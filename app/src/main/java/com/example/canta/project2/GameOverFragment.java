@@ -50,7 +50,6 @@ public class GameOverFragment extends Fragment implements View.OnClickListener {
                 Player.getInstance().setPlayerScore(0);
                 Intent intent = new Intent(getActivity(), SecondActivity.class);
                 startActivity(intent);
-
         }
     }
 }

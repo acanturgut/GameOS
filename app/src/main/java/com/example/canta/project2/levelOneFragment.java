@@ -1,9 +1,8 @@
 package com.example.canta.project2;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -418,7 +417,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 }else{
                     Player.getInstance().setLife(4);
                     trueans = 0;
-                    GameOverFragment game1 = new GameOverFragment();
+                    memBoardSelectionFragment game1 = new memBoardSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, game1);
                     ft.addToBackStack(null);

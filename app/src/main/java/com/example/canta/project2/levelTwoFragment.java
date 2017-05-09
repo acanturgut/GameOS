@@ -547,7 +547,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h24);
                     myim.setImageResource(R.drawable.ekalp);
                 }else{
-                    GameOverFragment game1 = new GameOverFragment();
+                    memBoardSelectionFragment game1 = new memBoardSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, game1);
                     ft.addToBackStack(null);

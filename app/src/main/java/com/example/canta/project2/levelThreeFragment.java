@@ -1,9 +1,8 @@
 package com.example.canta.project2;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -651,7 +650,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h34);
                     myim.setImageResource(R.drawable.ekalp);
                 }else{
-                    GameOverFragment game1 = new GameOverFragment();
+                    memBoardSelectionFragment game1 = new memBoardSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, game1);
                     ft.addToBackStack(null);
