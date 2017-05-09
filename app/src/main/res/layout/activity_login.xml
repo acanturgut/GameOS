@@ -11,23 +11,51 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.canta.project2.MainActivity">
 
-    <Button
-        android:text="Let's Play"
+    <EditText
+        android:id="@+id/password_edit_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/go_button"
-        android:textColor="@color/myWhite"
-        android:textStyle="normal|bold"
-        android:layout_marginTop="50dp"
-        android:layout_alignTop="@+id/player_name_edittext"
-        android:layout_alignLeft="@+id/player_name_edittext"
-        android:layout_alignStart="@+id/player_name_edittext"
-        android:layout_alignRight="@+id/player_name_edittext"
-        android:layout_alignEnd="@+id/player_name_edittext"
-        android:background="@drawable/button_normal"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/editextstyle"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
+        android:textColor="@android:color/holo_red_light"
         android:textSize="30sp"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:id="@+id/go_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/sign_in_button"
+        android:layout_alignBottom="@+id/sign_in_button"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button_normal"
+        android:padding="10dp"
+        android:text="Log In"
         android:textAllCaps="false"
-        android:padding="10dp" />
+        android:textColor="@color/myWhite"
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
+
+    <Button
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/button_normal"
+        android:padding="10dp"
+        android:text="Sign In"
+        android:textAllCaps="false"
+        android:textColor="@color/myWhite"
+        android:textSize="30sp"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/password_edit_text"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,34 +70,34 @@
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:text="Enter Your Username"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/textView9"
+        android:text="Enter Your Username - Password"
+        android:textAlignment="center"
         android:textColor="@color/myRed"
-        android:textSize="30sp"
-        android:layout_above="@+id/go_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="17dp"
-        android:layout_alignParentEnd="true"
+        android:textSize="18sp"
         android:textStyle="normal|bold"
-        android:textAlignment="center" />
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp" />
 
     <EditText
+        android:id="@+id/player_name_edittext"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/player_name_edittext"
-        android:textAlignment="center"
-        android:selectAllOnFocus="true"
-        android:layout_marginTop="95dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView9"
+        android:layout_marginTop="24dp"
         android:background="@drawable/editextstyle"
-        android:textStyle="normal|bold"
-        android:textSize="30sp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:textAlignment="center"
         android:textColor="@android:color/holo_red_light"
-        android:layout_below="@+id/textView"
-        android:layout_centerHorizontal="true" />
+        android:textSize="30sp"
+        android:textStyle="normal|bold" />
 
 
 </RelativeLayout>
