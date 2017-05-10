@@ -1,19 +1,15 @@
 package com.example.canta.project2;
 
 
-import android.content.Intent;
+import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import com.example.canta.project2.R;
 
 import java.util.ArrayList;
 
@@ -36,11 +32,11 @@ public class TopicSelectFragment extends Fragment implements View.OnClickListene
 
         return inflater.inflate(R.layout.fragment_topic_select, container, false);
     }
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onStart(){
         super.onStart();
+
         TextView playerName = (TextView)getActivity().findViewById(R.id.player_name);
         TextView scoreBoard = (TextView)getActivity().findViewById(R.id.score_topic);
         playerName.setText(Player.getInstance().getPlayerName());
@@ -76,7 +72,6 @@ public class TopicSelectFragment extends Fragment implements View.OnClickListene
         buttonList.add(historyButton400);
         Button historyButton500 = (Button)getActivity().findViewById(R.id.history_500);
         buttonList.add(historyButton500);
-
         restartButton = (Button)getActivity().findViewById(R.id.restart_button);
 
         for (int i = 0; i < buttonList.size(); i++) {

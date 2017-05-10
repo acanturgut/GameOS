@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "933790945245-qphjg2db67h3njg85658oh0ih2bcfdgf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.canta.project2",
+            "certificate_hash": "c4c8a3c41510ab923115a546794a66fb9adbbe5a"
+          }
+        },
+        {
           "client_id": "933790945245-c54tii7ki182f3nq5lla6m5j3bid7fl9.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -4,13 +4,11 @@ package com.example.canta.project2;
  * Created by a_tur on 2/25/2017.
  */
 public class QuestionDataSet {
-
-
-    public static String q1_sport = "How many periods in basketball match and how many minutes per preiod?-2 Periyot 5 dk-2 Periyot 10 dk-3 Periyot 10 dk-4 Periyot 10 dk";
-    public static String q2_sport = "Which team won UEFA Champion in 2000?-Kayserispor-Beşiktaş-Fenerbahçe-Galatasaray";
-    public static String q3_sport = "What does Alpinism mean?-Sailing-Wrestling-Camping-Mountaineering";
-    public static String q4_sport = "How many referees can manage the basketball game?-6-5-4-3";
-    public static String q5_sport = "Which national team won the 2006 World Cup?-Turkey-Swiss-French-Italy";
+    public static String q1_sport = "a-a-a-a-a";
+    public static String q2_sport = "a-a-a-a-a";
+    public static String q3_sport = "a-a-a-a-a";
+    public static String q4_sport = "a-a-a-a-a";
+    public static String q5_sport = "a-a-a-a-a";
 
     public static String q1_math = "7 ile 8'in çarpımının 6 eksiği olan sayı hangisinin iki katıdır?-5-35-10-25";
     public static String q2_math = "İki işçi bir işi 10 günde yaparsa bir işçi aynı işi kaç günde yapar?-5-10-15-20";
@@ -24,6 +22,65 @@ public class QuestionDataSet {
     public static String q4_hist = "Napoleon suffered defeat at Waterloo in what year?-1765-1795-1803-1815";
     public static String q5_hist = "What does the \"B\" stand for in Lyndon B. Johnson?-Bernard-Barney-Bareteon-Baines";
 
+    public static void setQ1_sport(String q1_sport) {
+        QuestionDataSet.q1_sport = q1_sport;
+    }
+
+    public static void setQ2_sport(String q2_sport) {
+        QuestionDataSet.q2_sport = q2_sport;
+    }
+
+    public static void setQ3_sport(String q3_sport) {
+        QuestionDataSet.q3_sport = q3_sport;
+    }
+
+    public static void setQ4_sport(String q4_sport) {
+        QuestionDataSet.q4_sport = q4_sport;
+    }
+
+    public static void setQ5_sport(String q5_sport) {
+        QuestionDataSet.q5_sport = q5_sport;
+    }
+
+    public static void setQ1_math(String q1_math) {
+        QuestionDataSet.q1_math = q1_math;
+    }
+
+    public static void setQ2_math(String q2_math) {
+        QuestionDataSet.q2_math = q2_math;
+    }
+
+    public static void setQ3_math(String q3_math) {
+        QuestionDataSet.q3_math = q3_math;
+    }
+
+    public static void setQ4_math(String q4_math) {
+        QuestionDataSet.q4_math = q4_math;
+    }
+
+    public static void setQ5_math(String q5_math) {
+        QuestionDataSet.q5_math = q5_math;
+    }
+
+    public static void setQ1_hist(String q1_hist) {
+        QuestionDataSet.q1_hist = q1_hist;
+    }
+
+    public static void setQ2_hist(String q2_hist) {
+        QuestionDataSet.q2_hist = q2_hist;
+    }
+
+    public static void setQ3_hist(String q3_hist) {
+        QuestionDataSet.q3_hist = q3_hist;
+    }
+
+    public static void setQ4_hist(String q4_hist) {
+        QuestionDataSet.q4_hist = q4_hist;
+    }
+
+    public static void setQ5_hist(String q5_hist) {
+        QuestionDataSet.q5_hist = q5_hist;
+    }
 
     private static QuestionDataSet ourInstance = new QuestionDataSet();
 
