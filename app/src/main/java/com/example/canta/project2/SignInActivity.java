@@ -26,6 +26,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private EditText email;
     private EditText password;
 
+    private EditText city;
+    private EditText name;
+    private EditText surname;
+
     private Button signIn;
     private Button goBack;
 
@@ -40,6 +44,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         username = (EditText) findViewById(R.id.l_user_name_text_box);
         email = (EditText) findViewById(R.id.l_user_email_text_box);
         password = (EditText) findViewById(R.id.l_user_password_text_box);
+
+        city = (EditText) findViewById(R.id.sign_in_city);
+        name = (EditText) findViewById(R.id.sign_in_name);
+        surname = (EditText) findViewById(R.id.sign_in_surname);
 
         signIn = (Button) findViewById(R.id.l_sign_in_button);
         goBack = (Button) findViewById(R.id.l_go_back);
@@ -71,7 +79,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
                                     FirebaseUser user = mAuth.getCurrentUser();
 
-                                    CreatedUser cu = new CreatedUser(username.getText().toString());
+                                    CreatedUser cu = new CreatedUser(username.getText().toString(),name.getText().toString() ,surname.getText().toString() , city.getText().toString());
 
                                     mDatabase.child("users").child(user.getUid().toString()).child("info").setValue(cu);
 
