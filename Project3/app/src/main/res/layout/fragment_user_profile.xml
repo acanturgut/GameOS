@@ -16,15 +16,16 @@
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
             android:layout_marginTop="86dp"
             android:background="@drawable/editextstyle"
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Name"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/profile_username"
@@ -48,6 +49,7 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:text="Surname"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
@@ -63,6 +65,7 @@
 
             android:inputType="textPersonName"
             android:text="City"
+            android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 

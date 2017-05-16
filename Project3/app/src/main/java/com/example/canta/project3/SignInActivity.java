@@ -1,6 +1,7 @@
 package com.example.canta.project3;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -64,12 +65,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
+    FirebaseUser user;
+    CreatedUser cu;
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case  R.id.l_sign_in_button: {
-
 
                 mAuth.createUserWithEmailAndPassword(email.getText() + "", password.getText() + "")
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -77,14 +80,22 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
 
-                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    user = mAuth.getCurrentUser();
 
-                                    CreatedUser cu = new CreatedUser(username.getText().toString(),name.getText().toString() ,surname.getText().toString() , city.getText().toString());
+                                    cu = new CreatedUser(username.getText().toString(),name.getText().toString() ,surname.getText().toString() , city.getText().toString());
 
-                                    mDatabase.child("users").child(user.getUid().toString()).child("info").setValue(cu);
+                                    final Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
 
-                                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(intent);
+                                            mDatabase.child("users").child(user.getUid().toString()).child("info").setValue(cu);
+                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                            startActivity(intent);
+
+                                        }
+
+                                    }, 100);
 
                                 } else {
 
