@@ -107,16 +107,35 @@ public class AllUserListFragment extends ListFragment {
             listOfUserID[i] = Player.getInstance().getAllPlayerID()[i];
         }
         List valid = Arrays.asList(Player.getInstance().getFriends());
+
         if (listOfUsername[(int) id].equals(Player.getInstance().getPlayerName()) || valid.contains(listOfUsername[(int)id])){
+
             Toast.makeText(getActivity(), "You cannot add this user as a friend" , Toast.LENGTH_SHORT).show();
+
         }else{
+
             //Toast.makeText(getActivity(), "Text: " + listOfUserID[(int) id], Toast.LENGTH_SHORT).show();
             Toast.makeText(getActivity(), "This user is added as a friend: " + listOfUsername[(int) id], Toast.LENGTH_SHORT).show();
             database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("friends").child(listOfUserID[(int)id]).setValue(listOfUsername[(int)id]);
             database.getReference("users").child(listOfUserID[(int)id]).child("friends").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).setValue(Player.getInstance().getPlayerName());
 
+
+
         }
     }
+
+   /* @Override
+    public void onTokenRefresh() {
+        // Get updated InstanceID token.
+        String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Refreshed token: " + refreshedToken);
+
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // Instance ID token to your app server.
+        sendRegistrationToServer(refreshedToken);
+    }
+    */
 }
 
 
