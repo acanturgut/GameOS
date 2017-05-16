@@ -116,6 +116,14 @@ tools:context="com.example.canta.project3.LoginActivity">
     android:layout_alignEnd="@+id/textView9"
     android:text="CAN" />
 
+    <ProgressBar
+        android:id="@+id/mainprogressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true" />
+
 
 </RelativeLayout>
 

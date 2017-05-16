@@ -7,6 +7,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,6 +24,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
     private EditText emailText;
     private EditText passwordText;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         signIn.setOnClickListener(this);
         logIn.setOnClickListener(this);
+
+        ProgressBar a = (ProgressBar) findViewById(R.id.mainprogressBar);
+        a.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -51,9 +56,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         switch (v.getId()) {
             case  R.id.go_button: {
-
+                ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
+                myprogressbar.setVisibility(View.VISIBLE);
                 if (!emailText.getText().toString().equals("") && !emailText.getText().toString().equals("Enter Your Name")) {
-
                     mAuth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                                 @Override
@@ -85,6 +90,8 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.taylan_button: {
+                ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
+                myprogressbar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword("ccapraz@ku.edu.tr", "aaaaaa")
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -102,14 +109,14 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
                                     Toast.makeText(getApplicationContext(), "Fail To Login!",
                                             Toast.LENGTH_LONG).show();
-
                                 }
                             }
                         });
                 break;
             }
             case R.id.can_button: {
-
+                ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
+                myprogressbar.setVisibility(View.VISIBLE);
                 mAuth.signInWithEmailAndPassword("aturgut@ku.edu.tr", "aaaaaa")
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override

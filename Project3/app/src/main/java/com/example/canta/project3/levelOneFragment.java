@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class levelOneFragment extends Fragment implements View.OnClickListener {
     int num = 0;
@@ -28,13 +30,16 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     int holderPic0;
     int holderPic1;
     int trueans = 0;
+    int[] imageViewID = new int[20];
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference().child("android.jpg");
 
-
-    int[] a = new int[16];
-    int id0,id1,id2,id3,id4,id5,id6,id7,id8,id9,id10,id11,id12,id13,id14,id15;
-    int ac0,ac1,ac2,ac3,ac4,ac5,ac6,ac7,ac8,ac9,ac10,ac11,ac12,ac13,ac14,ac15;
+    int[] flaglistNum;
+    int[] a = new int[12];
+    int[] ac = new int[16];
+    Bitmap[] allpictures;
+    Bitmap[] targets;
     public levelOneFragment() {
         // Required empty public constructor
     }
@@ -44,70 +49,49 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_one_level, container, false);
 
+        imageViewID[0] = R.id.f11;
+        imageViewID[1] = R.id.f12;
+        imageViewID[2] = R.id.f13;
+        imageViewID[3] = R.id.f14;
+        imageViewID[4] = R.id.f21;
+        imageViewID[5] = R.id.f22;
+        imageViewID[6] = R.id.f23;
+        imageViewID[7] = R.id.f24;
+        imageViewID[8] = R.id.f31;
+        imageViewID[9] = R.id.f32;
+        imageViewID[10] = R.id.f33;
+        imageViewID[11] = R.id.f34;
+        imageViewID[12] = R.id.f41;
+        imageViewID[13] = R.id.f42;
+        imageViewID[14] = R.id.f43;
+        imageViewID[15] = R.id.f44;
+        imageViewID[16] = R.id.imageView5;
+        imageViewID[17] = R.id.imageView6;
+        imageViewID[18] = R.id.imageView7;
+        imageViewID[19] = R.id.imageView8;
 
-        ImageView im1 = (ImageView) layout.findViewById(R.id.f11);
-        im1.setOnClickListener(this);
-        ImageView im2 = (ImageView) layout.findViewById(R.id.f12);
-        im2.setOnClickListener(this);
-        ImageView im3 = (ImageView) layout.findViewById(R.id.f13);
-        im3.setOnClickListener(this);
-        ImageView im4 = (ImageView) layout.findViewById(R.id.f14);
-        im4.setOnClickListener(this);
-        ImageView im5 = (ImageView) layout.findViewById(R.id.f21);
-        im5.setOnClickListener(this);
-        ImageView im6 = (ImageView) layout.findViewById(R.id.f22);
-        im6.setOnClickListener(this);
-        ImageView im7 = (ImageView) layout.findViewById(R.id.f23);
-        im7.setOnClickListener(this);
-        ImageView im8 = (ImageView) layout.findViewById(R.id.f24);
-        im8.setOnClickListener(this);
-        ImageView im9 = (ImageView) layout.findViewById(R.id.f31);
-        im9.setOnClickListener(this);
-        ImageView im10 = (ImageView) layout.findViewById(R.id.f32);
-        im10.setOnClickListener(this);
-        ImageView im11 = (ImageView) layout.findViewById(R.id.f33);
-        im11.setOnClickListener(this);
-        ImageView im12 = (ImageView) layout.findViewById(R.id.f34);
-        im12.setOnClickListener(this);
-        ImageView im13 = (ImageView) layout.findViewById(R.id.f41);
-        im13.setOnClickListener(this);
-        ImageView im14 = (ImageView) layout.findViewById(R.id.f42);
-        im14.setOnClickListener(this);
-        ImageView im15 = (ImageView) layout.findViewById(R.id.f43);
-        im15.setOnClickListener(this);
-        ImageView im16 = (ImageView) layout.findViewById(R.id.f44);
-        im16.setOnClickListener(this);
+        for (int i = 0; i < imageViewID.length; i++){
+            ImageView myImage = (ImageView) layout.findViewById(imageViewID[i]);
+            myImage.setOnClickListener(this);
+        }
 
-        ImageView target1 = (ImageView) layout.findViewById(R.id.imageView5);
-        target1.setOnClickListener(this);
-        ImageView target2 = (ImageView) layout.findViewById(R.id.imageView6);
-        target2.setOnClickListener(this);
-        ImageView target3 = (ImageView) layout.findViewById(R.id.imageView7);
-        target3.setOnClickListener(this);
-        ImageView target4 = (ImageView) layout.findViewById(R.id.imageView8);
-        target4.setOnClickListener(this);
+        int a[] = flaglist.getInstance().getQuestionList();
+
+        allpictures = new Bitmap[16];
+        flaglistNum = new int[16];
+        targets = new Bitmap[4];
+        createImageArray(a,flaglistNum, allpictures,targets);
         return layout;
     }
 
+
+
     public void onStart() {
         super.onStart();
-        ac0=0;
-        ac1=0;
-        ac2=0;
-        ac3=0;
-        ac4=0;
-        ac5=0;
-        ac6=0;
-        ac7=0;
-        ac8=0;
-        ac9=0;
-        ac10=0;
-        ac11=0;
-        ac12=0;
-        ac13=0;
-        ac14=0;
-        ac15=0;
-        final int myid1,myid2,myid3,myid4;
+        for (int i = 0; i < ac.length; i++){
+            ac[i] = 0;
+        }
+
         ImageView myim1 = (ImageView) getActivity().findViewById(R.id.h1);
         myim1.setImageResource(R.drawable.kalp);
         ImageView myim2 = (ImageView) getActivity().findViewById(R.id.h2);
@@ -117,23 +101,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         ImageView myim4 = (ImageView) getActivity().findViewById(R.id.h4);
         myim4.setImageResource(R.drawable.kalp);
         trueans = 0;
-        int a[] = flaglist.getInstance().getQuestionList();
-        id0 = a[0];
-        id1 = a[1];
-        id2 = a[2];
-        id3 = a[3];
-        id4 = a[4];
-        id5 = a[5];
-        id6 = a[6];
-        id7 = a[7];
-        id8 = a[8];
-        id9 = a[9];
-        id10 = a[10];
-        id11 = a[11];
-        id12 = a[12];
-        id13 = a[13];
-        id14 = a[14];
-        id15 = a[15];
+
         final ImageView tar1 = (ImageView) getActivity().findViewById(R.id.imageView5);
         final ImageView tar2 = (ImageView) getActivity().findViewById(R.id.imageView6);
         final ImageView tar3 = (ImageView) getActivity().findViewById(R.id.imageView7);
@@ -146,34 +114,30 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
 
         Player.getInstance().setPlayerScore(0);
 
-        imagesetter(R.id.f11,1,1);
-        imagesetter(R.id.f12,2,1);
-        imagesetter(R.id.f13,3,1);
-        imagesetter(R.id.f14,4,1);
-        imagesetter(R.id.f21,5,1);
-        imagesetter(R.id.f22,6,1);
-        imagesetter(R.id.f23,7,1);
-        imagesetter(R.id.f24,8,1);
-        imagesetter(R.id.f31,9,1);
-        imagesetter(R.id.f32,10,1);
-        imagesetter(R.id.f33,11,1);
-        imagesetter(R.id.f34,12,1);
-        imagesetter(R.id.f41,13,1);
-        imagesetter(R.id.f42,14,1);
-        imagesetter(R.id.f43,15,1);
-        imagesetter(R.id.f44,16,1);
+        final int[] counter = {0};
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
-               closeAll();
-                retrieveImage("flag" + flaglist.getInstance().getTarget1() + ".png",R.id.imageView5);
-                retrieveImage("flag" + flaglist.getInstance().getTarget2() + ".png",R.id.imageView6);
-                retrieveImage("flag" + flaglist.getInstance().getTarget3() + ".png",R.id.imageView7);
-                retrieveImage("flag" + flaglist.getInstance().getTarget4() + ".png",R.id.imageView8);
-
+                for (int i = 0; i < 16; i++){
+                    imagesetter(imageViewID[i],i,1);
+                }
+                Handler handler1 = new Handler();
+                handler1.postDelayed(new Runnable() {
+                    public void run() {
+                        closeAll();
+                        imagesettertarget(R.id.imageView5,0,1);
+                        imagesettertarget(R.id.imageView6,1,1);
+                        imagesettertarget(R.id.imageView7,2,1);
+                        imagesettertarget(R.id.imageView8,3,1);
+                    }
+                }, 5000);
             }
         }, 5000);
+
+
+
+
     }
 
     public void onResume(){
@@ -185,7 +149,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.f11:
-                imagesetter(R.id.f11,1,num);
+                imagesetter(R.id.f11,0,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -193,7 +157,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f12:
-                imagesetter(R.id.f12,2,num);
+                imagesetter(R.id.f12,1,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -201,7 +165,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f13:
-                imagesetter(R.id.f13,3,num);
+                imagesetter(R.id.f13,2,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -209,7 +173,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f14:
-                imagesetter(R.id.f14,4,num);
+                imagesetter(R.id.f14,3,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -217,7 +181,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f21:
-                imagesetter(R.id.f21,5,num);
+                imagesetter(R.id.f21,4,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -225,7 +189,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f22:
-                imagesetter(R.id.f22,6,num);
+                imagesetter(R.id.f22,5,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -233,7 +197,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f23:
-                imagesetter(R.id.f23,7,num);
+                imagesetter(R.id.f23,6,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -241,7 +205,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f24:
-                imagesetter(R.id.f24,8,num);
+                imagesetter(R.id.f24,7,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -249,7 +213,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f31:
-                imagesetter(R.id.f31,9,num);
+                imagesetter(R.id.f31,8,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -257,7 +221,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f32:
-                imagesetter(R.id.f32,10,num);
+                imagesetter(R.id.f32,9,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -265,7 +229,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f33:
-                imagesetter(R.id.f33,11,num);
+                imagesetter(R.id.f33,10,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -273,7 +237,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f34:
-                imagesetter(R.id.f34,12,num);
+                imagesetter(R.id.f34,11,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -281,7 +245,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f41:
-                imagesetter(R.id.f41,13,num);
+                imagesetter(R.id.f41,12,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -289,7 +253,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f42:
-                imagesetter(R.id.f42,14,num);
+                imagesetter(R.id.f42,13,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -297,7 +261,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f43:
-                imagesetter(R.id.f43,15,num);
+                imagesetter(R.id.f43,14,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -305,7 +269,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
             case R.id.f44:
-                imagesetter(R.id.f44,16,num);
+                imagesetter(R.id.f44,15,num);
                 if(num == 2){
                     closeAll();
                     num = -1;
@@ -313,59 +277,10 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 num ++;
                 break;
         }
-
     }
+
     public void hold(int number, int k){
-        int ref;
-        if (k==1) {
-            ref = id1;
-        }
-        else if (k==2){
-            ref = id2;
-        }
-        else if (k==3){
-            ref = id3;
-        }
-        else if (k==4){
-            ref = id4;
-        }
-        else if (k==5){
-            ref = id5;
-        }
-        else if (k==6){
-            ref = id6;
-        }
-        else if (k==7){
-            ref = id7;
-        }
-        else if (k==8){
-            ref = id8;
-        }
-        else if (k==9){
-            ref = id9;
-        }
-        else if (k==10){
-            ref = id10;
-        }
-        else if (k==11){
-            ref = id11;
-        }
-        else if (k==12){
-            ref = id12;
-        }
-        else if (k==13){
-            ref = id13;
-        }
-        else if (k==14){
-            ref = id14;
-        }
-        else if (k==15){
-            ref = id15;
-        }
-        else if (k==16){
-            ref = id0;
-        }
-        else ref = 0;
+        int ref = flaglistNum[k-1];
         number ++;
         if (number == 1){
             holderPic0 = k - 1;
@@ -394,7 +309,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 if (trueans == 4) {
                     Player.getInstance().setLife(4);
                     trueans = 0;
-                    levelTwoFragment move = new levelTwoFragment();
+                    MemoryGameSelectionFragment move = new MemoryGameSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, move);
                     ft.addToBackStack(null);
@@ -408,6 +323,10 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 holder1 = -5;
             }
             else{
+                Log.d("Clicked", "holderPic0: " + holderPic0);
+                Log.d("Clicked", "holderPic1: " + holderPic1);
+                Log.d("Clicked", "holder0: " + holder0);
+                Log.d("Clicked", "holder1: " + holder1);
                 Player.getInstance().setLife(Player.getInstance().getLife()-1);
                 if(Player.getInstance().getLife() == 3){
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h1);
@@ -437,166 +356,91 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-
     public void imagesetter(final int id, int k, int num) {
-        int ref;
-        if (k==0)ref = id0;
-        else if (k==1) ref = id1;
-        else if (k==2) ref = id2;
-        else if (k==3) ref = id3;
-        else if (k==4) ref = id4;
-        else if (k==5) ref = id5;
-        else if (k==6) ref = id6;
-        else if (k==7) ref = id7;
-        else if (k==8) ref = id8;
-        else if (k==9) ref = id9;
-        else if (k==10) ref = id10;
-        else if (k==11) ref = id11;
-        else if (k==12) ref = id12;
-        else if (k==13) ref = id13;
-        else if (k==14) ref = id14;
-        else if (k==15) ref = id15;
-        else if (k==16) ref = id0;
-        else ref = 0;
-        String flagname = "flag" + ref + ".png";
-        retrieveImage(flagname,id);
-
+        ImageView image1 = (ImageView) getActivity().findViewById(id);
+        image1.setImageBitmap(allpictures[k]);
     }
 
-
-
+    public void imagesettertarget(final int id, int k, int num) {
+        ImageView image1 = (ImageView) getActivity().findViewById(id);
+        image1.setImageBitmap(allpictures[k]);
+    }
 
     public void closeAll(){
-        final ImageView im1 = (ImageView) getActivity().findViewById(R.id.f11);
-        final ImageView im2 = (ImageView) getActivity().findViewById(R.id.f12);
-        final ImageView im3 = (ImageView) getActivity().findViewById(R.id.f13);
-        final ImageView im4 = (ImageView) getActivity().findViewById(R.id.f14);
-        final ImageView im5 = (ImageView) getActivity().findViewById(R.id.f21);
-        final ImageView im6 = (ImageView) getActivity().findViewById(R.id.f22);
-        final ImageView im7 = (ImageView) getActivity().findViewById(R.id.f23);
-        final ImageView im8 = (ImageView) getActivity().findViewById(R.id.f24);
-        final ImageView im9 = (ImageView) getActivity().findViewById(R.id.f31);
-        final ImageView im10 = (ImageView) getActivity().findViewById(R.id.f32);
-        final ImageView im11 = (ImageView) getActivity().findViewById(R.id.f33);
-        final ImageView im12 = (ImageView) getActivity().findViewById(R.id.f34);
-        final ImageView im13 = (ImageView) getActivity().findViewById(R.id.f41);
-        final ImageView im14 = (ImageView) getActivity().findViewById(R.id.f42);
-        final ImageView im15 = (ImageView) getActivity().findViewById(R.id.f43);
-        final ImageView im16 = (ImageView) getActivity().findViewById(R.id.f44);
-        if (ac0 == 0) im1.setImageResource(R.drawable.card);
-        if (ac1 == 0) im2.setImageResource(R.drawable.card);
-        if (ac2 == 0) im3.setImageResource(R.drawable.card);
-        if (ac3 == 0)im4.setImageResource(R.drawable.card);
-        if (ac4 == 0)im5.setImageResource(R.drawable.card);
-        if (ac5 == 0)im6.setImageResource(R.drawable.card);
-        if (ac6 == 0)im7.setImageResource(R.drawable.card);
-        if (ac7 == 0)im8.setImageResource(R.drawable.card);
-        if (ac8 == 0)im9.setImageResource(R.drawable.card);
-        if (ac9 == 0)im10.setImageResource(R.drawable.card);
-        if (ac10 == 0)im11.setImageResource(R.drawable.card);
-        if (ac11 == 0)im12.setImageResource(R.drawable.card);
-        if (ac12 == 0)im13.setImageResource(R.drawable.card);
-        if (ac13 == 0)im14.setImageResource(R.drawable.card);
-        if (ac14 == 0)im15.setImageResource(R.drawable.card);
-        if (ac15 == 0)im16.setImageResource(R.drawable.card);
+
+        for (int i = 0; i < 16; i++){
+            ImageView myview = (ImageView) getActivity().findViewById(imageViewID[i]);
+            if (ac[i] == 0){
+                myview.setImageResource(R.drawable.card);
+            }
+        }
     }
 
-    public void retrieveImage(String flagname, int id) {
-        final ImageView image1 = (ImageView) getActivity().findViewById(id);
-        try {
-            final File localFile = File.createTempFile(flagname, "png");
-            storageRef = storage.getReference().child(flagname);
-            System.out.println("----------------" + storageRef + "    -    "  + flagname);
-            storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                @Override
-                public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                    Bitmap bitmap = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    image1.setImageBitmap(bitmap);
-                }
-            }).addOnFailureListener(new OnFailureListener() {
-                @Override
-                public void onFailure(@NonNull Exception exception) {}
-            });
+    private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
+        for (int i = 0; i < 12; i++){
+            try {
+                final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
+                storageRef = storage.getReference().child("flag" + a[i] + ".png");
+                final int finalI = i;
+                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                        if (finalI < 4){
+                            targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            allpictures[12 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            flaglistNum[12 + finalI] = a[finalI];
+                        }
+                        flaglistNum[finalI] = a[finalI];
+                        allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {}
+                });
 
-        } catch (IOException e) {}
+            } catch (IOException e) {}
+        }
+        return 1;
+    }
+
+    private void shuffleArray(int[] flaglistNum, Bitmap[] allpictures){
+        int index;
+        Bitmap temp;
+        int temp2;
+        Random random = new Random();
+        for (int f = allpictures.length - 1; f > 0; f--){
+            index = random.nextInt(f + 1);
+            temp = allpictures[index];
+            temp2 = flaglistNum[index];
+            allpictures[index] = allpictures[f];
+            flaglistNum[index] = flaglistNum[f];
+            allpictures[f] = temp;
+            flaglistNum[f] = temp2;
+            Log.d("mixarray", index + " is replaced with " + f);
+        }
+        flaglist.getInstance().setBitmap_flag_List(allpictures);
+        flaglist.getInstance().setBitmap_target_List(targets);
     }
 
 
     private void updatePoint(boolean k){
-            System.out.println("list members are " + holder0 + "and" + holder1);
-            if (holder0 == holder1){
-                int alala = Player.getInstance().getPlayerScore();
-                if (k){
-                    alala = alala + 100;
-                        if (holderPic0 == 0) ac0 = 1;
-                        if (holderPic0 == 1) ac1 = 1;
-                        if (holderPic0 == 2) ac2 = 1;
-                        if (holderPic0 == 3) ac3 = 1;
-                        if (holderPic0 == 4) ac4 = 1;
-                        if (holderPic0 == 5) ac5 = 1;
-                        if (holderPic0 == 6) ac6 = 1;
-                        if (holderPic0 == 7) ac7 = 1;
-                        if (holderPic0 == 8) ac8 = 1;
-                        if (holderPic0 == 9) ac9 = 1;
-                        if (holderPic0 == 10) ac10 = 1;
-                        if (holderPic0 == 11) ac11 = 1;
-                        if (holderPic0 == 12) ac12 = 1;
-                        if (holderPic0 == 13) ac13 = 1;
-                        if (holderPic0 == 14) ac14 = 1;
-                        if (holderPic0 == 15) ac15 = 1;
-                        if (holderPic1 == 0) ac0 = 1;
-                        if (holderPic1 == 1) ac1 = 1;
-                        if (holderPic1 == 2) ac2 = 1;
-                        if (holderPic1 == 3) ac3 = 1;
-                        if (holderPic1 == 4) ac4 = 1;
-                        if (holderPic1 == 5) ac5 = 1;
-                        if (holderPic1 == 6) ac6 = 1;
-                        if (holderPic1 == 7) ac7 = 1;
-                        if (holderPic1 == 8) ac8 = 1;
-                        if (holderPic1 == 9) ac9 = 1;
-                        if (holderPic1 == 10) ac10 = 1;
-                        if (holderPic1 == 11) ac11 = 1;
-                        if (holderPic1 == 12) ac12 = 1;
-                        if (holderPic1 == 13) ac13 = 1;
-                        if (holderPic1 == 14) ac14 = 1;
-                        if (holderPic1 == 15) ac15 = 1;
+        System.out.println("list members are " + holder0 + "and" + holder1);
+        if (holder0 == holder1){
+            int alala = Player.getInstance().getPlayerScore();
+            if (k){
+                alala = alala + 100;
+                ac[holderPic0] = 1;
+                ac[holderPic1] = 1;
+            } else{
+                alala = alala - 100;
+            }
 
-                } else{
-                    alala = alala - 100;
-                }
-
-                Player.getInstance().setPlayerScore(alala);
-                TextView textScore = (TextView) getActivity().findViewById(R.id.myscore);
-                String scoree = "SCORE " + alala;
-                textScore.setText(scoree);
+            Player.getInstance().setPlayerScore(alala);
+            TextView textScore = (TextView) getActivity().findViewById(R.id.myscore);
+            String scoree = "SCORE " + alala;
+            textScore.setText(scoree);
 
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
