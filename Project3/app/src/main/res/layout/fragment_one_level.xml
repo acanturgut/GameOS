@@ -325,6 +325,12 @@
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
+        <ProgressBar
+            android:id="@+id/progresl1"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </RelativeLayout>

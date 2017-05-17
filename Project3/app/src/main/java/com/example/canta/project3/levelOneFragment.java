@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -70,6 +71,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         imageViewID[18] = R.id.imageView7;
         imageViewID[19] = R.id.imageView8;
 
+
         for (int i = 0; i < imageViewID.length; i++){
             ImageView myImage = (ImageView) layout.findViewById(imageViewID[i]);
             myImage.setOnClickListener(this);
@@ -83,8 +85,6 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         createImageArray(a,flaglistNum, allpictures,targets);
         return layout;
     }
-
-
 
     public void onStart() {
         super.onStart();
@@ -115,10 +115,13 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         Player.getInstance().setPlayerScore(0);
 
         final int[] counter = {0};
-
+        ProgressBar p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
+        p1.setVisibility(View.VISIBLE);
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
+                ProgressBar p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
+                p1.setVisibility(View.INVISIBLE);
                 for (int i = 0; i < 16; i++){
                     imagesetter(imageViewID[i],i,1);
                 }
