@@ -14,8 +14,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,6 +34,8 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     int holderPic1;
     int trueans = 0;
     int[] imageViewID = new int[20];
+
+    boolean isItDone = false;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference().child("android.jpg");
@@ -114,38 +118,36 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
 
         Player.getInstance().setPlayerScore(0);
 
-        final int[] counter = {0};
-        ProgressBar p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
-        p1.setVisibility(View.VISIBLE);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                ProgressBar p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
-                p1.setVisibility(View.INVISIBLE);
-                for (int i = 0; i < 16; i++){
-                    imagesetter(imageViewID[i],i,1);
-                }
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    public void run() {
-                        closeAll();
-                        imagesettertarget(R.id.imageView5,0,1);
-                        imagesettertarget(R.id.imageView6,1,1);
-                        imagesettertarget(R.id.imageView7,2,1);
-                        imagesettertarget(R.id.imageView8,3,1);
-                    }
-                }, 5000);
-            }
-        }, 5000);
-
-
 
 
     }
 
+    public void runThisShit(){
+
+
+            final int[] counter = {0};
+            ProgressBar p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
+            p1.setVisibility(View.VISIBLE);
+
+            p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
+            p1.setVisibility(View.INVISIBLE);
+            for (int i = 0; i < 16; i++) {
+                imagesetter(imageViewID[i], i, 1);
+            }
+            Handler handler1 = new Handler();
+            handler1.postDelayed(new Runnable() {
+                public void run() {
+                    closeAll();
+                    imagesettertarget(R.id.imageView5, 0, 1);
+                    imagesettertarget(R.id.imageView6, 1, 1);
+                    imagesettertarget(R.id.imageView7, 2, 1);
+                    imagesettertarget(R.id.imageView8, 3, 1);
+                }
+            }, 5000);
+    }
+
     public void onResume(){
         super.onResume();
-
     }
 
     @Override
@@ -282,6 +284,8 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    static int incrementer = 0;
+
     public void hold(int number, int k){
         int ref = flaglistNum[k-1];
         number ++;
@@ -399,10 +403,26 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {}
+                }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+
+                        incrementer++;
+
+                        if(incrementer == 12){
+
+                            runThisShit();
+                            incrementer = 0;
+
+                        }
+
+                    }
                 });
 
             } catch (IOException e) {}
         }
+
+
         return 1;
     }
 
@@ -424,7 +444,6 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         flaglist.getInstance().setBitmap_flag_List(allpictures);
         flaglist.getInstance().setBitmap_target_List(targets);
     }
-
 
     private void updatePoint(boolean k){
         System.out.println("list members are " + holder0 + "and" + holder1);
