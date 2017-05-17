@@ -1,8 +1,10 @@
 package com.example.canta.project3;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -11,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,8 +36,6 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     int trueans = 0;
     int[] imageViewID = new int[20];
 
-    boolean isItDone = false;
-
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference().child("android.jpg");
 
@@ -45,9 +44,12 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     int[] ac = new int[16];
     Bitmap[] allpictures;
     Bitmap[] targets;
+    Dialog dialog;
+
     public levelOneFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,23 +78,29 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         imageViewID[19] = R.id.imageView8;
 
 
-        for (int i = 0; i < imageViewID.length; i++){
+        for (int i = 0; i < imageViewID.length; i++) {
             ImageView myImage = (ImageView) layout.findViewById(imageViewID[i]);
             myImage.setOnClickListener(this);
         }
 
         int a[] = flaglist.getInstance().getQuestionList();
 
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_loader);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
+
+
         allpictures = new Bitmap[16];
         flaglistNum = new int[16];
         targets = new Bitmap[4];
-        createImageArray(a,flaglistNum, allpictures,targets);
+        createImageArray(a, flaglistNum, allpictures, targets);
         return layout;
     }
 
     public void onStart() {
         super.onStart();
-        for (int i = 0; i < ac.length; i++){
+        for (int i = 0; i < ac.length; i++) {
             ac[i] = 0;
         }
 
@@ -119,34 +127,26 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         Player.getInstance().setPlayerScore(0);
 
 
-
     }
 
-    public void runThisShit(){
-
-
-            final int[] counter = {0};
-            ProgressBar p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
-            p1.setVisibility(View.VISIBLE);
-
-            p1 = (ProgressBar) getActivity().findViewById(R.id.progresl1);
-            p1.setVisibility(View.INVISIBLE);
-            for (int i = 0; i < 16; i++) {
-                imagesetter(imageViewID[i], i, 1);
+    public void runThis() {
+        dialog.dismiss();
+        for (int i = 0; i < 16; i++) {
+            imagesetter(imageViewID[i], i, 1);
+        }
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            public void run() {
+                closeAll();
+                imagesettertarget(R.id.imageView5, 0, 1);
+                imagesettertarget(R.id.imageView6, 1, 1);
+                imagesettertarget(R.id.imageView7, 2, 1);
+                imagesettertarget(R.id.imageView8, 3, 1);
             }
-            Handler handler1 = new Handler();
-            handler1.postDelayed(new Runnable() {
-                public void run() {
-                    closeAll();
-                    imagesettertarget(R.id.imageView5, 0, 1);
-                    imagesettertarget(R.id.imageView6, 1, 1);
-                    imagesettertarget(R.id.imageView7, 2, 1);
-                    imagesettertarget(R.id.imageView8, 3, 1);
-                }
-            }, 5000);
+        }, 5000);
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
     }
 
@@ -154,145 +154,145 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.f11:
-                imagesetter(R.id.f11,0,num);
-                if(num == 2){
+                imagesetter(R.id.f11, 0, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 1);
-                num ++;
+                } else hold(num, 1);
+                num++;
                 break;
             case R.id.f12:
-                imagesetter(R.id.f12,1,num);
-                if(num == 2){
+                imagesetter(R.id.f12, 1, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 2);
-                num ++;
+                } else hold(num, 2);
+                num++;
                 break;
             case R.id.f13:
-                imagesetter(R.id.f13,2,num);
-                if(num == 2){
+                imagesetter(R.id.f13, 2, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 3);
-                num ++;
+                } else hold(num, 3);
+                num++;
                 break;
             case R.id.f14:
-                imagesetter(R.id.f14,3,num);
-                if(num == 2){
+                imagesetter(R.id.f14, 3, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 4);
-                num ++;
+                } else hold(num, 4);
+                num++;
                 break;
             case R.id.f21:
-                imagesetter(R.id.f21,4,num);
-                if(num == 2){
+                imagesetter(R.id.f21, 4, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 5);
-                num ++;
+                } else hold(num, 5);
+                num++;
                 break;
             case R.id.f22:
-                imagesetter(R.id.f22,5,num);
-                if(num == 2){
+                imagesetter(R.id.f22, 5, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 6);
-                num ++;
+                } else hold(num, 6);
+                num++;
                 break;
             case R.id.f23:
-                imagesetter(R.id.f23,6,num);
-                if(num == 2){
+                imagesetter(R.id.f23, 6, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 7);
-                num ++;
+                } else hold(num, 7);
+                num++;
                 break;
             case R.id.f24:
-                imagesetter(R.id.f24,7,num);
-                if(num == 2){
+                imagesetter(R.id.f24, 7, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 8);
-                num ++;
+                } else hold(num, 8);
+                num++;
                 break;
             case R.id.f31:
-                imagesetter(R.id.f31,8,num);
-                if(num == 2){
+                imagesetter(R.id.f31, 8, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 9);
-                num ++;
+                } else hold(num, 9);
+                num++;
                 break;
             case R.id.f32:
-                imagesetter(R.id.f32,9,num);
-                if(num == 2){
+                imagesetter(R.id.f32, 9, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 10);
-                num ++;
+                } else hold(num, 10);
+                num++;
                 break;
             case R.id.f33:
-                imagesetter(R.id.f33,10,num);
-                if(num == 2){
+                imagesetter(R.id.f33, 10, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 11);
-                num ++;
+                } else hold(num, 11);
+                num++;
                 break;
             case R.id.f34:
-                imagesetter(R.id.f34,11,num);
-                if(num == 2){
+                imagesetter(R.id.f34, 11, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 12);
-                num ++;
+                } else hold(num, 12);
+                num++;
                 break;
             case R.id.f41:
-                imagesetter(R.id.f41,12,num);
-                if(num == 2){
+                imagesetter(R.id.f41, 12, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 13);
-                num ++;
+                } else hold(num, 13);
+                num++;
                 break;
             case R.id.f42:
-                imagesetter(R.id.f42,13,num);
-                if(num == 2){
+                imagesetter(R.id.f42, 13, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 14);
-                num ++;
+                } else hold(num, 14);
+                num++;
                 break;
             case R.id.f43:
-                imagesetter(R.id.f43,14,num);
-                if(num == 2){
+                imagesetter(R.id.f43, 14, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 15);
-                num ++;
+                } else hold(num, 15);
+                num++;
                 break;
             case R.id.f44:
-                imagesetter(R.id.f44,15,num);
-                if(num == 2){
+                imagesetter(R.id.f44, 15, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 16);
-                num ++;
+                } else hold(num, 16);
+                num++;
                 break;
         }
     }
 
     static int incrementer = 0;
 
-    public void hold(int number, int k){
-        int ref = flaglistNum[k-1];
-        number ++;
-        if (number == 1){
+    public void hold(int number, int k) {
+        int ref = flaglistNum[k - 1];
+        number++;
+        if (number == 1) {
             holderPic0 = k - 1;
             holder0 = ref;
-        }else if (number == 2){
+        } else if (number == 2) {
             holderPic1 = k - 1;
             holder1 = ref;
             System.out.println("Trial : " + holder0 + " at " + holderPic0 + "and " + holder1 + " at " + holderPic1);
@@ -328,26 +328,25 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 holderPic1 = -3;
                 holder0 = -4;
                 holder1 = -5;
-            }
-            else{
+            } else {
                 Log.d("Clicked", "holderPic0: " + holderPic0);
                 Log.d("Clicked", "holderPic1: " + holderPic1);
                 Log.d("Clicked", "holder0: " + holder0);
                 Log.d("Clicked", "holder1: " + holder1);
-                Player.getInstance().setLife(Player.getInstance().getLife()-1);
-                if(Player.getInstance().getLife() == 3){
+                Player.getInstance().setLife(Player.getInstance().getLife() - 1);
+                if (Player.getInstance().getLife() == 3) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h1);
                     myim.setImageResource(R.drawable.ekalp);
-                }else if(Player.getInstance().getLife() == 2){
+                } else if (Player.getInstance().getLife() == 2) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h2);
                     myim.setImageResource(R.drawable.ekalp);
-                }else if(Player.getInstance().getLife() == 1){
+                } else if (Player.getInstance().getLife() == 1) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h3);
                     myim.setImageResource(R.drawable.ekalp);
-                }else if(Player.getInstance().getLife() == 0){
+                } else if (Player.getInstance().getLife() == 0) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h4);
                     myim.setImageResource(R.drawable.ekalp);
-                }else{
+                } else {
                     Player.getInstance().setLife(4);
                     trueans = 0;
 
@@ -370,21 +369,21 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
 
     public void imagesettertarget(final int id, int k, int num) {
         ImageView image1 = (ImageView) getActivity().findViewById(id);
-        image1.setImageBitmap(allpictures[k]);
+        image1.setImageBitmap(targets[k]);
     }
 
-    public void closeAll(){
+    public void closeAll() {
 
-        for (int i = 0; i < 16; i++){
+        for (int i = 0; i < 16; i++) {
             ImageView myview = (ImageView) getActivity().findViewById(imageViewID[i]);
-            if (ac[i] == 0){
+            if (ac[i] == 0) {
                 myview.setImageResource(R.drawable.card);
             }
         }
     }
 
-    private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
-        for (int i = 0; i < 12; i++){
+    private int createImageArray(final int a[], final int[] flaglistNum, final Bitmap[] allpictures, final Bitmap[] targets) {
+        for (int i = 0; i < 12; i++) {
             try {
                 final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
                 storageRef = storage.getReference().child("flag" + a[i] + ".png");
@@ -392,7 +391,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        if (finalI < 4){
+                        if (finalI < 4) {
                             targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                             allpictures[12 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
                             flaglistNum[12 + finalI] = a[finalI];
@@ -402,16 +401,17 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
-                    public void onFailure(@NonNull Exception exception) {}
+                    public void onFailure(@NonNull Exception exception) {
+                    }
                 }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
 
                         incrementer++;
 
-                        if(incrementer == 12){
+                        if (incrementer == 12) {
 
-                            runThisShit();
+                            runThis();
                             incrementer = 0;
 
                         }
@@ -419,19 +419,20 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                     }
                 });
 
-            } catch (IOException e) {}
+            } catch (IOException e) {
+            }
         }
 
 
         return 1;
     }
 
-    private void shuffleArray(int[] flaglistNum, Bitmap[] allpictures){
+    private void shuffleArray(int[] flaglistNum, Bitmap[] allpictures) {
         int index;
         Bitmap temp;
         int temp2;
         Random random = new Random();
-        for (int f = allpictures.length - 1; f > 0; f--){
+        for (int f = allpictures.length - 1; f > 0; f--) {
             index = random.nextInt(f + 1);
             temp = allpictures[index];
             temp2 = flaglistNum[index];
@@ -441,19 +442,17 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
             flaglistNum[f] = temp2;
             Log.d("mixarray", index + " is replaced with " + f);
         }
-        flaglist.getInstance().setBitmap_flag_List(allpictures);
-        flaglist.getInstance().setBitmap_target_List(targets);
     }
 
-    private void updatePoint(boolean k){
+    private void updatePoint(boolean k) {
         System.out.println("list members are " + holder0 + "and" + holder1);
-        if (holder0 == holder1){
+        if (holder0 == holder1) {
             int alala = Player.getInstance().getPlayerScore();
-            if (k){
+            if (k) {
                 alala = alala + 100;
                 ac[holderPic0] = 1;
                 ac[holderPic1] = 1;
-            } else{
+            } else {
                 alala = alala - 100;
             }
 

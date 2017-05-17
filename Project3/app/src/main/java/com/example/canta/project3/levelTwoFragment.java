@@ -1,19 +1,24 @@
 package com.example.canta.project3;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -38,6 +43,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
     int[] ac = new int[25];
     Bitmap[] allpictures;
     Bitmap[] targets;
+    Dialog dialog;
 
     public levelTwoFragment() {
         // Required empty public constructor
@@ -88,12 +94,35 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
 
         int a[] = flaglist.getInstance().getQuestionList2();
 
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_loader);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
+
         allpictures = new Bitmap[25];
         flaglistNum = new int[25];
         targets = new Bitmap[5];
         createImageArray(a,flaglistNum, allpictures,targets);
-
         return layout2;
+    }
+
+
+    public void runthis(){
+        dialog.dismiss();
+        for (int i = 0; i < 25; i++) {
+            imagesetter(imageViewID[i], i, 1);
+        }
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            public void run() {
+                closeAll();
+                imagesettertarget(R.id.newtarget1,0,1);
+                imagesettertarget(R.id.newtarget2,1,1);
+                imagesettertarget(R.id.newtarget3,2,1);
+                imagesettertarget(R.id.newtarget4,3,1);
+                imagesettertarget(R.id.newtarget5,4,1);
+            }
+        }, 5000);
     }
 
     public void onStart() {
@@ -126,29 +155,6 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         tar5.setImageResource(R.drawable.card);
 
         Player.getInstance().setPlayerScore(0);
-
-        final int[] counter = {0};
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                for (int i = 0; i < 25; i++){
-                    imagesetter(imageViewID[i],i,1);
-                }
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    public void run() {
-                        closeAll();
-                        imagesettertarget(R.id.newtarget1,0,1);
-                        imagesettertarget(R.id.newtarget2,1,1);
-                        imagesettertarget(R.id.newtarget3,2,1);
-                        imagesettertarget(R.id.newtarget4,3,1);
-                        imagesettertarget(R.id.newtarget5,4,1);
-                    }
-                }, 5000);
-            }
-        }, 5000);
-
     }
 
     public void onResume(){
@@ -388,11 +394,16 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                 int t4 = flaglist.getInstance().getTarget24();
                 int t5 = flaglist.getInstance().getTarget25();
                 if (t1 == holder1) tar1.setImageResource(R.drawable.trueans);
-                else if (t1 == holder1) tar1.setImageResource(R.drawable.trueans);
                 else if (t2 == holder1) tar2.setImageResource(R.drawable.trueans);
                 else if (t3 == holder1) tar3.setImageResource(R.drawable.trueans);
                 else if (t4 == holder1) tar4.setImageResource(R.drawable.trueans);
                 else if (t5 == holder1) tar5.setImageResource(R.drawable.trueans);
+                else if (t1 == holder0) tar1.setImageResource(R.drawable.trueans);
+                else if (t2 == holder0) tar1.setImageResource(R.drawable.trueans);
+                else if (t3 == holder0) tar3.setImageResource(R.drawable.trueans);
+                else if (t4 == holder0) tar4.setImageResource(R.drawable.trueans);
+                else if (t5 == holder0) tar5.setImageResource(R.drawable.trueans);
+                Log.d("TAGG", t1 + " " + t2 + " " + t3 + " " + t4 + " " + t5 + " " + holder1 + " " + holder0);
 
 
 
@@ -444,7 +455,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
 
     public void imagesettertarget(final int id, int k, int num) {
         ImageView image1 = (ImageView) getActivity().findViewById(id);
-        image1.setImageBitmap(allpictures[k]);
+        image1.setImageBitmap(targets[k]);
     }
 
 
@@ -458,7 +469,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-
+    static  int incrementer = 0;
     private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
         for (int i = 0; i < 20; i++){
             try {
@@ -479,6 +490,15 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {}
+                }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                        incrementer++;
+                        if(incrementer == 20){
+                            runthis();
+                            incrementer = 0;
+                        }
+                    }
                 });
 
             } catch (IOException e) {}

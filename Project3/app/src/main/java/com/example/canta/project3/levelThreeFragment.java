@@ -1,8 +1,10 @@
 package com.example.canta.project3;
 
+import android.app.Dialog;
 import android.app.Fragment;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -13,8 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -39,6 +43,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
     int[] ac = new int[42];
     Bitmap[] allpictures;
     Bitmap[] targets;
+    Dialog dialog;
 
     public levelThreeFragment() {
         // Required empty public constructor
@@ -96,6 +101,11 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
 
         int a[] = flaglist.getInstance().getQuestionList3();
 
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.dialog_loader);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.show();
+
         allpictures = new Bitmap[36];
         flaglistNum = new int[36];
         targets = new Bitmap[6];
@@ -120,7 +130,6 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         final int myid3;
         int c[] = flaglist.getInstance().getQuestionList3();
 
-        final int myid31,myid32,myid33,myid34,myid35,myid36;
         final ImageView tar1 = (ImageView) getActivity().findViewById(R.id.target1);
         final ImageView tar2 = (ImageView) getActivity().findViewById(R.id.target2);
         final ImageView tar3 = (ImageView) getActivity().findViewById(R.id.target3);
@@ -135,31 +144,6 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         tar6.setImageResource(R.drawable.card);
 
         Player.getInstance().setPlayerScore(0);
-
-
-        final int[] counter = {0};
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                for (int i = 0; i < 36; i++){
-                    imagesetter(imageViewID[i],i,1);
-                }
-                Handler handler1 = new Handler();
-                handler1.postDelayed(new Runnable() {
-                    public void run() {
-                        closeAll();
-                        imagesettertarget(R.id.target1,0,1);
-                        imagesettertarget(R.id.target2,1,1);
-                        imagesettertarget(R.id.target3,2,1);
-                        imagesettertarget(R.id.target5,3,1);
-                        imagesettertarget(R.id.target6,4,1);
-                        imagesettertarget(R.id.target8,5,1);
-
-                    }
-                }, 7000);
-            }
-        }, 5000);
 
     }
 
@@ -559,6 +543,27 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
     }
 
 
+
+    public void runthis(){
+        dialog.dismiss();
+        for (int i = 0; i < 36; i++) {
+            imagesetter(imageViewID[i], i, 1);
+        }
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            public void run() {
+                closeAll();
+                imagesettertarget(R.id.target1,0,1);
+                imagesettertarget(R.id.target2,1,1);
+                imagesettertarget(R.id.target3,2,1);
+                imagesettertarget(R.id.target5,3,1);
+                imagesettertarget(R.id.target6,4,1);
+                imagesettertarget(R.id.target8,5,1);
+            }
+        }, 5000);
+    }
+
+    static  int incrementer = 0;
     private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
         for (int i = 0; i < 30; i++){
             try {
@@ -579,6 +584,16 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {}
+                }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                        incrementer++;
+                        if(incrementer == 30){
+                            runthis();
+                            incrementer = 0;
+                        }
+
+                    }
                 });
 
             } catch (IOException e) {}

@@ -1,9 +1,5 @@
 package com.example.canta.project3;
 
-import android.graphics.Bitmap;
-
-import java.util.Random;
-
 /**
  * Created by canta on 3/31/2017.
  */
@@ -15,90 +11,54 @@ public class flaglist {
     }
 
     public static int flag_List[] = new int[12];
-
-    public static Bitmap[] getBitmap_flag_List() {
-        return bitmap_flag_List;
-    }
-
-    public static void setBitmap_flag_List(Bitmap[] bitmap_flag_List) {
-        flaglist.bitmap_flag_List = bitmap_flag_List;
-    }
-
-    public static Bitmap bitmap_flag_List[] = new Bitmap[16];
-
-    public static Bitmap[] getBitmap_target_List() {
-        return bitmap_target_List;
-    }
-
-    public static void setBitmap_target_List(Bitmap[] bitmap_target_List) {
-        flaglist.bitmap_target_List = bitmap_target_List;
-    }
-
-    public static Bitmap bitmap_target_List[] = new Bitmap[16];
-
-    public static int flag_List2[] = new int[25];
-    public static int flag_List3[] = new int[36];
+    public static int flag_List2[] = new int[20];
+    public static int flag_List3[] = new int[30];
 
     public static int getTarget1() {
         return target1;
     }
-
     public static int getTarget2() {
         return target2;
     }
-
     public static int getTarget3() {
         return target3;
     }
-
     public static int getTarget4() {
         return target4;
     }
-
     public static int getTarget21() {
         return target21;
     }
-
     public static int getTarget22() {
         return target22;
     }
-
     public static int getTarget23() {
         return target23;
     }
-
     public static int getTarget24() {
         return target24;
     }
-
     public static int getTarget25() {
         return target25;
     }
-
     public static int getTarget31() {
         return target31;
     }
-
     public static int getTarget32() {
         return target32;
     }
-
     public static int getTarget33() {
         return target33;
     }
-
     public static int getTarget34() {
         return target34;
     }
-
     public static int getTarget35() {
         return target35;
     }
-
     public static int getTarget36() {
         return target36;
     }
-
     public static int target1;
     public static int target2;
     public static int target3;
@@ -115,8 +75,7 @@ public class flaglist {
     public static int target35;
     public static int target36;
 
-    private flaglist() {
-    }
+    private flaglist() {}
 
     public static int[] getQuestionList() {
         boolean control;
@@ -139,20 +98,6 @@ public class flaglist {
         target2 = flag_List[1];
         target3 = flag_List[2];
         target4 = flag_List[3];
-        /*
-        flag_List[12] = target1;
-        flag_List[13] = target2;
-        flag_List[14] = target3;
-        flag_List[15] = target4;
-        int index, temp;
-        Random random = new Random();
-        for (int i = flag_List.length - 1; i > 0; i--){
-            index = random.nextInt(i + 1);
-            temp = flag_List[index];
-            flag_List[index] = flag_List[i];
-            flag_List[i] = temp;
-        }
-        */
 
         return flag_List;
 
@@ -181,23 +126,7 @@ public class flaglist {
         target23 = flag_List2[2];
         target24 = flag_List2[3];
         target25 = flag_List2[4];
-        flag_List2[20] = target25;
-        flag_List2[21] = target21;
-        flag_List2[22] = target22;
-        flag_List2[23] = target23;
-        flag_List2[24] = target24;
 
-        int index, temp;
-        Random random = new Random();
-        for (int i = flag_List2.length - 1; i > 0; i--) {
-            index = random.nextInt(i + 1);
-            temp = flag_List2[index];
-            flag_List2[index] = flag_List2[i];
-            flag_List2[i] = temp;
-        }
-        for (int k = 0; k < flag_List2.length; k++) {
-            System.out.print(k + ": " + flag_List2[k] + " - ");
-        }
         return flag_List2;
     }
 
@@ -206,7 +135,7 @@ public class flaglist {
         boolean control;
         flag_List3[0] = 0;
         flag_List3[1] = 1;
-        for (int i1 = 0; i1 < 32; i1++) {
+        for (int i1 = 0; i1 < 30; i1++) {
             control = true;
             flag_List3[i1] = (int) (Math.random() * 220 + 1);
             for (int i2 = 0; i2 < i1; i2++) {
@@ -218,31 +147,12 @@ public class flaglist {
                 i1 = i1 - 1;
             }
         }
-
         target31 = flag_List3[0];
         target32 = flag_List3[1];
         target33 = flag_List3[2];
         target34 = flag_List3[3];
         target35 = flag_List3[4];
         target36 = flag_List3[5];
-        flag_List3[30] = target36;
-        flag_List3[31] = target35;
-        flag_List3[32] = target31;
-        flag_List3[33] = target32;
-        flag_List3[34] = target33;
-        flag_List3[35] = target34;
-
-        int index, temp;
-        Random random = new Random();
-        for (int i = flag_List3.length - 1; i > 0; i--) {
-            index = random.nextInt(i + 1);
-            temp = flag_List3[index];
-            flag_List3[index] = flag_List3[i];
-            flag_List3[i] = temp;
-        }
-        for (int k = 0; k < flag_List3.length; k++) {
-            System.out.print(flag_List3[k] + "  ");
-        }
         return flag_List3;
     }
 }
