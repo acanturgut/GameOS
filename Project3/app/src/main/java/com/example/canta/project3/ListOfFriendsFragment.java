@@ -98,7 +98,7 @@ public void onDataChange(DataSnapshot snapshot) {
             listOfUserID[i] = Player.getInstance().getAllFriendsID()[i];
         }
         //Toast.makeText(getActivity(), "Text: " + listOfUserID[(int) id], Toast.LENGTH_SHORT).show();
-
+        Player_Other.getInstance().setId(listOfUserID[(int) id]);
         myRef = database.getReference("users").child(listOfUserID[(int) id]).child("info").child("username");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
