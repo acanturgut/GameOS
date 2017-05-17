@@ -15,6 +15,15 @@ public class Player_Other {
     private static String name = " ";
     private static String surname = " ";
 
+    public static String getId() {
+        return id;
+    }
+
+    public static void setId(String id) {
+        Player_Other.id = id;
+    }
+
+    private  static String id = "";
     private static String city = "";
     private static String playerName = "Enter Your Name";
 
