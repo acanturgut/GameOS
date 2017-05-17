@@ -97,6 +97,8 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_loader);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
         dialog.show();
 
         allpictures = new Bitmap[25];
