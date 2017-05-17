@@ -28,10 +28,13 @@ import java.util.Iterator;
  * A simple {@link Fragment} subclass.
  */
 public class ChallangesAndFriendRequestsFragment extends Fragment{
-    Iterator it;
+
     final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
+    final ArrayList<HashMap<String,String>> list2 = new ArrayList<HashMap<String,String>>();
 
     ListView challenges;
+    ListView friendRequsts;
+    SimpleAdapter adapter2;
     SimpleAdapter adapter;
     FirebaseDatabase database;
 
@@ -50,16 +53,16 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     static String gametype = "holder";
 
     HashMap<String,String> holder;
+    HashMap<String,String> holder2;
 
     @Override
     public void onStart(){
         super.onStart();
 
-
-
         database = FirebaseDatabase.getInstance();
-
         challenges = (ListView)getActivity().findViewById(R.id.list_view);
+        friendRequsts = (ListView)getActivity().findViewById(R.id.list_view2);
+
 
         adapter = new SimpleAdapter(getActivity(),
                 list,
@@ -67,18 +70,45 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                 new String[]{"First String", "Second String"},
                 new int[]{R.id.text11,R.id.text22});
 
+        adapter2 = new SimpleAdapter(getActivity(),
+                list2,
+                R.layout.list_viewer,
+                new String[]{"First String", "Second String"},
+                new int[]{R.id.text111,R.id.text222});
+
         challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
+                Button k = (Button)view.findViewById(R.id.list_item_accept);
+                Button ka = (Button)view.findViewById(R.id.list_item_decline);
 
-                Toast.makeText(getActivity(), position, Toast.LENGTH_SHORT).show();
+                final int kemal = position;
+
+                k.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        int kemal1 = kemal;
+
+                        Log.d("FUCK", "onClick: YES" + kemal);
+                    }
+                });
+
+                ka.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        int kemal1 = kemal;
+                        Log.d("FUCK", "onClick: NO" + kemal);
+
+                    }
+                });
 
             }
         });
 
-
-
+        friendRequsts.setAdapter(adapter2);
         challenges.setAdapter(adapter);
 
         database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("challanges").addChildEventListener(new ChildEventListener() {
@@ -86,12 +116,9 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
             public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
                 // Toast.makeText(getActivity(),"Text: " + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
 
-                Log.d("baban",dataSnapshot.getKey().toString());
 
                 HoldTheDoor pencil = dataSnapshot.getValue(HoldTheDoor.class);
 
-                Log.d("HOOOOO", "onChildAdded FIREBASE: " + FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
-                Log.d("HOOOOO", "onChildAdded PENCIL  : " + pencil.getChallanger());
 
                     if(!FirebaseAuth.getInstance().getCurrentUser().getUid().toString().equals(pencil.getChallanger())) {
 
@@ -102,7 +129,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         adapter.notifyDataSetChanged();
 
                     }
-
             }
 
             @Override
@@ -121,5 +147,45 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+
+        database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("friendRequests").addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
+                DeneryosTargeryos pencil = dataSnapshot.getValue(DeneryosTargeryos.class);
+
+                    holder2 = new HashMap<String, String>();
+
+                Log.d("BOK", "onChildAdded: "+ pencil.getUserID());
+                Log.d("BOK", "onChildAdded123: "+ pencil.getUsername());
+
+                    holder2.put("First String", pencil.getUsername());
+                    holder2.put("Second String","");
+                    list2.add(holder2);
+                    adapter2.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+
     }
 }
