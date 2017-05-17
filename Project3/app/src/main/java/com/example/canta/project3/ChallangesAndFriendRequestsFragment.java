@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -24,7 +27,7 @@ import java.util.Iterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ChallangesAndFriendRequestsFragment extends Fragment {
+public class ChallangesAndFriendRequestsFragment extends Fragment{
     Iterator it;
     final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 
@@ -35,7 +38,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment {
     public ChallangesAndFriendRequestsFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,6 +55,8 @@ public class ChallangesAndFriendRequestsFragment extends Fragment {
     public void onStart(){
         super.onStart();
 
+
+
         database = FirebaseDatabase.getInstance();
 
         challenges = (ListView)getActivity().findViewById(R.id.list_view);
@@ -62,6 +66,17 @@ public class ChallangesAndFriendRequestsFragment extends Fragment {
                 R.layout.list_item,
                 new String[]{"First String", "Second String"},
                 new int[]{R.id.text11,R.id.text22});
+
+        challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                Toast.makeText(getActivity(), position, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
 
         challenges.setAdapter(adapter);
@@ -75,75 +90,20 @@ public class ChallangesAndFriendRequestsFragment extends Fragment {
 
                 HoldTheDoor pencil = dataSnapshot.getValue(HoldTheDoor.class);
 
-                holder = new HashMap<String,String>();
-                holder.put("First String", pencil.getUsername());
-                holder.put("Second String", pencil.getGametype());
-                list.add(holder);
-                adapter.notifyDataSetChanged();
+                Log.d("HOOOOO", "onChildAdded FIREBASE: " + FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
+                Log.d("HOOOOO", "onChildAdded PENCIL  : " + pencil.getChallanger());
 
-                /*if (dataSnapshot.getKey() != null) {
+                    if(!FirebaseAuth.getInstance().getCurrentUser().getUid().toString().equals(pencil.getChallanger())) {
 
-                    database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("challanges").child(dataSnapshot.getKey().toString()).addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(DataSnapshot dataSnapshot2, String s) {
+                        holder = new HashMap<String, String>();
+                        holder.put("First String", pencil.getUsername());
+                        holder.put("Second String", pencil.getGametype());
+                        list.add(holder);
+                        adapter.notifyDataSetChanged();
 
-                                if (dataSnapshot2.getKey().toString().equals("username")) {
+                    }
 
-                                    if(username != null) {
-                                        username = dataSnapshot2.getValue().toString();
-                                        Log.d("ANANAS", "onChildAdded: USERNAME:  " + dataSnapshot2.getValue().toString());
-                                    }
-
-                                } else if (dataSnapshot2.getKey().toString().equals("gametype")) {
-                                    Log.d("ANANAS", "onChildAdded: GAMETYPE: " + dataSnapshot2.getValue().toString());
-                                    if(gametype != null) {
-                                        gametype = dataSnapshot2.getValue().toString();
-                                    }
-
-                                } else if (dataSnapshot2.getKey().toString().equals("challanger")) {
-
-                                    dataSnapshot2.getValue();
-
-                                } else if (dataSnapshot2.getKey().toString().equals("scoreed2")) {
-
-                                    dataSnapshot2.getValue();
-
-                                } else if (dataSnapshot2.getKey().toString().equals("scoreer1")) {
-
-                                    dataSnapshot2.getValue();
-
-                                }
-
-
-                        }
-
-                        @Override
-                        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                        }
-
-                        @Override
-                        public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                        }
-
-                        @Override
-                        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }else{
-                }
-
-
-                */
             }
-
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
