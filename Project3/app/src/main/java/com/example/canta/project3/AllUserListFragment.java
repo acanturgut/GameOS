@@ -109,19 +109,19 @@ public class AllUserListFragment extends ListFragment {
         List valid = Arrays.asList(Player.getInstance().getFriends());
 
         if (listOfUsername[(int) id].equals(Player.getInstance().getPlayerName()) || valid.contains(listOfUsername[(int)id])){
+            if(listOfUsername[(int) id].equals(Player.getInstance().getPlayerName())){
+                Toast.makeText(getActivity(), "You cannot add yourself as a friend" , Toast.LENGTH_SHORT).show();
+            }else if ( valid.contains(listOfUsername[(int)id])){
+                Toast.makeText(getActivity(), "This user is already your friend" , Toast.LENGTH_SHORT).show();
+            }
 
-            Toast.makeText(getActivity(), "You cannot add this user as a friend" , Toast.LENGTH_SHORT).show();
 
         }else{
 
             //Toast.makeText(getActivity(), "Text: " + listOfUserID[(int) id], Toast.LENGTH_SHORT).show();
             Toast.makeText(getActivity(), "This user is added as a friend: " + listOfUsername[(int) id], Toast.LENGTH_SHORT).show();
-            // database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("friends").child(listOfUserID[(int)id]).setValue(listOfUsername[(int)id]);
-            //  database.getReference("users").child(listOfUserID[(int)id]).child("friends").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).setValue(Player.getInstance().getPlayerName());
-            database.getReference("users").child(listOfUserID[(int)id]).child("friendRequests").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).setValue(Player.getInstance().getPlayerName());
-
-
-
+            database.getReference("users").child(listOfUserID[(int)id]).child("friendRequests").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("username").setValue(Player.getInstance().getPlayerName());
+            database.getReference("users").child(listOfUserID[(int)id]).child("friendRequests").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("userID").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
         }
     }
 

@@ -194,6 +194,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.addToBackStack(null);
             ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
+        }else if (id == R.id.nav_request) {
+            ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
+            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container, game1);
+            ft.addToBackStack(null);
+            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            ft.commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

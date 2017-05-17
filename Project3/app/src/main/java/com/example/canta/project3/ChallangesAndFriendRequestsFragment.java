@@ -1,8 +1,8 @@
 package com.example.canta.project3;
 
 
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -21,7 +20,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 
 
 /**
@@ -31,6 +29,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
 
     final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
     final ArrayList<HashMap<String,String>> list2 = new ArrayList<HashMap<String,String>>();
+    final ArrayList<String> listidler = new ArrayList<String>();
 
     ListView challenges;
     ListView friendRequsts;
@@ -88,9 +87,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                 k.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        int kemal1 = kemal;
-
                         Log.d("FUCK", "onClick: YES" + kemal);
                     }
                 });
@@ -98,15 +94,56 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                 ka.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                        String friendID = listidler.get(kemal);
+                        database.getReference("users").child(myid).child("challanges").child(friendID).removeValue();
+                        database.getReference("users").child(friendID).child("challanges").child(myid
+                        ).removeValue();
 
-                        int kemal1 = kemal;
-                        Log.d("FUCK", "onClick: NO" + kemal);
+                        Log.d("FUCK", "onClick: NO" + list.get(kemal) + "   " + listidler.get(kemal));
 
                     }
                 });
 
             }
         });
+
+
+        friendRequsts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
+
+                Button k = (Button)view.findViewById(R.id.list_item_accept2);
+                Button ka = (Button)view.findViewById(R.id.list_item_decline2);
+
+                final int kemal = position;
+
+                k.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String friendID = list2.get(kemal).get("Second String");
+                        String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                        String friendUN = list2.get(kemal).get("First String");
+                        String myUN = Player.getInstance().getPlayerName();
+                        Log.d("AAAAA", "onClick: " + myid + "  " + friendID + "------" + list2.get(kemal));
+                        database.getReference("users").child(myid).child("friends").child(friendID).setValue(friendUN);
+                        database.getReference("users").child(friendID).child("friends").child(myid).setValue(myUN);
+                        database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
+                    }
+                });
+
+                ka.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String friendID = list2.get(kemal).get("Second String");
+                        String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                        database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
+                    }
+                });
+
+            }
+        });
+
 
         friendRequsts.setAdapter(adapter2);
         challenges.setAdapter(adapter);
@@ -126,6 +163,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         holder.put("First String", pencil.getUsername());
                         holder.put("Second String", pencil.getGametype());
                         list.add(holder);
+                        listidler.add(pencil.getChallanger());
                         adapter.notifyDataSetChanged();
 
                     }
@@ -160,7 +198,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                 Log.d("BOK", "onChildAdded123: "+ pencil.getUsername());
 
                     holder2.put("First String", pencil.getUsername());
-                    holder2.put("Second String","");
+                    holder2.put("Second String", pencil.getUserID());
                     list2.add(holder2);
                     adapter2.notifyDataSetChanged();
             }

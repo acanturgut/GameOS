@@ -35,35 +35,34 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/list_item_accept"
+            android:id="@+id/list_item_accept2"
             android:layout_width="80dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/button_true"
-            android:text="Accept"
             android:clickable="true"
-            android:textColor="@color/myWhite"
-            android:textStyle="bold"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            />
+            android:text="Accept"
+            android:textColor="@color/myWhite"
+            android:textStyle="bold" />
 
         <Button
-            android:clickable="true"
-            android:id="@+id/list_item_decline"
+            android:id="@+id/list_item_decline2"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
             android:background="@drawable/button_normal"
+            android:clickable="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:text="DECLINE"
             android:textColor="@color/myWhite"
-            android:textStyle="bold"
-            android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:textStyle="bold" />
 
     </LinearLayout>
 
