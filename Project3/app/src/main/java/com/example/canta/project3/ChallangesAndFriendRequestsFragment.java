@@ -24,7 +24,7 @@ import java.util.Iterator;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class FriendListFragment extends Fragment {
+public class ChallangesAndFriendRequestsFragment extends Fragment {
     Iterator it;
     final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
 
@@ -32,7 +32,7 @@ public class FriendListFragment extends Fragment {
     SimpleAdapter adapter;
     FirebaseDatabase database;
 
-    public FriendListFragment() {
+    public ChallangesAndFriendRequestsFragment() {
         // Required empty public constructor
     }
 

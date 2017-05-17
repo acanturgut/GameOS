@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity
             ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }else if (id == R.id.nav_rank) {
-            FriendListFragment game1 = new FriendListFragment();
+            ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, game1);
             ft.addToBackStack(null);

@@ -87,7 +87,7 @@ public class userProfile extends Fragment implements View.OnClickListener {
                 myRef = database.getReference("users").child(currentFirebaseUser.getUid().toString()).child("info").child("city");
                 myRef.setValue(city.getText() + "");
 
-                FriendListFragment game1 = new FriendListFragment();
+                ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
                 android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                 ft.replace(R.id.fragment_container, game1);
                 ft.addToBackStack(null);

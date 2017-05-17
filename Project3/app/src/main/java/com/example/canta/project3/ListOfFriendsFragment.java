@@ -92,7 +92,6 @@ public void onDataChange(DataSnapshot snapshot) {
 
 
     @Override
-
     public void onListItemClick(ListView l, View v, int position, long id) {
         String[] listOfUserID = new String[Player.getInstance().getFriendCount()];
         for (int i = 0; i < Player.getInstance().getFriendCount(); i++) {
