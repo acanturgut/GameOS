@@ -60,28 +60,13 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
         mem6.setOnClickListener(this);
     }
 
-
+    String senderID,receiverID;
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.challange_qq_user:
-                String senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
-                String receiverID = Player_Other.getInstance().getId() + "";
-
-                FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("username").setValue(Player_Other.getInstance().getPlayerName());
-                FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("challenger").setValue(Player_Other.getInstance().getId());
-                FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("gametype").setValue("quickquiz");
-                FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreed2").setValue("0");
-                FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreer1").setValue("0");
-
-                FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("username").setValue(Player.getInstance().getPlayerName());
-                FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("challenger").setValue(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
-                FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("gametype").setValue("quickquiz");
-                FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreed2").setValue("0");
-                FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreer1").setValue("0");
-
-
-
-                System.out.println("1");
+                senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
+                receiverID = Player_Other.getInstance().getId() + "";
+                actionFirebase(senderID, receiverID, "quickquiz");
                 qqTopicSelectFragment move1 = new qqTopicSelectFragment();
                 android.app.FragmentTransaction ft1 = getFragmentManager().beginTransaction();
                 ft1.replace(R.id.fragment_container, move1);
@@ -90,7 +75,9 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 ft1.commit();
                 break;
             case R.id.challange_44_user:
-                System.out.println("2");
+                senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
+                receiverID = Player_Other.getInstance().getId() + "";
+                actionFirebase(senderID, receiverID, "MemoGame 4x4");
                 levelOneFragment move2 = new levelOneFragment();
                 android.app.FragmentTransaction ft2 = getFragmentManager().beginTransaction();
                 ft2.replace(R.id.fragment_container, move2);
@@ -99,7 +86,9 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 ft2.commit();
                 break;
             case R.id.challange_55_user:
-                System.out.println("3");
+                senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
+                receiverID = Player_Other.getInstance().getId() + "";
+                actionFirebase(senderID, receiverID, "MemoGame 5x5");
                 levelTwoFragment move3 = new levelTwoFragment();
                 android.app.FragmentTransaction ft3 = getFragmentManager().beginTransaction();
                 ft3.replace(R.id.fragment_container, move3);
@@ -108,6 +97,9 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 ft3.commit();
                 break;
             case R.id.challange_66_user:
+                senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
+                receiverID = Player_Other.getInstance().getId() + "";
+                actionFirebase(senderID, receiverID, "MemoGame 6x6");
                 levelThreeFragment move4 = new levelThreeFragment();
                 android.app.FragmentTransaction ft4 = getFragmentManager().beginTransaction();
                 ft4.replace(R.id.fragment_container, move4);
@@ -116,5 +108,19 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 ft4.commit();
                 break;
         }
+    }
+
+    public void actionFirebase(String senderID, String receiverID, String gametyle){
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("username").setValue(Player_Other.getInstance().getPlayerName());
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("challanger").setValue(senderID);
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("gametype").setValue("quickquiz");
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreed2").setValue("0");
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreer1").setValue("0");
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("username").setValue(Player.getInstance().getPlayerName());
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("challanger").setValue(senderID);
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("gametype").setValue("quickquiz");
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreed2").setValue("0");
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreer1").setValue("0");
+
     }
 }
