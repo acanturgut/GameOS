@@ -19,11 +19,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
     FirebaseUser currentFirebaseUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,13 +63,6 @@ public class MainActivity extends AppCompatActivity
             @Override public void onCancelled(DatabaseError error) {}
         });
 
-
-
-
-
-
-
-
         final int[] counter = {0};
         database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("friends").addChildEventListener(new ChildEventListener() {
             @Override
@@ -87,8 +81,6 @@ public class MainActivity extends AppCompatActivity
             public void onCancelled(DatabaseError databaseError) {}
         });
 
-
-
         database.getReference("users").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
@@ -104,6 +96,7 @@ public class MainActivity extends AppCompatActivity
                     });
                 }
             }
+
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
             @Override
@@ -113,11 +106,7 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-
-
-
     }
-
 
     @Override
     public void onBackPressed() {

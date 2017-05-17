@@ -15,6 +15,7 @@
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_margin="20dp"
             android:text="My Challenges"
             android:textAlignment="center"
             android:textSize="30sp"
@@ -23,6 +24,21 @@
 
         <ListView
             android:id="@+id/list_view"
+            android:layout_width="match_parent"
+            android:layout_height="173dp" />
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:text="Friend Requests"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:text="Friend Requests" />
+
+        <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
