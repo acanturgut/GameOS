@@ -19,6 +19,11 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -371,6 +376,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
     public void hold(int number, int k){
 
         int ref2 = flaglistNum[k-1];
@@ -411,7 +417,9 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
 
                 if (trueans == 5) {
                     Player.getInstance().setLife(4);
+
                     trueans = 0;
+                    firebasePointUpdate(0);
                     MemoryGameSelectionFragment move = new MemoryGameSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, move);
@@ -438,6 +446,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h24);
                     myim.setImageResource(R.drawable.ekalp);
                 }else{
+                    firebasePointUpdate(0);
                     MemoryGameSelectionFragment game1 = new MemoryGameSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
                     ft.replace(R.id.fragment_container, game1);
@@ -506,6 +515,21 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
             } catch (IOException e) {}
         }
         return 1;
+    }
+
+    public void firebasePointUpdate(final int errorSolver){
+        final int[] kk = {errorSolver};
+        FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("info").child("mescore").addValueEventListener(new ValueEventListener() {
+            @Override public void onDataChange(DataSnapshot dataSnapshot) {
+                if (kk[0] == 0){
+                    int usersCurrentScore = Integer.parseInt(dataSnapshot.getValue(String.class));
+                    usersCurrentScore += Player.getInstance().getPlayerScore();
+                    FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("info").child("mescore").setValue(usersCurrentScore + "");
+                    kk[0]++;
+                }
+            }
+            @Override public void onCancelled(DatabaseError error) {}
+        });
     }
 
     private void updatePoint(boolean k){

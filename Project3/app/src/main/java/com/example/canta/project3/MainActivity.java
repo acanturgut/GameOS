@@ -188,7 +188,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }else if (id == R.id.nav_rank) {
-            ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
+            TopScoresFragment game1 = new TopScoresFragment();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, game1);
             ft.addToBackStack(null);

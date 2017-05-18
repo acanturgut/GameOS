@@ -23,7 +23,7 @@
             tools:text="QuickQuiz" />
 
         <ListView
-            android:id="@+id/list_view"
+            android:id="@+id/list_view_qq"
             android:layout_width="match_parent"
             android:layout_height="173dp"
             />
@@ -40,7 +40,7 @@
             tools:text="MemoGame" />
 
         <ListView
-            android:id="@+id/list_view2"
+            android:id="@+id/list_view_mg"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

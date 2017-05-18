@@ -64,6 +64,7 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.challange_qq_user:
+
                 senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
                 receiverID = Player_Other.getInstance().getId() + "";
                 actionFirebase(senderID, receiverID, "quickquiz");
@@ -111,14 +112,20 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
     }
 
     public void actionFirebase(String senderID, String receiverID, String gametyle){
+
+        challangeHandler.getInstance().setIsChallange(true);
+        challangeHandler.getInstance().setMyId(senderID);
+        challangeHandler.getInstance().setOthersID(receiverID);
+        challangeHandler.getInstance().setIsChallanger(true);
+
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("username").setValue(Player_Other.getInstance().getPlayerName());
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("challanger").setValue(senderID);
-        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("gametype").setValue("quickquiz");
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("gametype").setValue(gametyle);
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreed2").setValue("0");
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreer1").setValue("0");
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("username").setValue(Player.getInstance().getPlayerName());
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("challanger").setValue(senderID);
-        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("gametype").setValue("quickquiz");
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("gametype").setValue(gametyle);
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreed2").setValue("0");
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreer1").setValue("0");
 

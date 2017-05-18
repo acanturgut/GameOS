@@ -79,6 +79,7 @@ public class userProfile extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()){
             case  R.id.button_profile_save: {
+
                 System.out.println("clicked");
                 myRef = database.getReference("users").child(currentFirebaseUser.getUid().toString()).child("info").child("name");
                 myRef.setValue(name.getText() + "");
@@ -86,6 +87,8 @@ public class userProfile extends Fragment implements View.OnClickListener {
                 myRef.setValue(surname.getText() + "");
                 myRef = database.getReference("users").child(currentFirebaseUser.getUid().toString()).child("info").child("city");
                 myRef.setValue(city.getText() + "");
+
+
 
                 ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
                 android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
