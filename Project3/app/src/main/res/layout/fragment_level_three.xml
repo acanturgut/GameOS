@@ -9,444 +9,551 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <ImageView
-        android:layout_width="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f341"
-        android:layout_below="@+id/f331"
-        android:layout_alignStart="@+id/f331"
-        android:layout_height="50dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f345"
-        android:layout_below="@+id/f334"
-        android:layout_toEndOf="@+id/f334"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f314"
-        android:layout_alignTop="@+id/f313"
-        android:layout_toEndOf="@+id/f313"
-        android:layout_width="50dp" />
+            <TextView
+                android:id="@+id/myscore2"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/textView5"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="20dp"
+                android:layout_toStartOf="@+id/target8"
+                android:layout_weight="1" />
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f324"
-        android:layout_below="@+id/f313"
-        android:layout_toEndOf="@+id/f323"
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+            <TextView
+                android:id="@+id/myscore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/myscore2"
+                android:layout_alignBottom="@+id/myscore2"
+                android:layout_toEndOf="@+id/myscore2"
+                android:layout_weight="1"
+                android:text=" " />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/kalp"
-        android:layout_alignBottom="@+id/myscore"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="25dp"
-        android:id="@+id/h31" />
+            <TextView
+                android:id="@+id/myscore5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/textView8"
+                android:layout_alignTop="@+id/h34"
+                android:layout_toStartOf="@+id/textView7"
+                android:layout_weight="1"
+                android:text="SCORE " />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/kalp"
-        android:layout_alignBottom="@+id/h31"
-        android:layout_toStartOf="@+id/h31"
-        android:id="@+id/h32" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/kalp"
-        android:layout_alignBottom="@+id/h32"
-        android:layout_toStartOf="@+id/h32"
-        android:id="@+id/h33" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/kalp"
-        android:layout_alignBottom="@+id/h33"
-        android:layout_toStartOf="@+id/h33"
-        android:id="@+id/h34" />
+            <ImageView
+                android:id="@+id/h32"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/h31"
+                android:layout_toStartOf="@+id/h31"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/kalp" />
 
-    <TextView
-        android:text="TARGET FLAG LIST"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:id="@+id/textView7"
-        android:layout_below="@+id/h34"
-        android:layout_centerHorizontal="true"
-        android:textStyle="normal|bold" />
+            <ImageView
+                android:id="@+id/h34"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/h33"
+                android:layout_toStartOf="@+id/h33"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/kalp" />
 
-    <ImageView
-        android:layout_width="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/target1"
-        android:layout_height="50dp"
-        android:layout_below="@+id/textView7"
-        android:layout_toEndOf="@+id/textView5"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" />
+            <ImageView
+                android:id="@+id/h33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/h32"
+                android:layout_toStartOf="@+id/h32"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/kalp" />
 
-    <ImageView
-        android:layout_width="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/target2"
-        android:layout_height="50dp"
-        android:layout_below="@+id/textView7"
-        android:layout_toEndOf="@+id/target1"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" />
+            <ImageView
+                android:id="@+id/h31"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/myscore"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="25dp"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/kalp" />
 
-    <ImageView
-        android:layout_width="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/target3"
-        android:layout_height="50dp"
-        android:layout_below="@+id/textView7"
-        android:layout_toEndOf="@+id/target2"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f313"
-        android:layout_alignTop="@+id/f312"
-        android:layout_toEndOf="@+id/f312" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="53dp"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f321"
-        android:layout_below="@+id/f311"
-        android:layout_alignStart="@+id/f311" />
+            <ImageView
+                android:id="@+id/target6"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/target3"
+                android:layout_toEndOf="@+id/target3"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f331"
-        android:layout_below="@+id/f321"
-        android:layout_alignStart="@+id/f321" />
+            <ImageView
+                android:id="@+id/target1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/textView7"
+                android:layout_toEndOf="@+id/textView5"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:layout_above="@+id/f331"
-        android:layout_alignStart="@+id/f312"
-        android:id="@+id/f322" />
+            <ImageView
+                android:id="@+id/target3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/textView7"
+                android:layout_toEndOf="@+id/target2"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f323"
-        android:layout_below="@+id/f312"
-        android:layout_toEndOf="@+id/f312" />
+            <ImageView
+                android:id="@+id/target2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/textView7"
+                android:layout_toEndOf="@+id/target1"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:srcCompat="@drawable/card" />
 
-    <TextView
-        android:text="LEVEL 3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/f312"
-        android:id="@+id/textView8"
-        android:textStyle="normal|bold"
-        android:layout_alignStart="@+id/f311"
-        android:layout_alignEnd="@+id/f335"
-        android:textAlignment="center" />
+            <ImageView
+                android:id="@+id/target5"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignBottom="@+id/target6"
+                android:layout_toEndOf="@+id/target6"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f333"
-        android:layout_below="@+id/f322"
-        android:layout_toEndOf="@+id/f322" />
+            <ImageView
+                android:id="@+id/target8"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/f311"
+                android:layout_toStartOf="@+id/textView7"
+                android:layout_weight="1"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="31dp"
-        android:id="@+id/textView5"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@+id/textView7"
-        android:layout_marginEnd="105dp" />
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/h34"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="TARGET FLAG LIST"
+            android:textAlignment="center"
+            android:textStyle="normal|bold" />
 
-    <ImageView
-        android:layout_width="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/target8"
-        android:layout_height="50dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_above="@+id/f311"
-        android:layout_toStartOf="@+id/textView7" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <TextView
-        android:text=" "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/myscore"
-        android:layout_marginStart="14dp"
-        android:layout_alignBaseline="@+id/myscore2"
-        android:layout_alignBottom="@+id/myscore2"
-        android:layout_toEndOf="@+id/myscore2" />
+            <ImageView
+                android:id="@+id/f324"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f313"
+                android:layout_toEndOf="@+id/f323"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <TextView
-        android:layout_height="wrap_content"
-        android:id="@+id/myscore2"
-        android:layout_alignBottom="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="20dp"
-        android:layout_toStartOf="@+id/target8"
-        android:layout_width="250dp" />
+            <ImageView
+                android:id="@+id/f341"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/f331"
+                android:layout_below="@+id/f331"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f315"
-        android:layout_alignTop="@+id/f314"
-        android:layout_toEndOf="@+id/f314" />
+            <ImageView
+                android:id="@+id/f314"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/f313"
+                android:layout_toEndOf="@+id/f313"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f351"
-        android:layout_below="@+id/f341"
-        android:layout_toStartOf="@+id/f332" />
+            <ImageView
+                android:id="@+id/f345"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f334"
+                android:layout_toEndOf="@+id/f334"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f325"
-        android:layout_below="@+id/f314"
-        android:layout_toEndOf="@+id/f314" />
+            <ImageView
+                android:id="@+id/f321"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/f311"
+                android:layout_below="@+id/f311"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f312"
-        android:layout_above="@+id/f322"
-        android:layout_toEndOf="@+id/f321" />
+            <ImageView
+                android:id="@+id/f313"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/f312"
+                android:layout_toEndOf="@+id/f312"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f332"
-        android:layout_below="@+id/f322"
-        android:layout_toEndOf="@+id/f321" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:layout_marginTop="37dp"
-        android:id="@+id/f311"
-        android:layout_below="@+id/target1"
-        android:layout_alignEnd="@+id/myscore" />
+            <ImageView
+                android:id="@+id/f351"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f341"
+                android:layout_toStartOf="@+id/f332"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f355"
-        android:layout_below="@+id/f345"
-        android:layout_toEndOf="@+id/f354" />
+            <ImageView
+                android:id="@+id/f331"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/f321"
+                android:layout_below="@+id/f321"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f334"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/f324"
-        android:layout_toEndOf="@+id/f323" />
+            <ImageView
+                android:id="@+id/f322"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/f331"
+                android:layout_alignStart="@+id/f312"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f344"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/f333"
-        android:layout_toEndOf="@+id/f333" />
+            <ImageView
+                android:id="@+id/f333"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f322"
+                android:layout_toEndOf="@+id/f322"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f352"
-        android:layout_height="50dp"
-        android:layout_width="50dp"
-        android:layout_below="@+id/f341"
-        android:layout_toEndOf="@+id/f341" />
+            <ImageView
+                android:id="@+id/f323"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f312"
+                android:layout_toEndOf="@+id/f312"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f354"
-        android:layout_below="@+id/f345"
-        android:layout_toEndOf="@+id/f343" />
+            <ImageView
+                android:id="@+id/f315"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignTop="@+id/f314"
+                android:layout_toEndOf="@+id/f314"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f342"
-        android:layout_below="@+id/f333"
-        android:layout_toEndOf="@+id/f341" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f343"
-        android:layout_below="@+id/f333"
-        android:layout_toEndOf="@+id/f332" />
+            <ImageView
+                android:id="@+id/f325"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f314"
+                android:layout_toEndOf="@+id/f314"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f353"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_below="@+id/f342"
-        android:layout_toEndOf="@+id/f352" />
+            <ImageView
+                android:id="@+id/f332"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f322"
+                android:layout_toEndOf="@+id/f321"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f335"
-        android:layout_below="@+id/f325"
-        android:layout_toEndOf="@+id/f334" />
+            <ImageView
+                android:id="@+id/f311"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignEnd="@+id/myscore"
+                android:layout_below="@+id/target1"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <TextView
-        android:text="SCORE "
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/h34"
-        android:layout_alignStart="@+id/textView8"
-        android:id="@+id/myscore5"
-        android:layout_toStartOf="@+id/textView7" />
+            <ImageView
+                android:id="@+id/f355"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f345"
+                android:layout_toEndOf="@+id/f354"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f326"
-        android:layout_below="@+id/f316"
-        android:layout_toEndOf="@+id/f325" />
+            <ImageView
+                android:id="@+id/f312"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_above="@+id/f322"
+                android:layout_toEndOf="@+id/f321"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f346"
-        android:layout_below="@+id/f336"
-        android:layout_toEndOf="@+id/f345" />
+            <ImageView
+                android:id="@+id/f334"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f324"
+                android:layout_toEndOf="@+id/f323"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f356"
-        android:layout_below="@+id/f346"
-        android:layout_toEndOf="@+id/f345" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="57dp"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f361"
-        android:layout_below="@+id/f351"
-        android:layout_alignStart="@+id/f351" />
+            <ImageView
+                android:id="@+id/f354"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f345"
+                android:layout_toEndOf="@+id/f343"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f363"
-        android:layout_below="@+id/f354"
-        android:layout_toEndOf="@+id/f352" />
+            <ImageView
+                android:id="@+id/f352"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f341"
+                android:layout_toEndOf="@+id/f341"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f362"
-        android:layout_below="@+id/f352"
-        android:layout_toEndOf="@+id/f351" />
+            <ImageView
+                android:id="@+id/f342"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f333"
+                android:layout_toEndOf="@+id/f341"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f366"
-        android:layout_below="@+id/f355"
-        android:layout_toEndOf="@+id/f355" />
+            <ImageView
+                android:id="@+id/f343"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f333"
+                android:layout_toEndOf="@+id/f332"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f365"
-        android:layout_below="@+id/f355"
-        android:layout_toStartOf="@+id/f336" />
+            <ImageView
+                android:id="@+id/f353"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f342"
+                android:layout_toEndOf="@+id/f352"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f364"
-        android:layout_below="@+id/f354"
-        android:layout_toStartOf="@+id/f365" />
+            <ImageView
+                android:id="@+id/f344"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f333"
+                android:layout_toEndOf="@+id/f333"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f316"
-        android:layout_below="@+id/textView8"
-        android:layout_toEndOf="@+id/f315" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:id="@+id/f336"
-        android:layout_below="@+id/f326"
-        android:layout_toEndOf="@+id/f345" />
+            <ImageView
+                android:id="@+id/f335"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f325"
+                android:layout_toEndOf="@+id/f334"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        app:srcCompat="@drawable/card"
-        android:id="@+id/target6"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:layout_alignTop="@+id/target3"
-        android:layout_toEndOf="@+id/target3" />
+            <ImageView
+                android:id="@+id/f363"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f354"
+                android:layout_toEndOf="@+id/f352"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
 
-    <ImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@drawable/card"
-        android:layout_alignBottom="@+id/target6"
-        android:layout_toEndOf="@+id/target6"
-        android:id="@+id/target5"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp" />
+            <ImageView
+                android:id="@+id/f356"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f346"
+                android:layout_toEndOf="@+id/f345"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f326"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f316"
+                android:layout_toEndOf="@+id/f325"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f346"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f336"
+                android:layout_toEndOf="@+id/f345"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f361"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignStart="@+id/f351"
+                android:layout_below="@+id/f351"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/f365"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f355"
+                android:layout_toStartOf="@+id/f336"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f366"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f355"
+                android:layout_toEndOf="@+id/f355"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f316"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/textView8"
+                android:layout_toEndOf="@+id/f315"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f364"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f354"
+                android:layout_toStartOf="@+id/f365"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f336"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f326"
+                android:layout_toEndOf="@+id/f345"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+
+            <ImageView
+                android:id="@+id/f362"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_below="@+id/f352"
+                android:layout_toEndOf="@+id/f351"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/card" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <fragment
+                android:id="@+id/fragment"
+                android:name="com.example.canta.project3.emptyFragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/fragment_empty" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>
