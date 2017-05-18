@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         } else if (id == R.id.nav_gallery) {
+            challangeHandler.getInstance().setIsChallange(false);
             qqTopicSelectFragment game1 = new qqTopicSelectFragment();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, game1);
@@ -167,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         } else if (id == R.id.nav_slideshow) {
+            challangeHandler.getInstance().setIsChallange(false);
             MemoryGameSelectionFragment game1 = new MemoryGameSelectionFragment();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, game1);

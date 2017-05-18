@@ -329,8 +329,8 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <fragment
-                android:id="@+id/fragment3"
+            <FrameLayout
+                android:id="@+id/time_container1"
                 android:name="com.example.canta.project3.emptyFragment"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

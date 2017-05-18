@@ -42,6 +42,7 @@ public class MemoryGameSelectionFragment extends Fragment implements View.OnClic
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.playmemo4:
+                challangeHandler.getInstance().setIsChallange(false);
                 levelOneFragment move1 = new levelOneFragment();
                 android.app.FragmentTransaction ft1 = getFragmentManager().beginTransaction();
                 ft1.replace(R.id.fragment_container, move1);
@@ -50,6 +51,7 @@ public class MemoryGameSelectionFragment extends Fragment implements View.OnClic
                 ft1.commit();
                 break;
             case R.id.playmemo5:
+                challangeHandler.getInstance().setIsChallange(false);
                 levelTwoFragment move2 = new levelTwoFragment();
                 android.app.FragmentTransaction ft2 = getFragmentManager().beginTransaction();
                 ft2.replace(R.id.fragment_container, move2);
@@ -58,6 +60,7 @@ public class MemoryGameSelectionFragment extends Fragment implements View.OnClic
                 ft2.commit();
                 break;
             case R.id.playmemo6:
+                challangeHandler.getInstance().setIsChallange(false);
                 levelThreeFragment move3 = new levelThreeFragment();
                 android.app.FragmentTransaction ft3 = getFragmentManager().beginTransaction();
                 ft3.replace(R.id.fragment_container, move3);

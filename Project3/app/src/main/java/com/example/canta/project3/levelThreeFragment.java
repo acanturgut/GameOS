@@ -2,6 +2,7 @@ package com.example.canta.project3;
 
 import android.app.Dialog;
 import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -97,14 +99,40 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         imageViewID[34] = R.id.f365;
         imageViewID[35] = R.id.f366;
 
-
+        Player.getInstance().setLife(4);
         for (int i = 0; i < 36; i++){
             Log.d("baban", "onCreateView: " + i);
             ImageView myImage = (ImageView) layout3.findViewById(imageViewID[i]);
             myImage.setOnClickListener(this);
         }
 
-        int a[] = flaglist.getInstance().getQuestionList3();
+        if(challangeHandler.isChallange() && challangeHandler.isChallanger()){
+            a = flaglist.getInstance().getQuestionList3();
+            for (int i = 0; i < a.length; i++){
+                FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getOthersID()).child("challanges").child(challangeHandler.getMyId()).child("flaglist").child(i + "").setValue(a[i]);
+            }
+        }else if(challangeHandler.isChallange() && !challangeHandler.isChallanger()){
+
+            for (int i = 0; i < a.length; i++){
+                final int i2 = i;
+                FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        }else{
+            a = flaglist.getInstance().getQuestionList2();
+        }
+
+
+
 
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_loader);
@@ -113,10 +141,17 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         dialog.setCancelable(false);
         dialog.show();
 
+
         allpictures = new Bitmap[36];
         flaglistNum = new int[36];
         targets = new Bitmap[6];
-        createImageArray(a,flaglistNum, allpictures,targets);
+
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            public void run() {
+                createImageArray(a, flaglistNum, allpictures, targets);
+            }
+        }, 1500);
 
 
         return layout3;
@@ -509,16 +544,16 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
             } else{
                 Player.getInstance().setLife(Player.getInstance().getLife()-1);
                 if(Player.getInstance().getLife() == 3){
-                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h21);
+                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h31);
                     myim.setImageResource(R.drawable.ekalp);
                 }else if(Player.getInstance().getLife() == 2){
-                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h22);
+                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h32);
                     myim.setImageResource(R.drawable.ekalp);
                 }else if(Player.getInstance().getLife() == 1){
-                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h23);
+                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h33);
                     myim.setImageResource(R.drawable.ekalp);
                 }else if(Player.getInstance().getLife() == 0){
-                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h24);
+                    ImageView myim = (ImageView) getActivity().findViewById(R.id.h34);
                     myim.setImageResource(R.drawable.ekalp);
                 }else{
                     firebasePointUpdate(0);
@@ -564,6 +599,12 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         for (int i = 0; i < 36; i++) {
             imagesetter(imageViewID[i], i, 1);
         }
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        StopwatchFragment stopwatchFragment = new StopwatchFragment();
+        ft.replace(R.id.time_container3, stopwatchFragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             public void run() {
@@ -629,6 +670,40 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
             }
             @Override public void onCancelled(DatabaseError error) {}
         });
+
+        if(challangeHandler.getInstance().isChallange()){
+
+            challangeHandler.getInstance().setIsChallange(false);
+            if (challangeHandler.getInstance().isChallanger()){
+                FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
+                FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getOthersID()).child("challanges").child(challangeHandler.getInstance().getMyId()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
+            } else{
+                FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.getValue() != null) {
+                            if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
+                                Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
+                            } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
+                                Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
+                String myid = challangeHandler.getInstance().getMyId();
+                String friendID = challangeHandler.getInstance().getOthersID();
+                FirebaseDatabase.getInstance().getReference("users").child(myid).child("challanges").child(friendID).removeValue();
+                FirebaseDatabase.getInstance().getReference("users").child(friendID).child("challanges").child(myid).removeValue();
+
+            }
+        }
     }
 
     private void updatePoint(boolean k){

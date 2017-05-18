@@ -54,6 +54,8 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     HashMap<String,String> holder;
     HashMap<String,String> holder2;
 
+    int[] closeloader = new int[]{1,1};
+
     @Override
     public void onStart(){
         super.onStart();
