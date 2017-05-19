@@ -30,6 +30,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     final ArrayList<HashMap<String,String>> list = new ArrayList<HashMap<String,String>>();
     final ArrayList<HashMap<String,String>> list2 = new ArrayList<HashMap<String,String>>();
     final ArrayList<String> listidler = new ArrayList<String>();
+    final ArrayList<String> mailler = new ArrayList<String>();
 
     ListView challenges;
     ListView friendRequsts;
@@ -91,6 +92,8 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         challangeHandler.getInstance().setIsChallange(true);
                         challangeHandler.getInstance().setMyId(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
                         challangeHandler.getInstance().setOthersID(listidler.get(kemal));
+                        challangeHandler.getInstance().setChallangeremail(mailler.get(kemal));
+                        Log.d("emailtoSend", "onClick: " + mailler.get(kemal));
                         challangeHandler.getInstance().setIsChallanger(false);
                         startGame(list.get(kemal).get("Second String"));
                     }
@@ -167,6 +170,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         holder.put("Second String", pencil.getGametype());
                         list.add(holder);
                         listidler.add(pencil.getChallanger());
+                        mailler.add(pencil.getChallangeremail());
                         adapter.notifyDataSetChanged();
 
                     }

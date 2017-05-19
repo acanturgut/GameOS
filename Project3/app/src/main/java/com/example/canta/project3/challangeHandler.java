@@ -46,6 +46,15 @@ class challangeHandler {
         challangeHandler.isChallanger = isChallanger;
     }
 
+    public static String getChallangeremail() {
+        return challangeremail;
+    }
+
+    public static void setChallangeremail(String challangeremail) {
+        challangeHandler.challangeremail = challangeremail;
+    }
+
+    private static String challangeremail = " ";
     private static String myId = "";
     private  static String othersID = "";
     private static boolean isChallange = false;

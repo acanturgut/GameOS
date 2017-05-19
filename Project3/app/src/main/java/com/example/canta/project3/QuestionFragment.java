@@ -9,6 +9,7 @@ import android.os.HandlerThread;
 import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.onesignal.OneSignal;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -30,6 +32,8 @@ import java.net.URL;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
+
+import static com.example.canta.project3.MainActivity.current_user_email;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -105,6 +109,14 @@ public class QuestionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        OneSignal.startInit(getActivity())
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .unsubscribeWhenNotificationsAreDisabled(true)
+                .init();
+
+        OneSignal.sendTag("User_ID", current_user_email);
+
+
         return inflater.inflate(R.layout.fragment_question, container, false);
     }
 
@@ -167,7 +179,6 @@ public class QuestionFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View v) {
-
                 goNewActivity(answer1);
 
             }
@@ -176,7 +187,6 @@ public class QuestionFragment extends Fragment {
         answer2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 goNewActivity(answer2);
 
             }
@@ -185,7 +195,6 @@ public class QuestionFragment extends Fragment {
         answer3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 goNewActivity(answer3);
             }
         });
@@ -193,7 +202,6 @@ public class QuestionFragment extends Fragment {
         answer4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 goNewActivity(answer4);
             }
         });
@@ -274,9 +282,9 @@ public class QuestionFragment extends Fragment {
             });
 
             if(challangeHandler.getInstance().isChallange()){
-
                 challangeHandler.getInstance().setIsChallange(false);
                 if (challangeHandler.getInstance().isChallanger()){
+
                     FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
                     FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getOthersID()).child("challanges").child(challangeHandler.getInstance().getMyId()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
                 } else{
@@ -286,13 +294,13 @@ public class QuestionFragment extends Fragment {
                             if (dataSnapshot.getValue() != null) {
                                 if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
                                     Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
-                                    sendNotification(challangeHandler.getOthersID(),"RESULT", "YOU WIN");
+                                    sendNotification(challangeHandler.getChallangeremail(), "YOU WIN AGAINST " + Player.getInstance().getPlayerName() + " in QuickQuiz");
                                 } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
                                     Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
-                                    sendNotification(challangeHandler.getOthersID(),"RESULT", "YOU LOST");
+                                    sendNotification(challangeHandler.getChallangeremail(), "YOU LOST AGAINST " + Player.getInstance().getPlayerName() + " in QuickQuiz");
                                 } else {
                                     Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
-                                    sendNotification(challangeHandler.getOthersID(),"RESULT", "YOU DRAW");
+                                    sendNotification(challangeHandler.getChallangeremail(), "YOU ARE DRAW WITH " + Player.getInstance().getPlayerName() + " in QuickQuiz");
                                 }
                             }
                         }
@@ -323,24 +331,13 @@ public class QuestionFragment extends Fragment {
     public boolean isGameOver(){
 
         for (int i = 0; i < 15; i++) {
-
             if(QuestionHolder.getInstance().getQuestionList()[i] == 0){
-
                 return false;
             }
         }
-
         return true;
     }
 
-    public void goGameOverScreen(){
-
-        //Intent intent = new Intent(getApplicationContext(), GameOverActivity.class);
-        //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-        //startActivity(intent);
-        //finish();
-
-    }
 
     private void startTimerThread() {
 
@@ -351,12 +348,17 @@ public class QuestionFragment extends Fragment {
         handler.post(timeRunner);
     }
 
-    private void sendNotification(final String send_email, final String title, final String message)
+    public void sendNotification(String emailtoSend, String mymessage)
     {
+        Log.d("emailtoSend", "sendNotification: " + emailtoSend);
+        final String email = emailtoSend;
+        final String message = mymessage;
+        final String send_email = emailtoSend;
         AsyncTask.execute(new Runnable() {
             @Override
             public void run() {
                 int SDK_INT = android.os.Build.VERSION.SDK_INT;
+
                 if (SDK_INT > 8) {
                     StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                             .permitAll().build();
@@ -381,7 +383,7 @@ public class QuestionFragment extends Fragment {
                                 + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
 
                                 + "\"data\": {\"foo\": \"bar\"},"
-                                + "\"contents\": {\""+ title + "\": \""+message+"\"}"
+                                + "\"contents\": {\"en\": \""+ message + "\"}"
                                 + "}";
 
 
@@ -415,6 +417,5 @@ public class QuestionFragment extends Fragment {
             }
         });
     }
-
 
 }

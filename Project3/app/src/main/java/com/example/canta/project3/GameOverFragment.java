@@ -24,8 +24,8 @@ public class GameOverFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // In
-        // flate the layout for this fragment
+
+
         View layout = inflater.inflate(R.layout.fragment_game_over, container, false);
 
         return inflater.inflate(R.layout.fragment_game_over, container, false);

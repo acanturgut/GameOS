@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         current_user_email = currentFirebaseUser.getEmail();
 
+        FirebaseDatabase.getInstance().getReference("users").child(currentFirebaseUser.getUid().toString()).child("info").child("email").setValue(currentFirebaseUser.getEmail().toString());
+
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .unsubscribeWhenNotificationsAreDisabled(true)

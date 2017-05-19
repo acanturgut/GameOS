@@ -12,6 +12,16 @@ public class HoldTheDoor {
     String scoreed1;
     String challanger;
 
+    public String getChallangeremail() {
+        return challangeremail;
+    }
+
+    public void setChallangeremail(String challangeremail) {
+        this.challangeremail = challangeremail;
+    }
+
+    String challangeremail;
+
     public HoldTheDoor() {
 
     }

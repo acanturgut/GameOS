@@ -2,8 +2,11 @@ package com.example.canta.project3;
 
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +14,15 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Scanner;
 
 
 /**
@@ -68,6 +79,7 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 senderID = FirebaseAuth.getInstance().getCurrentUser().getUid().toString() + "";
                 receiverID = Player_Other.getInstance().getId() + "";
                 actionFirebase(senderID, receiverID, "quickquiz");
+                Log.d("emailcheck", "onClick: " + Player_Other.getInstance().getEmail());
                 qqTopicSelectFragment move1 = new qqTopicSelectFragment();
                 android.app.FragmentTransaction ft1 = getFragmentManager().beginTransaction();
                 ft1.replace(R.id.fragment_container, move1);
@@ -111,7 +123,7 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
         }
     }
 
-    public void actionFirebase(String senderID, String receiverID, String gametyle){
+    public void actionFirebase(String senderID, String receiverID, final String gametyle){
 
         challangeHandler.getInstance().setIsChallange(true);
         challangeHandler.getInstance().setMyId(senderID);
@@ -129,7 +141,94 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("gametype").setValue(gametyle);
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreed2").setValue("0");
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreer1").setValue("0");
-        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("challangeremail").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("challangeremail").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
+
+        FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("info").child("email").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String email = dataSnapshot.getValue().toString();
+                sendNotification(email, Player.getInstance().getPlayerName() + " sent a " + gametyle + " challange request");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
+
+
+    private void sendNotification(String emailtoSend, String mymessage)
+    {
+        Log.d("emailtoSend", "sendNotification: " + emailtoSend);
+        final String email = emailtoSend;
+        final String message = mymessage;
+        final String send_email = emailtoSend;
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic MmI2NGI5OGItZGQyNC00NjNkLTllMzgtZmFmZTVhMmI5ZTUx");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"830ade25-7966-4efa-b780-4e392ebf3d6f\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\"en\": \""+ message + "\"}"
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+
+
 }
