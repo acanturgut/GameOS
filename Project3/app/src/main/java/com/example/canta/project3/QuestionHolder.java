@@ -29,4 +29,25 @@ public class  QuestionHolder {
     public static int[] getQuestionList() {
         return questionList;
     }
+
+    public static int getCurrentQuestionNumberForChallange() {
+        return currentQuestionNumberForChallange;
+    }
+
+    public static void setCurrentQuestionNumberForChallange(int currentQuestionNumberForChallange) {
+        QuestionHolder.currentQuestionNumberForChallange = currentQuestionNumberForChallange;
+    }
+
+    public static int currentQuestionNumberForChallange;
+
+
+    public static String getCategoryforChallange() {
+        return categoryforChallange;
+    }
+
+    public static void setCategoryforChallange(String categoryforChallange) {
+        QuestionHolder.categoryforChallange = categoryforChallange;
+    }
+
+    public static String categoryforChallange;
 }

@@ -80,7 +80,34 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 receiverID = Player_Other.getInstance().getId() + "";
                 actionFirebase(senderID, receiverID, "quickquiz");
                 Log.d("emailcheck", "onClick: " + Player_Other.getInstance().getEmail());
-                qqTopicSelectFragment move1 = new qqTopicSelectFragment();
+
+
+                int random = (int)Math.random() * 2;
+                Log.d("qqqqq", "onClick: " + random);
+
+                if (random ==0){
+                    QuestionHolder.getInstance().setCategoryforChallange("hist");
+                    QuestionHolder.getInstance().setCurrentQuestionNumberForChallange(0);
+                    FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("category").setValue("hist");
+                    FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("category").setValue("hist");
+
+                }else if (random ==1){
+                    QuestionHolder.getInstance().setCategoryforChallange("math");
+                    QuestionHolder.getInstance().setCurrentQuestionNumberForChallange(0);
+                    FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("category").setValue("math");
+                    FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("category").setValue("math");
+
+                }else if (random ==2){
+                    QuestionHolder.getInstance().setCategoryforChallange("sport");
+                    QuestionHolder.getInstance().setCurrentQuestionNumberForChallange(0);
+                    FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("category").setValue("sport");
+                    FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("category").setValue("sport");
+
+                }
+
+
+
+                qqChallangeHandler move1 = new qqChallangeHandler();
                 android.app.FragmentTransaction ft1 = getFragmentManager().beginTransaction();
                 ft1.replace(R.id.fragment_container, move1);
                 ft1.addToBackStack(null);

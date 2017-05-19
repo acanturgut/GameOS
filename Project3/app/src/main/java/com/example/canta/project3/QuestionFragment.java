@@ -259,12 +259,22 @@ public class QuestionFragment extends Fragment {
     int errorSolver;
     public void goOtherActivity(){
         if (!isGameOver()) {
-            qqTopicSelectFragment game1 = new qqTopicSelectFragment();
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, game1);
-            ft.addToBackStack(null);
-            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
+
+            if(challangeHandler.getInstance().isChallange()){
+                qqChallangeHandler game1 = new qqChallangeHandler();
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, game1);
+                ft.addToBackStack(null);
+                ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            }else {
+                qqTopicSelectFragment game1 = new qqTopicSelectFragment();
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, game1);
+                ft.addToBackStack(null);
+                ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            }
         } else {
             errorSolver = 0;
             currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();

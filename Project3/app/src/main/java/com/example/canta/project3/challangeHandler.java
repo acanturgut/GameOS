@@ -54,6 +54,15 @@ class challangeHandler {
         challangeHandler.challangeremail = challangeremail;
     }
 
+    public static String getCategory() {
+        return category;
+    }
+
+    public static void setCategory(String category) {
+        challangeHandler.category = category;
+    }
+
+    private static String category = " ";
     private static String challangeremail = " ";
     private static String myId = "";
     private  static String othersID = "";
