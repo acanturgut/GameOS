@@ -123,11 +123,13 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("gametype").setValue(gametyle);
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreed2").setValue("0");
         FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("scoreer1").setValue("0");
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("challangeremail").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("username").setValue(Player.getInstance().getPlayerName());
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("challanger").setValue(senderID);
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("gametype").setValue(gametyle);
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreed2").setValue("0");
         FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("scoreer1").setValue("0");
+        FirebaseDatabase.getInstance().getReference("users").child(senderID).child("challanges").child(receiverID).child("challangeremail").setValue(FirebaseAuth.getInstance().getCurrentUser().getEmail().toString());
 
     }
 }

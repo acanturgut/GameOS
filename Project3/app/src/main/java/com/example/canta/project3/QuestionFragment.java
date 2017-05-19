@@ -1,10 +1,12 @@
 package com.example.canta.project3;
 
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.os.StrictMode;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -22,7 +24,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
@@ -280,10 +286,13 @@ public class QuestionFragment extends Fragment {
                             if (dataSnapshot.getValue() != null) {
                                 if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
                                     Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
+                                    sendNotification(challangeHandler.getOthersID(),"RESULT", "YOU WIN");
                                 } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
                                     Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
+                                    sendNotification(challangeHandler.getOthersID(),"RESULT", "YOU LOST");
                                 } else {
                                     Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
+                                    sendNotification(challangeHandler.getOthersID(),"RESULT", "YOU DRAW");
                                 }
                             }
                         }
@@ -310,32 +319,6 @@ public class QuestionFragment extends Fragment {
             ft.commit();
         }
     }
-
-
-
-
-
-
-
-
-
-
-    /*
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        QuestionHolder.getInstance().questionSetter(index, 3);
-        if(!isGameOver()) {
-            timeInt = -1;
-            //Intent intent = new Intent(getApplicationContext(), TopicSelectActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            //startActivity(intent);
-            //finish();
-        }else{
-            goGameOverScreen();
-        }
-    } */
 
     public boolean isGameOver(){
 
@@ -367,4 +350,71 @@ public class QuestionFragment extends Fragment {
         handler = new Handler(thread.getLooper());
         handler.post(timeRunner);
     }
+
+    private void sendNotification(final String send_email, final String title, final String message)
+    {
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                int SDK_INT = android.os.Build.VERSION.SDK_INT;
+                if (SDK_INT > 8) {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                            .permitAll().build();
+                    StrictMode.setThreadPolicy(policy);
+
+                    try {
+                        String jsonResponse;
+
+                        URL url = new URL("https://onesignal.com/api/v1/notifications");
+                        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                        con.setUseCaches(false);
+                        con.setDoOutput(true);
+                        con.setDoInput(true);
+
+                        con.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+                        con.setRequestProperty("Authorization", "Basic MmI2NGI5OGItZGQyNC00NjNkLTllMzgtZmFmZTVhMmI5ZTUx");
+                        con.setRequestMethod("POST");
+
+                        String strJsonBody = "{"
+                                + "\"app_id\": \"830ade25-7966-4efa-b780-4e392ebf3d6f\","
+
+                                + "\"filters\": [{\"field\": \"tag\", \"key\": \"User_ID\", \"relation\": \"=\", \"value\": \"" + send_email + "\"}],"
+
+                                + "\"data\": {\"foo\": \"bar\"},"
+                                + "\"contents\": {\""+ title + "\": \""+message+"\"}"
+                                + "}";
+
+
+                        System.out.println("strJsonBody:\n" + strJsonBody);
+
+                        byte[] sendBytes = strJsonBody.getBytes("UTF-8");
+                        con.setFixedLengthStreamingMode(sendBytes.length);
+
+                        OutputStream outputStream = con.getOutputStream();
+                        outputStream.write(sendBytes);
+
+                        int httpResponse = con.getResponseCode();
+                        System.out.println("httpResponse: " + httpResponse);
+
+                        if (httpResponse >= HttpURLConnection.HTTP_OK
+                                && httpResponse < HttpURLConnection.HTTP_BAD_REQUEST) {
+                            Scanner scanner = new Scanner(con.getInputStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        } else {
+                            Scanner scanner = new Scanner(con.getErrorStream(), "UTF-8");
+                            jsonResponse = scanner.useDelimiter("\\A").hasNext() ? scanner.next() : "";
+                            scanner.close();
+                        }
+                        System.out.println("jsonResponse:\n" + jsonResponse);
+
+                    } catch (Throwable t) {
+                        t.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
+
 }

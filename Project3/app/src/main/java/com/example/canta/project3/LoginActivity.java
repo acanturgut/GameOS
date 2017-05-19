@@ -32,6 +32,9 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+
+
+
         mAuth = FirebaseAuth.getInstance();
 
         emailText = (EditText) findViewById(R.id.player_name_edittext);

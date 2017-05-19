@@ -38,17 +38,6 @@ public class ListOfFriendsFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
-
-/*
-public void onDataChange(DataSnapshot snapshot) {
-            Log.e("Count " ,""+snapshot.getChildrenCount());
-            for (DataSnapshot postSnapshot: snapshot.getChildren()) {
-                String post = postSnapshot.getValue(String.class);
-            }
-        }
- */
-
         final int[] counter = {0};
         database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("friends").addChildEventListener(new ChildEventListener() {
             @Override
@@ -104,6 +93,17 @@ public void onDataChange(DataSnapshot snapshot) {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Player_Other.getInstance().setPlayerName("" + dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        myRef = database.getReference("users").child(listOfUserID[(int) id]).child("info").child("email");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Player_Other.getInstance().setEmail("" + dataSnapshot.getValue().toString());
             }
 
             @Override

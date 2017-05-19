@@ -15,6 +15,16 @@ public class Player_Other {
     private static String name = " ";
     private static String surname = " ";
 
+    public static String getEmail() {
+        return email;
+    }
+
+    public static void setEmail(String email) {
+        Player_Other.email = email;
+    }
+
+    private static String email = " ";
+
     public static String getId() {
         return id;
     }

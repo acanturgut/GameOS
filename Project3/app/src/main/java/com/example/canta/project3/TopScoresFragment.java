@@ -61,7 +61,7 @@ public class TopScoresFragment extends Fragment {
         adaptermg = new SimpleAdapter(getActivity(),
                 listmg,
                 R.layout.fragment_top_scores_mglist,
-                new String[]{"username","mgscore"},
+                new String[]{"username","mescore"},
                 new int[]{R.id.textmgscore,R.id.textmgpoint});
 
         adapterqq = new SimpleAdapter(getActivity(),
@@ -87,11 +87,12 @@ public class TopScoresFragment extends Fragment {
                             holder1.put("username" , a.getUsername());
                             holder1.put("qqscore" , a.getQqscore());
                             holder2.put("username" , a.getUsername());
-                            holder2.put("mgscore" , a.getMgscore());
+                            holder2.put("mescore" , a.getMgscore());
+                            Log.d("aaaaaaaaaaaa", "score is " + a.getMgscore());
                             listqq.add(holder1);
                             listmg.add(holder2);
                             sortHashmap(listqq,"qqscore");
-                            sortHashmap(listmg,"mgscore");
+                            sortHashmap(listmg,"mescore");
                             adapterqq.notifyDataSetChanged();
                             adaptermg.notifyDataSetChanged();
 
@@ -111,11 +112,13 @@ public class TopScoresFragment extends Fragment {
                         HashMap<String, String> temp;   // Yer değiştirmede kullanılacak geçici değişken
                         for (int i = 1; i < mymap.size(); i++) {
                             for (int j = 0; j < mymap.size() - i; j++) {
-                                if (Integer.parseInt(mymap.get(j).get(gameName)) < Integer.parseInt(mymap.get(j + 1).get(gameName))) {
-                                    Log.d("sorting", mymap.get(j).get(gameName) + "  is replaced with " + mymap.get(j + 1).get(gameName));
-                                    temp = mymap.get(j);
-                                    mymap.set(j, mymap.get(j + 1));
-                                    mymap.set(j + 1, temp);
+                                if (mymap.get(j).get(gameName) != null) {
+                                    if (Integer.parseInt(mymap.get(j).get(gameName)) < Integer.parseInt(mymap.get(j + 1).get(gameName))) {
+                                        Log.d("sorting", mymap.get(j).get(gameName) + "  is replaced with " + mymap.get(j + 1).get(gameName));
+                                        temp = mymap.get(j);
+                                        mymap.set(j, mymap.get(j + 1));
+                                        mymap.set(j + 1, temp);
+                                    }
                                 }
                             }
                         }

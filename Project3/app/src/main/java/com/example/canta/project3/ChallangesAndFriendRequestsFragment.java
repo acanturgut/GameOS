@@ -80,7 +80,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
         challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
                 Button k = (Button)view.findViewById(R.id.list_item_accept);
                 Button ka = (Button)view.findViewById(R.id.list_item_decline);
 

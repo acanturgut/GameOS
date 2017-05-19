@@ -128,7 +128,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                 });
             }
         }else{
-            a = flaglist.getInstance().getQuestionList2();
+            a = flaglist.getInstance().getQuestionList3();
         }
 
 
