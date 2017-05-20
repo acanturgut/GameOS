@@ -254,7 +254,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     }
 
     public void refreshFragment(){
-        qqChallangeHandler game1 = new qqChallangeHandler();
+        ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
         android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, game1);
         ft.addToBackStack(null);
