@@ -1,7 +1,10 @@
 package com.example.canta.project3;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
@@ -66,6 +69,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case  R.id.go_button: {
+
+                if (checkConnection(this)) {
+                    // Its Available...
+
+
                 ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
                 myprogressbar.setVisibility(View.VISIBLE);
                 if (!emailText.getText().toString().equals("") && !emailText.getText().toString().equals("Enter Your Name")) {
@@ -89,6 +97,13 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                     }
                                 }
                             });
+                }
+
+                } else {
+
+                    Toast.makeText(getApplicationContext(), "Check Internet Connection!",Toast.LENGTH_LONG).show();
+
+
                 }
                 break;
             }
@@ -149,5 +164,24 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             }
         }
+    }
+
+    public static boolean checkConnection(Context context) {
+        final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+        if (activeNetworkInfo != null) {
+            Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
+            if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+
+                return true;
+            } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+
+                return true;
+            }
+        }
+        return false;
     }
 }
