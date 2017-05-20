@@ -10,7 +10,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -18,6 +20,8 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,6 +43,10 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     SimpleAdapter adapter;
     FirebaseDatabase database;
 
+    ProgressBar bar;
+    TextView textWarn;
+
+
     public ChallangesAndFriendRequestsFragment() {
         // Required empty public constructor
     }
@@ -47,8 +55,11 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        challangeHandler.getInstance().setIsChallange(false);
+        QuestionHolder.getInstance().setCurrentQuestionNumberForChallange(0);
         return inflater.inflate(R.layout.fragment_friend_list, container, false);
     }
+
     static String username = "holder";
     static String gametype = "holder";
     HashMap<String,String> holder;
@@ -57,6 +68,9 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     @Override
     public void onStart(){
         super.onStart();
+
+        textWarn = (TextView)getActivity().findViewById(R.id.warning_this);
+        bar =(ProgressBar)getActivity().findViewById(R.id.progress_bar_main);
         database = FirebaseDatabase.getInstance();
         challenges = (ListView)getActivity().findViewById(R.id.list_view);
         friendRequsts = (ListView)getActivity().findViewById(R.id.list_view2);
@@ -111,25 +125,37 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                 k.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String friendID = list2.get(kemal).get("Second String");
-                        String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
-                        String friendUN = list2.get(kemal).get("First String");
-                        String myUN = Player.getInstance().getPlayerName();
-                        Log.d("AAAAA", "onClick: " + myid + "  " + friendID + "------" + list2.get(kemal));
-                        database.getReference("users").child(myid).child("friends").child(friendID).setValue(friendUN);
-                        database.getReference("users").child(friendID).child("friends").child(myid).setValue(myUN);
-                        database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
-                        database.getReference("users").child(friendID).child("info").child("email").addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-                                notification.getInstance().sendNotification(dataSnapshot.getValue().toString(), Player.getPlayerName() + " accepted your challange request!");
-                            }
 
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
+                        try {
+                            String friendID = list2.get(kemal).get("Second String");
+                            String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
+                            String friendUN = list2.get(kemal).get("First String");
+                            String myUN = Player.getInstance().getPlayerName();
+                            Log.d("AAAAA", "onClick: " + myid + "  " + friendID + "------" + list2.get(kemal));
 
-                            }
-                        });
+
+                            database.getReference("users").child(myid).child("friends").child(friendID).setValue(friendUN);
+                            database.getReference("users").child(friendID).child("friends").child(myid).setValue(myUN);
+                            database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
+                            database.getReference("users").child(friendID).child("info").child("email").addValueEventListener(new ValueEventListener() {
+
+
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    notification.getInstance().sendNotification(dataSnapshot.getValue().toString(), Player.getPlayerName() + " accepted your challange request!");
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                        }catch (Exception e){
+
+                        }
+
+                        refreshFragment();
                     }
                 });
                 ka.setOnClickListener(new View.OnClickListener() {
@@ -139,6 +165,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
                         database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
                         refreshFragment();
+
                     }
                 });
             }
@@ -153,6 +180,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
             public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
                 // Toast.makeText(getActivity(),"Text: " + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
                 HoldTheDoor pencil = dataSnapshot.getValue(HoldTheDoor.class);
+
                     if(!FirebaseAuth.getInstance().getCurrentUser().getUid().toString().equals(pencil.getChallanger())) {
                         holder = new HashMap<String, String>();
                         holder.put("First String", pencil.getUsername());
@@ -169,7 +197,8 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         }
                         count ++;
 
-
+                        bar.setVisibility(View.INVISIBLE);
+                        textWarn.setVisibility(View.INVISIBLE);
                     }
             }
 
@@ -179,6 +208,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
+
             }
 
             @Override
@@ -210,7 +240,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-
+                refreshFragment();
             }
 
             @Override
@@ -227,41 +257,46 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     }
 
     public void startGame(String gamename){
-        if (gamename.equals("quickquiz")){
-            qqChallangeHandler game1 = new qqChallangeHandler();
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, game1);
-            ft.addToBackStack(null);
-            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        }else if (gamename.equals("MemoGame 4x4")){
-            levelOneFragment game1 = new levelOneFragment();
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, game1);
-            ft.addToBackStack(null);
-            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        }else if (gamename.equals("MemoGame 5x5")){
-            levelTwoFragment game1 = new levelTwoFragment();
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, game1);
-            ft.addToBackStack(null);
-            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        }else if (gamename.equals("MemoGame 6x6")){
-            levelThreeFragment game1 = new levelThreeFragment();
-            android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
-            ft.replace(R.id.fragment_container, game1);
-            ft.addToBackStack(null);
-            ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-            ft.commit();
-        }else{
-            Log.d("invalid", "startGame: " + gamename);
-        }
+        try {
+            if (gamename.equals("quickquiz")) {
+                qqChallangeHandler game1 = new qqChallangeHandler();
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, game1);
+                ft.addToBackStack(null);
+                ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            } else if (gamename.equals("MemoGame 4x4")) {
+                levelOneFragment game1 = new levelOneFragment();
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, game1);
+                ft.addToBackStack(null);
+                ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
 
+            } else if (gamename.equals("MemoGame 5x5")) {
+                levelTwoFragment game1 = new levelTwoFragment();
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, game1);
+                ft.addToBackStack(null);
+                ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            } else if (gamename.equals("MemoGame 6x6")) {
+                levelThreeFragment game1 = new levelThreeFragment();
+                android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.replace(R.id.fragment_container, game1);
+                ft.addToBackStack(null);
+                ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                ft.commit();
+            } else {
+                Log.d("invalid", "startGame: " + gamename);
+            }
+        }catch(Exception e){
+            refreshFragment();
+        }
     }
 
     public void refreshFragment(){
+
         ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
         android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, game1);

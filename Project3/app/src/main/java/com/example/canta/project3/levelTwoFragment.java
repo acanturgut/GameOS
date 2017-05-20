@@ -203,12 +203,17 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             public void run() {
-                closeAll();
-                imagesettertarget(R.id.newtarget1,0,1);
-                imagesettertarget(R.id.newtarget2,1,1);
-                imagesettertarget(R.id.newtarget3,2,1);
-                imagesettertarget(R.id.newtarget4,3,1);
-                imagesettertarget(R.id.newtarget5,4,1);
+
+                try {
+                    closeAll();
+                    imagesettertarget(R.id.newtarget1, 0, 1);
+                    imagesettertarget(R.id.newtarget2, 1, 1);
+                    imagesettertarget(R.id.newtarget3, 2, 1);
+                    imagesettertarget(R.id.newtarget4, 3, 1);
+                    imagesettertarget(R.id.newtarget5, 4, 1);
+                }catch(Exception e){
+
+                }
             }
         }, 5000);
     }

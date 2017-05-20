@@ -612,13 +612,17 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             public void run() {
+            try {
                 closeAll();
-                imagesettertarget(R.id.target1,0,1);
-                imagesettertarget(R.id.target2,1,1);
-                imagesettertarget(R.id.target3,2,1);
-                imagesettertarget(R.id.target5,3,1);
-                imagesettertarget(R.id.target6,4,1);
-                imagesettertarget(R.id.target8,5,1);
+                imagesettertarget(R.id.target1, 0, 1);
+                imagesettertarget(R.id.target2, 1, 1);
+                imagesettertarget(R.id.target3, 2, 1);
+                imagesettertarget(R.id.target5, 3, 1);
+                imagesettertarget(R.id.target6, 4, 1);
+                imagesettertarget(R.id.target8, 5, 1);
+            }catch(Exception e){
+
+            }
             }
         }, 5000);
     }

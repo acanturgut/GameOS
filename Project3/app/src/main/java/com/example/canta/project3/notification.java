@@ -1,8 +1,12 @@
 package com.example.canta.project3;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -23,8 +27,26 @@ class notification {
     private notification() {
     }
 
-    public void sendNotification(String emailtoSend, String mymessage)
-    {
+    public static boolean checkConnection(Context context) {
+        final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+        if (activeNetworkInfo != null) {
+            Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
+            if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+
+                return true;
+            } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void sendNotification(String emailtoSend, String mymessage){
         Log.d("emailtoSend", "sendNotification: " + emailtoSend);
         final String email = emailtoSend;
         final String message = mymessage;

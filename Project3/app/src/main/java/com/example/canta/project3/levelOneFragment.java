@@ -102,7 +102,11 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                        try {
+                            a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                        }catch (Exception e){
+
+                        }
                     }
 
                     @Override
@@ -187,11 +191,15 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             public void run() {
-                closeAll();
-                imagesettertarget(R.id.imageView5, 0, 1);
-                imagesettertarget(R.id.imageView6, 1, 1);
-                imagesettertarget(R.id.imageView7, 2, 1);
-                imagesettertarget(R.id.imageView8, 3, 1);
+                try {
+                    closeAll();
+                    imagesettertarget(R.id.imageView5, 0, 1);
+                    imagesettertarget(R.id.imageView6, 1, 1);
+                    imagesettertarget(R.id.imageView7, 2, 1);
+                    imagesettertarget(R.id.imageView8, 3, 1);
+                }catch(Exception e){
+
+                }
             }
         }, 5000);
     }

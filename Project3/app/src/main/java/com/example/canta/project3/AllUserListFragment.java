@@ -115,7 +115,6 @@ public class AllUserListFragment extends ListFragment {
                 Toast.makeText(getActivity(), "This user is already your friend" , Toast.LENGTH_SHORT).show();
             }
 
-
         }else{
             Toast.makeText(getActivity(), "This user is added as a friend: " + listOfUsername[(int) id], Toast.LENGTH_SHORT).show();
             database.getReference("users").child(listOfUserID[(int)id]).child("friendRequests").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("username").setValue(Player.getInstance().getPlayerName());
@@ -134,8 +133,6 @@ public class AllUserListFragment extends ListFragment {
             });
         }
     }
-
-
 }
 
 

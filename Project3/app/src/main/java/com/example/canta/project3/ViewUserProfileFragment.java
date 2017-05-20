@@ -74,7 +74,6 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                 actionFirebase(senderID, receiverID, "quickquiz");
                 Log.d("emailcheck", "onClick: " + Player_Other.getInstance().getEmail());
 
-
                 int random = (int)Math.random() * 2;
                 Log.d("qqqqq", "onClick: " + random);
 
@@ -97,8 +96,6 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
                     FirebaseDatabase.getInstance().getReference("users").child(receiverID).child("challanges").child(senderID).child("category").setValue("sport");
 
                 }
-
-
 
                 qqChallangeHandler move1 = new qqChallangeHandler();
                 android.app.FragmentTransaction ft1 = getFragmentManager().beginTransaction();
