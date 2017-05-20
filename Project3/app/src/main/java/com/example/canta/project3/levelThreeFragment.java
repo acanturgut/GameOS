@@ -118,9 +118,14 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        a[i2] = Integer.parseInt(dataSnapshot.getValue() + "");
-                        Log.d("hatane", "onDataChange: " + a);
+                        try {
+                            a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                        }catch (Exception e){
+                            Log.d("aa", "onDataChange: " + e);
+                        }
                     }
+
+
 
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
@@ -132,7 +137,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
             a = flaglist.getInstance().getQuestionList3();
         }
 
-        
+
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_loader);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

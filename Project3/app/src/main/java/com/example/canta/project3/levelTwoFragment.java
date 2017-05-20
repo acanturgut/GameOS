@@ -111,7 +111,12 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                        try {
+                            a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                        }catch (Exception e){
+                            Log.d("aa", "onDataChange: " + e);
+                        }
+
                     }
 
                     @Override
@@ -150,30 +155,6 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         return layout2;
     }
 
-    public void runthis(){
-        dialog.dismiss();
-        for (int i = 0; i < 25; i++) {
-            imagesetter(imageViewID[i], i, 1);
-        }
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        StopwatchFragment stopwatchFragment = new StopwatchFragment();
-        ft.replace(R.id.time_container2, stopwatchFragment);
-        ft.addToBackStack(null);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
-        Handler handler1 = new Handler();
-        handler1.postDelayed(new Runnable() {
-            public void run() {
-                closeAll();
-                imagesettertarget(R.id.newtarget1,0,1);
-                imagesettertarget(R.id.newtarget2,1,1);
-                imagesettertarget(R.id.newtarget3,2,1);
-                imagesettertarget(R.id.newtarget4,3,1);
-                imagesettertarget(R.id.newtarget5,4,1);
-            }
-        }, 5000);
-    }
-
     public void onStart() {
         super.onStart();
         for (int i = 0; i < ac.length; i++){
@@ -206,11 +187,37 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         Player.getInstance().setPlayerScore(0);
     }
 
+
+
+    public void runthis(){
+        dialog.dismiss();
+        for (int i = 0; i < 25; i++) {
+            imagesetter(imageViewID[i], i, 1);
+        }
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        StopwatchFragment stopwatchFragment = new StopwatchFragment();
+        ft.replace(R.id.time_container2, stopwatchFragment);
+        ft.addToBackStack(null);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+        Handler handler1 = new Handler();
+        handler1.postDelayed(new Runnable() {
+            public void run() {
+                closeAll();
+                imagesettertarget(R.id.newtarget1,0,1);
+                imagesettertarget(R.id.newtarget2,1,1);
+                imagesettertarget(R.id.newtarget3,2,1);
+                imagesettertarget(R.id.newtarget4,3,1);
+                imagesettertarget(R.id.newtarget5,4,1);
+            }
+        }, 5000);
+    }
+
+
     public void onResume(){
         super.onResume();
 
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

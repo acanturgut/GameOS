@@ -53,7 +53,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     static String gametype = "holder";
     HashMap<String,String> holder;
     HashMap<String,String> holder2;
-
+    int count = 0;
     @Override
     public void onStart(){
         super.onStart();
@@ -147,7 +147,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
 
         friendRequsts.setAdapter(adapter2);
         challenges.setAdapter(adapter);
-
+        count = 0;
         database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("challanges").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
@@ -162,6 +162,13 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         mailler.add(pencil.getChallangeremail() + "");
                         categoriter.add(pencil.getCategory());
                         adapter.notifyDataSetChanged();
+
+                        Log.d("donee", "onChildAdded: " + count + "  --  " + dataSnapshot.getChildrenCount());
+                        if(count == dataSnapshot.getChildrenCount()){
+                            Log.d("donee", "onChildAdded: done");
+                        }
+                        count ++;
+
 
                     }
             }
