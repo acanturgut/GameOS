@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -49,44 +48,33 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_friend_list, container, false);
     }
-
     static String username = "holder";
     static String gametype = "holder";
-
     HashMap<String,String> holder;
     HashMap<String,String> holder2;
-
-    int[] closeloader = new int[]{1,1};
 
     @Override
     public void onStart(){
         super.onStart();
-
         database = FirebaseDatabase.getInstance();
         challenges = (ListView)getActivity().findViewById(R.id.list_view);
         friendRequsts = (ListView)getActivity().findViewById(R.id.list_view2);
-
-
         adapter = new SimpleAdapter(getActivity(),
                 list,
                 R.layout.list_item,
                 new String[]{"First String", "Second String"},
                 new int[]{R.id.text11,R.id.text22});
-
         adapter2 = new SimpleAdapter(getActivity(),
                 list2,
                 R.layout.list_viewer,
                 new String[]{"First String", "Second String"},
                 new int[]{R.id.text111,R.id.text222});
-
         challenges.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 Button k = (Button)view.findViewById(R.id.list_item_accept);
                 Button ka = (Button)view.findViewById(R.id.list_item_decline);
-
                 final int kemal = (int) id;
-
                 k.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -94,14 +82,12 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         challangeHandler.getInstance().setMyId(FirebaseAuth.getInstance().getCurrentUser().getUid().toString());
                         challangeHandler.getInstance().setOthersID(listidler.get(kemal));
                         challangeHandler.getInstance().setChallangeremail(mailler.get(kemal));
-
                         challangeHandler.getInstance().setIsChallanger(false);
                         QuestionHolder.getInstance().setCategoryforChallange(categoriter.get(kemal).toString());
                         Log.d("zzz", "onClick: " + QuestionHolder.getInstance().getCategoryforChallange());
                         startGame(list.get(kemal).get("Second String"));
                     }
                 });
-
                 ka.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -109,23 +95,17 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         String friendID = listidler.get(kemal);
                         database.getReference("users").child(myid).child("challanges").child(friendID).removeValue();
                         database.getReference("users").child(friendID).child("challanges").child(myid).removeValue();
-
-
                     }
                 });
-
             }
         });
 
         friendRequsts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-
                 Button k = (Button)view.findViewById(R.id.list_item_accept2);
                 Button ka = (Button)view.findViewById(R.id.list_item_decline2);
-
                 final int kemal = position;
-
                 k.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -139,7 +119,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
                     }
                 });
-
                 ka.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -148,7 +127,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
                     }
                 });
-
             }
         });
 
@@ -160,13 +138,8 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
             @Override
             public void onChildAdded(final DataSnapshot dataSnapshot, String s) {
                 // Toast.makeText(getActivity(),"Text: " + dataSnapshot.getValue(), Toast.LENGTH_SHORT).show();
-
-
                 HoldTheDoor pencil = dataSnapshot.getValue(HoldTheDoor.class);
-
-
                     if(!FirebaseAuth.getInstance().getCurrentUser().getUid().toString().equals(pencil.getChallanger())) {
-
                         holder = new HashMap<String, String>();
                         holder.put("First String", pencil.getUsername());
                         holder.put("Second String", pencil.getGametype());
@@ -176,7 +149,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         categoriter.add(pencil.getCategory());
                         Log.d("zzz", "onChildAdded: " + pencil.getCategory());
                         adapter.notifyDataSetChanged();
-
                     }
             }
 

@@ -514,6 +514,7 @@ public class qqChallangeHandler extends Fragment {
     }
 
     public void sendNotification(String emailtoSend, String mymessage) {
+
         Log.d("emailtoSend", "sendNotification: " + emailtoSend);
         final String email = emailtoSend;
         final String message = mymessage;

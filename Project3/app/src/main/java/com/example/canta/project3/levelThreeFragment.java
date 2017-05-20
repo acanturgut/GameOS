@@ -141,7 +141,6 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         dialog.setCancelable(false);
         dialog.show();
 
-
         allpictures = new Bitmap[36];
         flaglistNum = new int[36];
         targets = new Bitmap[6];

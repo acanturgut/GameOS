@@ -15,15 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.onesignal.OneSignal;
 
 import java.io.OutputStream;
@@ -276,59 +271,6 @@ public class QuestionFragment extends Fragment {
                 ft.commit();
             }
         } else {
-            errorSolver = 0;
-            currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            myRef = database.getReference("users").child(currentFirebaseUser.getUid().toString()).child("info").child("qqscore");
-            myRef.addValueEventListener(new ValueEventListener() {
-                @Override public void onDataChange(DataSnapshot dataSnapshot) {
-                    if (errorSolver == 0){
-                        usersCurrentScore = Integer.parseInt(dataSnapshot.getValue(String.class));
-                        usersCurrentScore += Player.getInstance().getPlayerScore();
-                        myRef.setValue(usersCurrentScore + "");
-                        errorSolver ++;
-                    }
-                }
-                @Override public void onCancelled(DatabaseError error) {}
-            });
-
-            if(challangeHandler.getInstance().isChallange()){
-                challangeHandler.getInstance().setIsChallange(false);
-                if (challangeHandler.getInstance().isChallanger()){
-
-                    FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
-                    FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getOthersID()).child("challanges").child(challangeHandler.getInstance().getMyId()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
-                } else{
-                    FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.getValue() != null) {
-                                if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
-                                    Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
-                                    sendNotification(challangeHandler.getChallangeremail(), "YOU WIN AGAINST " + Player.getInstance().getPlayerName() + " in QuickQuiz");
-                                } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
-                                    Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
-                                    sendNotification(challangeHandler.getChallangeremail(), "YOU LOST AGAINST " + Player.getInstance().getPlayerName() + " in QuickQuiz");
-                                } else {
-                                    Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
-                                    sendNotification(challangeHandler.getChallangeremail(), "YOU ARE DRAW WITH " + Player.getInstance().getPlayerName() + " in QuickQuiz");
-                                }
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-
-                    String myid = challangeHandler.getInstance().getMyId();
-                    String friendID = challangeHandler.getInstance().getOthersID();
-                    database.getReference("users").child(myid).child("challanges").child(friendID).removeValue();
-                    database.getReference("users").child(friendID).child("challanges").child(myid).removeValue();
-
-                }
-            }
-
-
             GameOverFragment game1 = new GameOverFragment();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, game1);
