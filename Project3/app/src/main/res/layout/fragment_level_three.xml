@@ -19,25 +19,12 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/myscore2"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/textView5"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="20dp"
-                android:layout_toStartOf="@+id/target8"
-                android:layout_weight="1" />
+        </LinearLayout>
 
-            <TextView
-                android:id="@+id/myscore"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/myscore2"
-                android:layout_alignBottom="@+id/myscore2"
-                android:layout_toEndOf="@+id/myscore2"
-                android:layout_weight="1"
-                android:text=" " />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/myscore5"
@@ -45,16 +32,14 @@
                 android:layout_height="wrap_content"
                 android:layout_alignStart="@+id/textView8"
                 android:layout_alignTop="@+id/h34"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="5dp"
                 android:layout_toStartOf="@+id/textView7"
-                android:layout_weight="1"
-                android:text="SCORE " />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                android:layout_weight="641.85"
+                android:text="SCORE: 0 "
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/h32"
@@ -89,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/myscore"
                 android:layout_alignParentEnd="true"
-                android:layout_marginEnd="25dp"
+                android:layout_marginRight="15dp"
                 android:layout_weight="1"
                 app:srcCompat="@drawable/kalp" />
 
@@ -107,8 +92,7 @@
                 android:layout_alignTop="@+id/target3"
                 android:layout_toEndOf="@+id/target3"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -118,8 +102,7 @@
                 android:layout_below="@+id/textView7"
                 android:layout_toEndOf="@+id/textView5"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -129,8 +112,7 @@
                 android:layout_below="@+id/textView7"
                 android:layout_toEndOf="@+id/target2"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -140,8 +122,7 @@
                 android:layout_below="@+id/textView7"
                 android:layout_toEndOf="@+id/target1"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -151,8 +132,7 @@
                 android:layout_alignBottom="@+id/target6"
                 android:layout_toEndOf="@+id/target6"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -162,8 +142,7 @@
                 android:layout_above="@+id/f311"
                 android:layout_toStartOf="@+id/textView7"
                 android:layout_weight="1"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
+                android:padding="10dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
@@ -173,15 +152,18 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/h34"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="5dp"
             android:text="TARGET FLAG LIST"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
             android:textStyle="normal|bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -191,6 +173,7 @@
                 android:layout_below="@+id/f313"
                 android:layout_toEndOf="@+id/f323"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -200,6 +183,7 @@
                 android:layout_alignStart="@+id/f331"
                 android:layout_below="@+id/f331"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -209,6 +193,7 @@
                 android:layout_alignTop="@+id/f313"
                 android:layout_toEndOf="@+id/f313"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -218,6 +203,7 @@
                 android:layout_below="@+id/f334"
                 android:layout_toEndOf="@+id/f334"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -227,6 +213,7 @@
                 android:layout_alignStart="@+id/f311"
                 android:layout_below="@+id/f311"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -236,13 +223,14 @@
                 android:layout_alignTop="@+id/f312"
                 android:layout_toEndOf="@+id/f312"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -252,6 +240,7 @@
                 android:layout_below="@+id/f341"
                 android:layout_toStartOf="@+id/f332"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -261,6 +250,7 @@
                 android:layout_alignStart="@+id/f321"
                 android:layout_below="@+id/f321"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -270,6 +260,7 @@
                 android:layout_above="@+id/f331"
                 android:layout_alignStart="@+id/f312"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -279,6 +270,7 @@
                 android:layout_below="@+id/f322"
                 android:layout_toEndOf="@+id/f322"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -288,6 +280,7 @@
                 android:layout_below="@+id/f312"
                 android:layout_toEndOf="@+id/f312"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -297,12 +290,14 @@
                 android:layout_alignTop="@+id/f314"
                 android:layout_toEndOf="@+id/f314"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -312,6 +307,7 @@
                 android:layout_below="@+id/f314"
                 android:layout_toEndOf="@+id/f314"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -321,6 +317,7 @@
                 android:layout_below="@+id/f322"
                 android:layout_toEndOf="@+id/f321"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -330,6 +327,7 @@
                 android:layout_alignEnd="@+id/myscore"
                 android:layout_below="@+id/target1"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -339,6 +337,7 @@
                 android:layout_below="@+id/f345"
                 android:layout_toEndOf="@+id/f354"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -348,6 +347,7 @@
                 android:layout_above="@+id/f322"
                 android:layout_toEndOf="@+id/f321"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -357,12 +357,14 @@
                 android:layout_below="@+id/f324"
                 android:layout_toEndOf="@+id/f323"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="57dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -372,6 +374,7 @@
                 android:layout_below="@+id/f345"
                 android:layout_toEndOf="@+id/f343"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -381,6 +384,7 @@
                 android:layout_below="@+id/f341"
                 android:layout_toEndOf="@+id/f341"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -390,6 +394,7 @@
                 android:layout_below="@+id/f333"
                 android:layout_toEndOf="@+id/f341"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -399,6 +404,7 @@
                 android:layout_below="@+id/f333"
                 android:layout_toEndOf="@+id/f332"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -408,6 +414,7 @@
                 android:layout_below="@+id/f342"
                 android:layout_toEndOf="@+id/f352"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -417,12 +424,14 @@
                 android:layout_below="@+id/f333"
                 android:layout_toEndOf="@+id/f333"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -432,6 +441,7 @@
                 android:layout_below="@+id/f325"
                 android:layout_toEndOf="@+id/f334"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -441,6 +451,7 @@
                 android:layout_below="@+id/f354"
                 android:layout_toEndOf="@+id/f352"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -450,6 +461,7 @@
                 android:layout_below="@+id/f346"
                 android:layout_toEndOf="@+id/f345"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -459,6 +471,7 @@
                 android:layout_below="@+id/f316"
                 android:layout_toEndOf="@+id/f325"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -468,6 +481,7 @@
                 android:layout_below="@+id/f336"
                 android:layout_toEndOf="@+id/f345"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -477,12 +491,14 @@
                 android:layout_alignStart="@+id/f351"
                 android:layout_below="@+id/f351"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
 
             <ImageView
@@ -492,6 +508,7 @@
                 android:layout_below="@+id/f355"
                 android:layout_toStartOf="@+id/f336"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -501,6 +518,7 @@
                 android:layout_below="@+id/f355"
                 android:layout_toEndOf="@+id/f355"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -510,6 +528,7 @@
                 android:layout_below="@+id/textView8"
                 android:layout_toEndOf="@+id/f315"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -519,6 +538,7 @@
                 android:layout_below="@+id/f354"
                 android:layout_toStartOf="@+id/f365"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -528,6 +548,7 @@
                 android:layout_below="@+id/f326"
                 android:layout_toEndOf="@+id/f345"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
 
             <ImageView
@@ -537,12 +558,14 @@
                 android:layout_below="@+id/f352"
                 android:layout_toEndOf="@+id/f351"
                 android:layout_weight="1"
+                android:padding="5dp"
                 app:srcCompat="@drawable/card" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="5dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 

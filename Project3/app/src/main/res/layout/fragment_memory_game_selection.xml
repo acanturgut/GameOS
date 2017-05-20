@@ -11,94 +11,55 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="42dp"
-            android:text="MEMOGAME"
-            android:textColor="@color/myRed"
-            android:textSize="30sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/textView6"
-            android:layout_alignStart="@+id/textView6"
-            android:layout_below="@+id/textView6"
-            android:layout_marginTop="36dp"
-            android:text="4X4"
-            android:textAlignment="center"
-            android:textColor="@color/myRed"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
         <Button
             android:id="@+id/playmemo4"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView10"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView6"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="26dp"
             android:background="@drawable/button_normal"
             android:backgroundTint="@color/myRed"
-            android:text="PLAY"
+            android:text="4x4"
             android:textColor="@color/myWhite"
-            android:layout_alignEnd="@+id/textView6"
-            android:layout_toEndOf="@+id/textView10"
-            android:layout_alignStart="@+id/textView10" />
-
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/playmemo4"
-            android:layout_alignStart="@+id/playmemo4"
-            android:layout_below="@+id/playmemo4"
-            android:layout_marginTop="15dp"
-            android:text="5X5"
-            android:textAlignment="center"
-            android:textColor="@color/myRed"
-            android:textSize="24sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/playmemo5"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/textView11"
-            android:layout_below="@+id/textView11"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/playmemo4"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/button_normal"
-            android:text="PLAY"
+            android:text="5x5"
             android:textColor="@color/myWhite"
-            android:layout_alignEnd="@+id/playmemo6" />
-
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/playmemo6"
-            android:layout_alignStart="@+id/playmemo5"
-            android:layout_below="@+id/playmemo5"
-            android:layout_marginTop="12dp"
-            android:text="6X6"
-            android:textAlignment="center"
-            android:textColor="@color/myRed"
-            android:textSize="24sp"
+            android:textSize="36sp"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/playmemo6"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView12"
+            android:layout_height="100dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/playmemo5"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:background="@drawable/button_normal"
-            android:text="PLAY"
+            android:text="6x6"
             android:textColor="@color/myWhite"
-            android:layout_alignEnd="@+id/textView6"
-            android:layout_alignStart="@+id/textView11" />
+            android:textSize="36sp"
+            android:textStyle="bold" />
 
     </RelativeLayout>
 </FrameLayout>

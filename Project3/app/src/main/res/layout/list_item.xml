@@ -7,12 +7,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <LinearLayout
             android:layout_width="161dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_weight="0.25">
 
             <TextView
                 android:id="@+id/text11"
@@ -36,7 +38,7 @@
 
         <Button
             android:id="@+id/list_item_accept"
-            android:layout_width="35dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -51,7 +53,7 @@
 
         <Button
             android:id="@+id/list_item_decline"
-            android:layout_width="35dp"
+            android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"

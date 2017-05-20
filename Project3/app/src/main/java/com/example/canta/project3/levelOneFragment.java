@@ -63,6 +63,8 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         // Inflate the layout for this fragment
         View layout = inflater.inflate(R.layout.fragment_one_level, container, false);
 
+        Player.getInstance().setLife(4);
+
         imageViewID[0] = R.id.f11;
         imageViewID[1] = R.id.f12;
         imageViewID[2] = R.id.f13;

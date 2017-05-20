@@ -61,6 +61,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         // Inf3late the layout f3or this f3ragment
         View layout3 = inflater.inflate(R.layout.fragment_level_three, container, false);
 
+        Player.getInstance().setLife(4);
 
         imageViewID[0] = R.id.f311;
         imageViewID[1] = R.id.f312;
@@ -731,7 +732,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
             }
 
             Player.getInstance().setPlayerScore(alala);
-            TextView textScore = (TextView) getActivity().findViewById(R.id.myscore);
+            TextView textScore = (TextView) getActivity().findViewById(R.id.myscore5);
             String scoree = "SCORE " + alala;
             textScore.setText(scoree);
 

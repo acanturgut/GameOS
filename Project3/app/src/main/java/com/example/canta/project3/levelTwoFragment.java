@@ -61,6 +61,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
         // Inf2late the layout f2or this f2ragment
         View layout2 = inflater.inflate(R.layout.fragment_two_level, container, false);
 
+        Player.getInstance().setLife(4);
 
         imageViewID[0] = R.id.f211;
         imageViewID[1] = R.id.f212;

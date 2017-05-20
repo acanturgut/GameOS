@@ -21,6 +21,7 @@ public class MemoryGameSelectionFragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_memory_game_selection, container, false);
     }
 
