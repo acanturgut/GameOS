@@ -37,9 +37,9 @@
                 android:icon="@drawable/ic_menu_send"
                 android:title="Top Rankings" />
             <item
-                android:id="@+id/push"
+                android:id="@+id/logout"
                 android:icon="@drawable/ic_menu_send"
-                android:title="Push Notification" />
+                android:title="Logout" />
         </menu>
     </item>
 
