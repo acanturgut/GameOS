@@ -96,6 +96,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         String friendID = listidler.get(kemal);
                         database.getReference("users").child(myid).child("challanges").child(friendID).removeValue();
                         database.getReference("users").child(friendID).child("challanges").child(myid).removeValue();
+                        refreshFragment();
                     }
                 });
             }
@@ -137,6 +138,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         String friendID = list2.get(kemal).get("Second String");
                         String myid = FirebaseAuth.getInstance().getCurrentUser().getUid().toString();
                         database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
+                        refreshFragment();
                     }
                 });
             }
@@ -160,7 +162,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         mailler.add(pencil.getChallangeremail() + "");
                         categoriter.add(pencil.getCategory());
                         adapter.notifyDataSetChanged();
-                        refreshFragment();
+
                     }
             }
 
@@ -192,7 +194,6 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                     holder2.put("Second String", pencil.getUserID());
                     list2.add(holder2);
                     adapter2.notifyDataSetChanged();
-                refreshFragment();
             }
 
             @Override
