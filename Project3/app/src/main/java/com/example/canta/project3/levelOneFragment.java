@@ -537,7 +537,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
 
                     }
                 });
-
+                challangeHandler.getInstance().setIsChallange(false);
                 String myid = challangeHandler.getInstance().getMyId();
                 String friendID = challangeHandler.getInstance().getOthersID();
                 FirebaseDatabase.getInstance().getReference("users").child(myid).child("challanges").child(friendID).removeValue();

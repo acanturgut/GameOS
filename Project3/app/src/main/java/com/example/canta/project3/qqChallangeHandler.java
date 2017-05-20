@@ -354,7 +354,7 @@ public class qqChallangeHandler extends Fragment {
             }
         }
 
-
+        challangeHandler.getInstance().setIsChallange(false);
         GameOverFragment game1 = new GameOverFragment();
         android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, game1);

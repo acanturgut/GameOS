@@ -118,7 +118,8 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
+                        a[i2] = Integer.parseInt(dataSnapshot.getValue() + "");
+                        Log.d("hatane", "onDataChange: " + a);
                     }
 
                     @Override
@@ -131,9 +132,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
             a = flaglist.getInstance().getQuestionList3();
         }
 
-
-
-
+        
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_loader);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -526,7 +525,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                 if (trueans3 == 6) {
                     Player.getInstance().setLife(4);
 
-                    firebasePointUpdate(0);
+
 
                     trueans3 = 0;
                     MemoryGameSelectionFragment move = new MemoryGameSelectionFragment();
@@ -535,6 +534,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                     ft.addToBackStack(null);
                     ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
+                    firebasePointUpdate(0);
                 }
                 holderPic0 = -2;
                 holderPic1 = -3;
@@ -681,12 +681,16 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if (dataSnapshot.getValue() != null) {
+                            QuestionFragment notifier = new QuestionFragment();
                             if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You win against " + Player.getInstance().getPlayerName());
                             } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You lost against " + Player.getInstance().getPlayerName());
                             } else {
                                 Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You are draw with " + Player.getInstance().getPlayerName());
                             }
                         }
                     }
@@ -695,7 +699,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
 
                     }
                 });
-
+                challangeHandler.getInstance().setIsChallange(false);
                 String myid = challangeHandler.getInstance().getMyId();
                 String friendID = challangeHandler.getInstance().getOthersID();
                 FirebaseDatabase.getInstance().getReference("users").child(myid).child("challanges").child(friendID).removeValue();

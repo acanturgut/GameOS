@@ -1,5 +1,6 @@
 package com.example.canta.project3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -220,6 +221,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.commit();
         } else if (id == R.id.logout){
             FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
