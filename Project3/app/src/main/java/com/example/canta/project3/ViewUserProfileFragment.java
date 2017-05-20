@@ -167,10 +167,8 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String email = dataSnapshot.getValue().toString();
-
                 notification.getInstance().sendNotification(email, Player.getInstance().getPlayerName() + " sent a " + gametyle + " challange request");
             }
-
             @Override
             public void onCancelled(DatabaseError databaseError) {
 

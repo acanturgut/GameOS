@@ -12,6 +12,7 @@ public class HoldTheDoor {
     String scoreed1;
     String challanger;
     String category = "math";
+    String challangeremail;
 
     public String getCategory() {
         return category;
@@ -30,7 +31,7 @@ public class HoldTheDoor {
         this.challangeremail = challangeremail;
     }
 
-    String challangeremail;
+
 
     public HoldTheDoor() {
 

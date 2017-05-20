@@ -17,6 +17,7 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -117,6 +118,17 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         database.getReference("users").child(myid).child("friends").child(friendID).setValue(friendUN);
                         database.getReference("users").child(friendID).child("friends").child(myid).setValue(myUN);
                         database.getReference("users").child(myid).child("friendRequests").child(friendID).removeValue();
+                        database.getReference("users").child(friendID).child("info").child("email").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                notification.getInstance().sendNotification(dataSnapshot.getValue().toString(), Player.getPlayerName() + " accepted your challange request!");
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
                     }
                 });
                 ka.setOnClickListener(new View.OnClickListener() {
@@ -145,10 +157,10 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                         holder.put("Second String", pencil.getGametype());
                         list.add(holder);
                         listidler.add(pencil.getChallanger());
-                        mailler.add(pencil.getChallangeremail() + " ");
+                        mailler.add(pencil.getChallangeremail() + "");
                         categoriter.add(pencil.getCategory());
-                        Log.d("zzz", "onChildAdded: " + pencil.getCategory());
                         adapter.notifyDataSetChanged();
+                        refreshFragment();
                     }
             }
 
@@ -180,6 +192,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
                     holder2.put("Second String", pencil.getUserID());
                     list2.add(holder2);
                     adapter2.notifyDataSetChanged();
+                refreshFragment();
             }
 
             @Override
@@ -238,6 +251,15 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
             Log.d("invalid", "startGame: " + gamename);
         }
 
+    }
+
+    public void refreshFragment(){
+        qqChallangeHandler game1 = new qqChallangeHandler();
+        android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
+        ft.replace(R.id.fragment_container, game1);
+        ft.addToBackStack(null);
+        ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
 }

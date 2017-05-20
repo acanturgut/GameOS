@@ -522,13 +522,13 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                             QuestionFragment notifier = new QuestionFragment();
                             if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
-                                notifier.sendNotification(challangeHandler.getChallangeremail(),"You win against " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You win against " + Player.getInstance().getPlayerName());
                             } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
-                                notifier.sendNotification(challangeHandler.getChallangeremail(),"You lost against " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You lost against " + Player.getInstance().getPlayerName());
                             } else {
                                 Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
-                                notifier.sendNotification(challangeHandler.getChallangeremail(),"You are draw with " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You are draw with " + Player.getInstance().getPlayerName());
                             }
                         }
                     }
