@@ -15,7 +15,8 @@
         android:text=""
         android:textAlignment="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="10dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15dp"
         android:textStyle="bold" />
 
 
