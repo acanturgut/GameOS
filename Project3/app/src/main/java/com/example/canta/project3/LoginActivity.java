@@ -32,10 +32,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-
-
-
         mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            // User is signed in
 
         emailText = (EditText) findViewById(R.id.player_name_edittext);
         passwordText = (EditText) findViewById(R.id.password_edit_text);
@@ -53,6 +54,12 @@ public class LoginActivity extends Activity implements View.OnClickListener {
 
         ProgressBar a = (ProgressBar) findViewById(R.id.mainprogressBar);
         a.setVisibility(View.INVISIBLE);
+
+        } else {
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
