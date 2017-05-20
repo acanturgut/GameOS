@@ -61,7 +61,7 @@ public class QuestionFragment extends Fragment {
         public void run() {
 
             while (timeInt > 0) {
-
+                try {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -86,7 +86,7 @@ public class QuestionFragment extends Fragment {
                     }
                 });
 
-                try {
+
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

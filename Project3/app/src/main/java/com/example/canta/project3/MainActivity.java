@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+
+
+
     }
 
     @Override
@@ -138,12 +141,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onStart() {
         super.onStart();
 
+
     }
+
+    static Menu menu_for_fragement;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+
+        menu_for_fragement = menu;
+
+        menu.getItem(0).setVisible(false);
+
+
+
         return true;
     }
 
@@ -155,9 +168,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        //if (id == R.id.action_settings) {
+            //return true;
+        //}
 
         return super.onOptionsItemSelected(item);
     }
@@ -167,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
+        menu_for_fragement.getItem(0).setVisible(false);
         if (id == R.id.nav_camera) {
             userProfile game1 = new userProfile();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();

@@ -1,12 +1,16 @@
 package com.example.canta.project3;
 
+import android.app.FragmentTransaction;
 import android.app.ListFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,6 +33,8 @@ public class AllUserListFragment extends ListFragment {
     public AllUserListFragment listener;
     DatabaseReference myRef;
 
+    Menu searchVar;
+
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     String[] names = new String[100];
     public long numChild = 0;
@@ -36,6 +42,10 @@ public class AllUserListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        MainActivity.menu_for_fragement.getItem(0).setVisible(true);
+
+        MenuItem searchBar = MainActivity.menu_for_fragement.getItem(0);
 
         final int[] counter = {0};
         database.getReference("users").addChildEventListener(new ChildEventListener() {
@@ -82,12 +92,29 @@ public class AllUserListFragment extends ListFragment {
             listOfUserID[i] = Player.getInstance().getAllPlayerID()[i];
         }
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(
                 inflater.getContext(),
                 android.R.layout.simple_list_item_1,
                 listOfUsername);
         setListAdapter(adapter);
+
+        SearchView searchView = (SearchView)searchBar.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                adapter.getFilter().filter(newText);
+
+                return false;
+            }
+        });
+
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
@@ -95,6 +122,24 @@ public class AllUserListFragment extends ListFragment {
     public void onStart() {
         super.onStart();
         Toast.makeText(getActivity(), "Click Username to Add Friend" , Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
+
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MainActivity.menu_for_fragement.getItem(0).setVisible(false);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        MainActivity.menu_for_fragement.getItem(0).setVisible(false);
     }
 
     @Override

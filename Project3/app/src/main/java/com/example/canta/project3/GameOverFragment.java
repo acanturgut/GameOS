@@ -24,6 +24,7 @@ public class GameOverFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        //getActivity().getActionBar().hide();
 
         View layout = inflater.inflate(R.layout.fragment_game_over, container, false);
 

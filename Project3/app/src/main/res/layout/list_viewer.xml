@@ -36,7 +36,7 @@
 
         <Button
             android:id="@+id/list_item_accept2"
-            android:layout_width="80dp"
+            android:layout_width="35dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -45,13 +45,13 @@
             android:clickable="true"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="Accept"
+            android:text="A"
             android:textColor="@color/myWhite"
             android:textStyle="bold" />
 
         <Button
             android:id="@+id/list_item_decline2"
-            android:layout_width="wrap_content"
+            android:layout_width="35dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
@@ -60,7 +60,7 @@
             android:clickable="true"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:text="DECLINE"
+            android:text="X"
             android:textColor="@color/myWhite"
             android:textStyle="bold" />
 
