@@ -31,8 +31,6 @@ public class HoldTheDoor {
         this.challangeremail = challangeremail;
     }
 
-
-
     public HoldTheDoor() {
 
     }

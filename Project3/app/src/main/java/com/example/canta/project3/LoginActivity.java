@@ -79,40 +79,45 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case  R.id.go_button: {
-                avi.show();
-                if (checkConnection(this)) {
-                    // Its Available...
+
+                if(!(passwordText.getText().toString().equals("") && emailText.getText().toString().equals(""))) {
+
+                    avi.show();
+                    if (checkConnection(this)) {
+                        // Its Available...
 
 
-                //VISIBLE TODO
-                if (!emailText.getText().toString().equals("") && !emailText.getText().toString().equals("Enter Your Name")) {
-                    mAuth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
-                            .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                                @Override
-                                public void onComplete(@NonNull Task<AuthResult> task) {
-                                    if (task.isSuccessful()) {
-                                        // Sign in success, update UI with the signed-in user's information
+                        //VISIBLE TODO
+                        if (!emailText.getText().toString().equals("") && !emailText.getText().toString().equals("Enter Your Name")) {
+                            mAuth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
+                                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                // Sign in success, update UI with the signed-in user's information
 
-                                        FirebaseUser user = mAuth.getCurrentUser();
-                                        Player.getInstance().setPlayerName(user.toString());
+                                                FirebaseUser user = mAuth.getCurrentUser();
+                                                Player.getInstance().setPlayerName(user.toString());
 
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                        startActivity(intent);
+                                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                                startActivity(intent);
 
-                                    } else {
-                                        avi.hide();
-                                        Toast.makeText(getApplicationContext(), "Fail To Login!",
-                                                Toast.LENGTH_LONG).show();
-                                    }
-                                }
-                            });
-                }
+                                            } else {
+                                                avi.hide();
+                                                Toast.makeText(getApplicationContext(), "Fail To Login!",
+                                                        Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    });
+                        }
 
-                } else {
-                    avi.hide();
-                    Toast.makeText(getApplicationContext(), "Check Internet Connection!",Toast.LENGTH_LONG).show();
+                    } else {
+                        avi.hide();
+                        Toast.makeText(getApplicationContext(), "Check Internet Connection!", Toast.LENGTH_SHORT).show();
+                    }
 
-
+                }else{
+                    Toast.makeText(getApplicationContext(), "Fields are Empty!", Toast.LENGTH_SHORT).show();
                 }
                 break;
             }
@@ -176,6 +181,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             }
         }
+
     }
 
     public static boolean checkConnection(Context context) {

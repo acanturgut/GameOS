@@ -123,7 +123,6 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
             a = flaglist.getInstance().getQuestionList();
         }
 
-
         dialog = new Dialog(getActivity());
         dialog.setContentView(R.layout.dialog_loader);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
@@ -175,7 +174,6 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         tar4.setImageResource(R.drawable.card);
 
         Player.getInstance().setPlayerScore(0);
-
 
     }
 
