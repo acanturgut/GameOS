@@ -2,6 +2,7 @@ package com.example.canta.project3;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -15,7 +16,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "quickquiz_table";
     public static final String COL_1 = "ID";
     public static final String COL_2 = "TOPIC";
-    public static final String COL_3 = "QUESTION";
+    public static final String COL_3 = "NUMBER";
+    public static final String COL_4 = "QUESTION";
 
 
     public DatabaseHelper(Context context) {
@@ -24,7 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,TOPIC TEXT, QUESTION TEXT UNIQUE)" );
+        db.execSQL("CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT,TOPIC TEXT,NUMBER INTEGER, QUESTION TEXT UNIQUE)" );
     }
 
     @Override
@@ -33,11 +35,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData (String topic, String question){
+    public boolean insertData (String topic, int number, String question){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COL_2,topic);
-        contentValues.put(COL_3,question);
+        contentValues.put(COL_3,number);
+        contentValues.put(COL_4,question);
         long result = db.insert(TABLE_NAME,null,contentValues);
         if(result == -1){
             return false;
@@ -47,5 +50,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
 
+    }
+
+    public Cursor getData(String cat, int num){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor result = db.rawQuery("SELECT FROM " + TABLE_NAME + " WHERE ")
     }
 }
