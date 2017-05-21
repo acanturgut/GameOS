@@ -39,49 +39,169 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
         MainActivity.toolbar.setTitle("Quick Quiz");
 
         database.getReference("quickquiz").child("sport").child("q1").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ1_sport(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ1_sport(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("sport").child("q2").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ2_sport(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ2_sport(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("sport").child("q3").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ3_sport(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ3_sport(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("sport").child("q4").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ4_sport(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ4_sport(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("sport").child("q5").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ5_sport(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ5_sport(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("math").child("q1").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ1_math(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ1_math(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("math").child("q2").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ2_math(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ2_math(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("math").child("q3").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ3_math(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ3_math(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("math").child("q4").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ4_math(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ4_math(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("math").child("q5").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ5_math(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ5_math(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("hist").child("q1").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ1_hist(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ1_hist(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("hist").child("q2").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ2_hist(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ2_hist(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("hist").child("q3").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ3_hist(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ3_hist(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("hist").child("q4").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ4_hist(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ4_hist(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
         database.getReference("quickquiz").child("hist").child("q5").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ5_hist(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                QuestionDataSet.setQ5_hist(dataSnapshot.getValue(String.class));
+                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
     }
 
@@ -92,63 +212,62 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
-        TextView playerName = (TextView)getActivity().findViewById(R.id.player_name);
-        TextView scoreBoard = (TextView)getActivity().findViewById(R.id.score_topic);
+        TextView playerName = (TextView) getActivity().findViewById(R.id.player_name);
+        TextView scoreBoard = (TextView) getActivity().findViewById(R.id.score_topic);
         playerName.setText(Player.getInstance().getPlayerName());
-        scoreBoard.setText("Score: "+Integer.toString(Player.getInstance().getPlayerScore()));
+        scoreBoard.setText("Score: " + Integer.toString(Player.getInstance().getPlayerScore()));
         ArrayList<Button> buttonList = new ArrayList<Button>();
-        Button sportButton100 = (Button)getActivity().findViewById(R.id.sport_100);
+        Button sportButton100 = (Button) getActivity().findViewById(R.id.sport_100);
         buttonList.add(sportButton100);
-        Button sportButton200 = (Button)getActivity().findViewById(R.id.sport_200);
+        Button sportButton200 = (Button) getActivity().findViewById(R.id.sport_200);
         buttonList.add(sportButton200);
-        Button sportButton300 = (Button)getActivity().findViewById(R.id.sport_300);
+        Button sportButton300 = (Button) getActivity().findViewById(R.id.sport_300);
         buttonList.add(sportButton300);
-        Button sportButton400 = (Button)getActivity().findViewById(R.id.sport_400);
+        Button sportButton400 = (Button) getActivity().findViewById(R.id.sport_400);
         buttonList.add(sportButton400);
-        Button sportButton500 = (Button)getActivity().findViewById(R.id.sport_500);
+        Button sportButton500 = (Button) getActivity().findViewById(R.id.sport_500);
         buttonList.add(sportButton500);
-        Button mathButton100 = (Button)getActivity().findViewById(R.id.math_100);
+        Button mathButton100 = (Button) getActivity().findViewById(R.id.math_100);
         buttonList.add(mathButton100);
-        Button mathButton200 = (Button)getActivity().findViewById(R.id.math_200);
+        Button mathButton200 = (Button) getActivity().findViewById(R.id.math_200);
         buttonList.add(mathButton200);
-        Button mathButton300 = (Button)getActivity().findViewById(R.id.math_300);
+        Button mathButton300 = (Button) getActivity().findViewById(R.id.math_300);
         buttonList.add(mathButton300);
-        Button mathButton400 = (Button)getActivity().findViewById(R.id.math_400);
+        Button mathButton400 = (Button) getActivity().findViewById(R.id.math_400);
         buttonList.add(mathButton400);
-        Button mathButton500 = (Button)getActivity().findViewById(R.id.math_500);
+        Button mathButton500 = (Button) getActivity().findViewById(R.id.math_500);
         buttonList.add(mathButton500);
-        Button historyButton100 = (Button)getActivity().findViewById(R.id.history_100);
+        Button historyButton100 = (Button) getActivity().findViewById(R.id.history_100);
         buttonList.add(historyButton100);
-        Button historyButton200 = (Button)getActivity().findViewById(R.id.history_200);
+        Button historyButton200 = (Button) getActivity().findViewById(R.id.history_200);
         buttonList.add(historyButton200);
-        Button historyButton300 = (Button)getActivity().findViewById(R.id.history_300);
+        Button historyButton300 = (Button) getActivity().findViewById(R.id.history_300);
         buttonList.add(historyButton300);
-        Button historyButton400 = (Button)getActivity().findViewById(R.id.history_400);
+        Button historyButton400 = (Button) getActivity().findViewById(R.id.history_400);
         buttonList.add(historyButton400);
-        Button historyButton500 = (Button)getActivity().findViewById(R.id.history_500);
+        Button historyButton500 = (Button) getActivity().findViewById(R.id.history_500);
         buttonList.add(historyButton500);
-        restartButton = (Button)getActivity().findViewById(R.id.restart_button);
+        restartButton = (Button) getActivity().findViewById(R.id.restart_button);
 
         for (int i = 0; i < buttonList.size(); i++) {
-            if(QuestionHolder.getInstance().getQuestionList()[i] == 1) {
+            if (QuestionHolder.getInstance().getQuestionList()[i] == 1) {
                 System.out.println("Button " + i + " is disabled");
-                buttonList.get(i).setBackground( getResources().getDrawable(R.drawable.button_true,getActivity().getTheme()));
+                buttonList.get(i).setBackground(getResources().getDrawable(R.drawable.button_true, getActivity().getTheme()));
                 buttonList.get(i).setEnabled(false);
-            }else if(QuestionHolder.getInstance().getQuestionList()[i] == 2){
+            } else if (QuestionHolder.getInstance().getQuestionList()[i] == 2) {
                 System.out.println("Button " + i + " is disabled");
-                buttonList.get(i).setBackground( getResources().getDrawable(R.drawable.button_wrong,getActivity().getTheme()));
+                buttonList.get(i).setBackground(getResources().getDrawable(R.drawable.button_wrong, getActivity().getTheme()));
                 buttonList.get(i).setEnabled(false);
-            }else if(QuestionHolder.getInstance().getQuestionList()[i] == 3){
+            } else if (QuestionHolder.getInstance().getQuestionList()[i] == 3) {
                 System.out.println("Button " + i + " is disabled");
-                buttonList.get(i).setBackground( getResources().getDrawable(R.drawable.button_go_back,getActivity().getTheme()));
+                buttonList.get(i).setBackground(getResources().getDrawable(R.drawable.button_go_back, getActivity().getTheme()));
                 buttonList.get(i).setEnabled(false);
-            }else{
+            } else {
                 System.out.println("Button " + i + " is enabled");
                 buttonList.get(i).setEnabled(true);
             }
@@ -181,63 +300,63 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
         switch (v.getId()) {
 
             case R.id.sport_100:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ1_sport(),100,1);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ1_sport(), 100, 1);
                 break;
 
             case R.id.sport_200:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ2_sport(),200,1);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ2_sport(), 200, 1);
                 break;
 
             case R.id.sport_300:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ3_sport(),300,1);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ3_sport(), 300, 1);
                 break;
 
             case R.id.sport_400:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ4_sport(),400,1);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ4_sport(), 400, 1);
                 break;
 
             case R.id.sport_500:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ5_sport(),500,1);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ5_sport(), 500, 1);
                 break;
 
             case R.id.math_100:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ1_math(),100,2);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ1_math(), 100, 2);
                 break;
 
             case R.id.math_200:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ2_math(),200,2);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ2_math(), 200, 2);
                 break;
 
             case R.id.math_300:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ3_math(),300,2);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ3_math(), 300, 2);
                 break;
 
             case R.id.math_400:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ4_math(),400,2);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ4_math(), 400, 2);
                 break;
 
             case R.id.math_500:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ5_math(),500,2);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ5_math(), 500, 2);
                 break;
 
             case R.id.history_100:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ1_hist(),100,3);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ1_hist(), 100, 3);
                 break;
 
             case R.id.history_200:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ2_hist(),200,3);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ2_hist(), 200, 3);
                 break;
 
             case R.id.history_300:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ3_hist(),300,3);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ3_hist(), 300, 3);
                 break;
 
             case R.id.history_400:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ4_hist(),400,3);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ4_hist(), 400, 3);
                 break;
 
             case R.id.history_500:
-                questionDataUpdater(QuestionDataSet.getInstance().getQ5_hist(),500,3);
+                questionDataUpdater(QuestionDataSet.getInstance().getQ5_hist(), 500, 3);
                 break;
 
             case R.id.restart_button:
@@ -260,7 +379,7 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
         }
     }
 
-    private void questionDataUpdater(String data, int score, int topic){
+    private void questionDataUpdater(String data, int score, int topic) {
 
         String[] parts = data.split("-");
         String part1 = parts[0];

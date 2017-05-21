@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef;
     FirebaseUser currentFirebaseUser;
+    static DatabaseHelper mydb;
     static String current_user_email;
     static Toolbar toolbar;
 
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mydb = new DatabaseHelper(this);
         currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         current_user_email = currentFirebaseUser.getEmail();
