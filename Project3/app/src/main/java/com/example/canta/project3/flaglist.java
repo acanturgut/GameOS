@@ -77,6 +77,66 @@ public class flaglist {
 
     private flaglist() {}
 
+    public static void setTarget1(int target1) {
+        flaglist.target1 = target1;
+    }
+
+    public static void setTarget2(int target2) {
+        flaglist.target2 = target2;
+    }
+
+    public static void setTarget3(int target3) {
+        flaglist.target3 = target3;
+    }
+
+    public static void setTarget4(int target4) {
+        flaglist.target4 = target4;
+    }
+
+    public static void setTarget21(int target21) {
+        flaglist.target21 = target21;
+    }
+
+    public static void setTarget22(int target22) {
+        flaglist.target22 = target22;
+    }
+
+    public static void setTarget23(int target23) {
+        flaglist.target23 = target23;
+    }
+
+    public static void setTarget24(int target24) {
+        flaglist.target24 = target24;
+    }
+
+    public static void setTarget25(int target25) {
+        flaglist.target25 = target25;
+    }
+
+    public static void setTarget31(int target31) {
+        flaglist.target31 = target31;
+    }
+
+    public static void setTarget32(int target32) {
+        flaglist.target32 = target32;
+    }
+
+    public static void setTarget33(int target33) {
+        flaglist.target33 = target33;
+    }
+
+    public static void setTarget34(int target34) {
+        flaglist.target34 = target34;
+    }
+
+    public static void setTarget35(int target35) {
+        flaglist.target35 = target35;
+    }
+
+    public static void setTarget36(int target36) {
+        flaglist.target36 = target36;
+    }
+
     public static int[] getQuestionList() {
         boolean control;
         flag_List[0] = 0;
@@ -96,6 +156,7 @@ public class flaglist {
 
         target1 = flag_List[0];
         target2 = flag_List[1];
+
         target3 = flag_List[2];
         target4 = flag_List[3];
 

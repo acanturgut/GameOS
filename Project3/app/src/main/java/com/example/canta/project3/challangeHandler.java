@@ -68,5 +68,4 @@ class challangeHandler {
     private  static String othersID = "";
     private static boolean isChallange = false;
     private static boolean isChallanger = true;
-
 }

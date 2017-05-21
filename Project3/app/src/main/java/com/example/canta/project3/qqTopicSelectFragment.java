@@ -44,7 +44,6 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
 
         MainActivity.toolbar.setTitle("Quick Quiz");
 
-
         if (checkConnection(getActivity().getApplicationContext())) {
                 Log.d("databaseInsert", "internet var");
             database.getReference("quickquiz").child("sport").child("q1").addValueEventListener(new ValueEventListener() {

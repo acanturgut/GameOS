@@ -21,8 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -143,7 +141,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
 
                                 @Override
                                 public void onDataChange(DataSnapshot dataSnapshot) {
-                                    notification.getInstance().sendNotification(dataSnapshot.getValue().toString(), Player.getPlayerName() + " accepted your challange request!");
+                                    notification.getInstance().sendNotification(dataSnapshot.getValue().toString(), Player.getPlayerName() + " accepted your friendship request!");
                                 }
 
                                 @Override

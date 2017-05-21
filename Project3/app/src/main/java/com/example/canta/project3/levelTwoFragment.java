@@ -3,6 +3,7 @@ package com.example.canta.project3;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -32,6 +33,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
 import java.io.IOException;
+
+import static com.example.canta.project3.qqTopicSelectFragment.checkConnection;
 
 public class levelTwoFragment extends Fragment implements View.OnClickListener {
     int num;
@@ -539,6 +542,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
     private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
         for (int i = 0; i < 20; i++){
             try {
+                if (checkConnection(getActivity().getApplicationContext())) {
                 final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
                 storageRef = storage.getReference().child("flag" + a[i] + ".png");
                 final int finalI = i;
@@ -552,6 +556,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                         }
                         flaglistNum[finalI] = a[finalI];
                         allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                        MainActivity.mydb.insertImage(a[finalI] + "", allpictures[finalI]);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -566,6 +571,45 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                         }
                     }
                 });
+                } else {
+                    Cursor cursor = MainActivity.mydb.getImage();
+
+                    if (cursor.getCount() == 0) {
+                        Log.d("databaseInsert", "Cursor Null");
+                    } else {
+                        int cnt = 0;
+                        while (cursor.moveToNext()) {
+                            if(cnt < 20){
+                                byte[] image = cursor.getBlob(2);
+                                Log.d("databaseInsert", "::: " + image);
+                                Bitmap b = BitmapFactory.decodeByteArray(image, 0, image.length);
+                                flaglistNum[cnt] = Integer.parseInt(cursor.getString(1));
+                                allpictures[cnt] = b;
+                                if (cnt < 5){
+                                    flaglistNum[20 + cnt] = Integer.parseInt(cursor.getString(1));
+                                    allpictures[20 + cnt] = b;
+                                    targets[cnt] = b;
+                                    if (cnt == 0){
+                                        flaglist.getInstance().setTarget21(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 1){
+                                        flaglist.getInstance().setTarget22(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 2){
+                                        flaglist.getInstance().setTarget23(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 3){
+                                        flaglist.getInstance().setTarget24(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 4){
+                                        flaglist.getInstance().setTarget25(Integer.parseInt(cursor.getString(1)));
+                                    }
+                                }
+                                cnt ++;
+                                if (cnt == 20){
+                                    runthis();
+                                    cnt = 0;
+                                }
+                            }
+                        }
+                    }
+                }
 
             } catch (IOException e) {}
         }

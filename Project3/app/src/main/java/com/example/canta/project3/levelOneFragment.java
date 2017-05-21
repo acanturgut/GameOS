@@ -3,6 +3,7 @@ package com.example.canta.project3;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +34,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 import java.util.Random;
+
+import static com.example.canta.project3.qqTopicSelectFragment.checkConnection;
 
 public class levelOneFragment extends Fragment implements View.OnClickListener {
     int num = 0;
@@ -92,21 +95,21 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
             myImage.setOnClickListener(this);
         }
 
-        if(challangeHandler.isChallange() && challangeHandler.isChallanger()){
+        if (challangeHandler.isChallange() && challangeHandler.isChallanger()) {
             a = flaglist.getInstance().getQuestionList();
-            for (int i = 0; i < a.length; i++){
+            for (int i = 0; i < a.length; i++) {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getOthersID()).child("challanges").child(challangeHandler.getMyId()).child("flaglist").child(i + "").setValue(a[i]);
             }
-        }else if(challangeHandler.isChallange() && !challangeHandler.isChallanger()){
+        } else if (challangeHandler.isChallange() && !challangeHandler.isChallanger()) {
 
-            for (int i = 0; i < a.length; i++){
+            for (int i = 0; i < a.length; i++) {
                 final int i2 = i;
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         try {
                             a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
-                        }catch (Exception e){
+                        } catch (Exception e) {
 
                         }
                     }
@@ -117,11 +120,9 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                     }
                 });
             }
-        }else{
+        } else {
             a = flaglist.getInstance().getQuestionList();
         }
-
-
 
 
         dialog = new Dialog(getActivity());
@@ -199,7 +200,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                     imagesettertarget(R.id.imageView6, 1, 1);
                     imagesettertarget(R.id.imageView7, 2, 1);
                     imagesettertarget(R.id.imageView8, 3, 1);
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -345,6 +346,7 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     }
 
     static int incrementer = 0;
+
     public void hold(int number, int k) {
         int ref = flaglistNum[k - 1];
         number++;
@@ -445,39 +447,77 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     private int createImageArray(final int a[], final int[] flaglistNum, final Bitmap[] allpictures, final Bitmap[] targets) {
         for (int i = 0; i < 12; i++) {
             try {
-                final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
-                storageRef = storage.getReference().child("flag" + a[i] + ".png");
-                final int finalI = i;
-                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        if (finalI < 4) {
-                            targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            allpictures[12 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            flaglistNum[12 + finalI] = a[finalI];
+                if (checkConnection(getActivity().getApplicationContext())) {
+                    final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
+                    storageRef = storage.getReference().child("flag" + a[i] + ".png");
+                    final int finalI = i;
+                    storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            if (finalI < 4) {
+                                targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                allpictures[12 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                flaglistNum[12 + finalI] = a[finalI];
+                            }
+                            flaglistNum[finalI] = a[finalI];
+                            allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            MainActivity.mydb.insertImage(a[finalI] + "", allpictures[finalI]);
                         }
-                        flaglistNum[finalI] = a[finalI];
-                        allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {
-                    }
-                }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
 
-                        incrementer++;
+                            incrementer++;
 
-                        if (incrementer == 12) {
+                            if (incrementer == 12) {
 
-                            runThis();
-                            incrementer = 0;
+                                runThis();
+                                incrementer = 0;
+
+                            }
 
                         }
+                    });
+                } else {
+                    Cursor cursor = MainActivity.mydb.getImage();
 
+                    if (cursor.getCount() == 0) {
+                        Log.d("databaseInsert", "Cursor Null");
+                    } else {
+                        int cnt = 0;
+                        while (cursor.moveToNext()) {
+                            if(cnt < 12){
+                                byte[] image = cursor.getBlob(2);
+                                Log.d("databaseInsert", "::: " + image);
+                                Bitmap b = BitmapFactory.decodeByteArray(image, 0, image.length);
+                                flaglistNum[cnt] = Integer.parseInt(cursor.getString(1));
+                                allpictures[cnt] = b;
+                                if (cnt < 4){
+                                    flaglistNum[12 + cnt] = Integer.parseInt(cursor.getString(1));
+                                    allpictures[12 + cnt] = b;
+                                    targets[cnt] = b;
+                                    if (cnt == 0){
+                                        flaglist.getInstance().setTarget1(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 1){
+                                        flaglist.getInstance().setTarget2(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 2){
+                                        flaglist.getInstance().setTarget3(Integer.parseInt(cursor.getString(1)));
+                                    }else if (cnt == 3){
+                                        flaglist.getInstance().setTarget4(Integer.parseInt(cursor.getString(1)));
+                                    }
+                                }
+                                cnt ++;
+                                if (cnt == 12){
+                                    runThis();
+                                }
+                            }
+                        }
                     }
-                });
+                }
 
             } catch (IOException e) {
             }
@@ -504,27 +544,31 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void firebasePointUpdate(final int errorSolver){
+    public void firebasePointUpdate(final int errorSolver) {
         final int[] kk = {errorSolver};
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("info").child("mescore").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {
-                if (kk[0] == 0){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (kk[0] == 0) {
                     int usersCurrentScore = Integer.parseInt(dataSnapshot.getValue(String.class));
                     usersCurrentScore += Player.getInstance().getPlayerScore();
                     FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("info").child("mescore").setValue(usersCurrentScore + "");
                     kk[0]++;
                 }
             }
-            @Override public void onCancelled(DatabaseError error) {}
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
 
-        if(challangeHandler.getInstance().isChallange()){
+        if (challangeHandler.getInstance().isChallange()) {
 
             challangeHandler.getInstance().setIsChallange(false);
-            if (challangeHandler.getInstance().isChallanger()){
+            if (challangeHandler.getInstance().isChallanger()) {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getOthersID()).child("challanges").child(challangeHandler.getInstance().getMyId()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
-            } else{
+            } else {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -532,16 +576,17 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
                             QuestionFragment notifier = new QuestionFragment();
                             if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
-                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You win against " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(), "You win against " + Player.getInstance().getPlayerName());
                             } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
-                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You lost against " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(), "You lost against " + Player.getInstance().getPlayerName());
                             } else {
                                 Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
-                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You are draw with " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(), "You are draw with " + Player.getInstance().getPlayerName());
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
