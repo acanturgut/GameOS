@@ -540,37 +540,40 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
 
     static  int incrementer = 0;
     private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
-        for (int i = 0; i < 20; i++){
+
             try {
                 if (checkConnection(getActivity().getApplicationContext())) {
-                final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
-                storageRef = storage.getReference().child("flag" + a[i] + ".png");
-                final int finalI = i;
-                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        if (finalI < 5){
-                            targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            allpictures[20 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            flaglistNum[20 + finalI] = a[finalI];
-                        }
-                        flaglistNum[finalI] = a[finalI];
-                        allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                        MainActivity.mydb.insertImage(a[finalI] + "", allpictures[finalI]);
+                    for (int i = 0; i < 20; i++) {
+                        final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
+                        storageRef = storage.getReference().child("flag" + a[i] + ".png");
+                        final int finalI = i;
+                        storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                                if (finalI < 5) {
+                                    targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                    allpictures[20 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                    flaglistNum[20 + finalI] = a[finalI];
+                                }
+                                flaglistNum[finalI] = a[finalI];
+                                allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                MainActivity.mydb.insertImage(a[finalI] + "", allpictures[finalI]);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                            }
+                        }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                                incrementer++;
+                                if (incrementer == 20) {
+                                    runthis();
+                                    incrementer = 0;
+                                }
+                            }
+                        });
                     }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {}
-                }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                        incrementer++;
-                        if(incrementer == 20){
-                            runthis();
-                            incrementer = 0;
-                        }
-                    }
-                });
                 } else {
                     Cursor cursor = MainActivity.mydb.getImage();
 
@@ -612,7 +615,7 @@ public class levelTwoFragment extends Fragment implements View.OnClickListener {
                 }
 
             } catch (IOException e) {}
-        }
+
         return 1;
     }
 

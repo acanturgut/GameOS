@@ -89,7 +89,6 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
         imageViewID[18] = R.id.imageView7;
         imageViewID[19] = R.id.imageView8;
 
-
         for (int i = 0; i < imageViewID.length; i++) {
             ImageView myImage = (ImageView) layout.findViewById(imageViewID[i]);
             myImage.setOnClickListener(this);
@@ -445,9 +444,10 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
     }
 
     private int createImageArray(final int a[], final int[] flaglistNum, final Bitmap[] allpictures, final Bitmap[] targets) {
-        for (int i = 0; i < 12; i++) {
-            try {
-                if (checkConnection(getActivity().getApplicationContext())) {
+
+        try {
+            if (checkConnection(getActivity().getApplicationContext())) {
+                for (int i = 0; i < 12; i++) {
                     final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
                     storageRef = storage.getReference().child("flag" + a[i] + ".png");
                     final int finalI = i;
@@ -482,45 +482,45 @@ public class levelOneFragment extends Fragment implements View.OnClickListener {
 
                         }
                     });
-                } else {
-                    Cursor cursor = MainActivity.mydb.getImage();
+                }
+            } else {
+                Cursor cursor = MainActivity.mydb.getImage();
 
-                    if (cursor.getCount() == 0) {
-                        Log.d("databaseInsert", "Cursor Null");
-                    } else {
-                        int cnt = 0;
-                        while (cursor.moveToNext()) {
-                            if(cnt < 12){
-                                byte[] image = cursor.getBlob(2);
-                                Log.d("databaseInsert", "::: " + image);
-                                Bitmap b = BitmapFactory.decodeByteArray(image, 0, image.length);
-                                flaglistNum[cnt] = Integer.parseInt(cursor.getString(1));
-                                allpictures[cnt] = b;
-                                if (cnt < 4){
-                                    flaglistNum[12 + cnt] = Integer.parseInt(cursor.getString(1));
-                                    allpictures[12 + cnt] = b;
-                                    targets[cnt] = b;
-                                    if (cnt == 0){
-                                        flaglist.getInstance().setTarget1(Integer.parseInt(cursor.getString(1)));
-                                    }else if (cnt == 1){
-                                        flaglist.getInstance().setTarget2(Integer.parseInt(cursor.getString(1)));
-                                    }else if (cnt == 2){
-                                        flaglist.getInstance().setTarget3(Integer.parseInt(cursor.getString(1)));
-                                    }else if (cnt == 3){
-                                        flaglist.getInstance().setTarget4(Integer.parseInt(cursor.getString(1)));
-                                    }
+                if (cursor.getCount() == 0) {
+                    Log.d("databaseInsert", "Cursor Null");
+                } else {
+                    int cnt = 0;
+                    while (cursor.moveToNext()) {
+                        if (cnt < 12) {
+                            byte[] image = cursor.getBlob(2);
+                            Log.d("taken from SQLite", "::: " + image);
+                            Bitmap b = BitmapFactory.decodeByteArray(image, 0, image.length);
+                            flaglistNum[cnt] = Integer.parseInt(cursor.getString(1));
+                            allpictures[cnt] = b;
+                            if (cnt < 4) {
+                                flaglistNum[12 + cnt] = Integer.parseInt(cursor.getString(1));
+                                allpictures[12 + cnt] = b;
+                                targets[cnt] = b;
+                                if (cnt == 0) {
+                                    flaglist.getInstance().setTarget1(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 1) {
+                                    flaglist.getInstance().setTarget2(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 2) {
+                                    flaglist.getInstance().setTarget3(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 3) {
+                                    flaglist.getInstance().setTarget4(Integer.parseInt(cursor.getString(1)));
                                 }
-                                cnt ++;
-                                if (cnt == 12){
-                                    runThis();
-                                }
+                            }
+                            cnt++;
+                            if (cnt == 12) {
+                                runThis();
                             }
                         }
                     }
                 }
-
-            } catch (IOException e) {
             }
+
+        } catch (IOException e) {
         }
 
 

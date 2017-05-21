@@ -229,8 +229,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ft.setTransition(android.app.FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             ft.commit();
         }else if (id == R.id.nav_request) {
-            //ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
-            testerFragment game1 = new testerFragment();
+            ChallangesAndFriendRequestsFragment game1 = new ChallangesAndFriendRequestsFragment();
             android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container, game1);
             ft.addToBackStack(null);

@@ -3,6 +3,7 @@ package com.example.canta.project3;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
@@ -33,6 +34,8 @@ import com.google.firebase.storage.StorageReference;
 import java.io.File;
 import java.io.IOException;
 
+import static com.example.canta.project3.qqTopicSelectFragment.checkConnection;
+
 public class levelThreeFragment extends Fragment implements View.OnClickListener {
     int num;
     int holder0;
@@ -55,6 +58,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
     public levelThreeFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -101,31 +105,30 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         imageViewID[35] = R.id.f366;
 
         Player.getInstance().setLife(4);
-        for (int i = 0; i < 36; i++){
+        for (int i = 0; i < 36; i++) {
             Log.d("baban", "onCreateView: " + i);
             ImageView myImage = (ImageView) layout3.findViewById(imageViewID[i]);
             myImage.setOnClickListener(this);
         }
 
-        if(challangeHandler.isChallange() && challangeHandler.isChallanger()){
+        if (challangeHandler.isChallange() && challangeHandler.isChallanger()) {
             a = flaglist.getInstance().getQuestionList3();
-            for (int i = 0; i < a.length; i++){
+            for (int i = 0; i < a.length; i++) {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getOthersID()).child("challanges").child(challangeHandler.getMyId()).child("flaglist").child(i + "").setValue(a[i]);
             }
-        }else if(challangeHandler.isChallange() && !challangeHandler.isChallanger()){
+        } else if (challangeHandler.isChallange() && !challangeHandler.isChallanger()) {
 
-            for (int i = 0; i < a.length; i++){
+            for (int i = 0; i < a.length; i++) {
                 final int i2 = i;
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getMyId()).child("challanges").child(challangeHandler.getOthersID()).child("flaglist").child(i + "").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         try {
                             a[i2] = Integer.parseInt(dataSnapshot.getValue().toString());
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             Log.d("aa", "onDataChange: " + e);
                         }
                     }
-
 
 
                     @Override
@@ -134,7 +137,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                     }
                 });
             }
-        }else{
+        } else {
             a = flaglist.getInstance().getQuestionList3();
         }
 
@@ -193,7 +196,7 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
 
     }
 
-    public void onResume(){
+    public void onResume() {
         super.onResume();
 
     }
@@ -202,306 +205,306 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.f311:
-                imagesetter(R.id.f311,0,num);
-                if(num == 2){
+                imagesetter(R.id.f311, 0, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 1);
-                num ++;
+                } else hold(num, 1);
+                num++;
                 break;
             case R.id.f312:
-                imagesetter(R.id.f312,1,num);
-                if(num == 2){
+                imagesetter(R.id.f312, 1, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 2);
-                num ++;
+                } else hold(num, 2);
+                num++;
                 break;
             case R.id.f313:
-                imagesetter(R.id.f313,2,num);
-                if(num == 2){
+                imagesetter(R.id.f313, 2, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 3);
-                num ++;
+                } else hold(num, 3);
+                num++;
                 break;
             case R.id.f314:
-                imagesetter(R.id.f314,3,num);
-                if(num == 2){
+                imagesetter(R.id.f314, 3, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num,4);
-                num ++;
+                } else hold(num, 4);
+                num++;
                 break;
             case R.id.f315:
-                imagesetter(R.id.f315,4,num);
-                if(num == 2){
+                imagesetter(R.id.f315, 4, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 5);
-                num ++;
+                } else hold(num, 5);
+                num++;
                 break;
             case R.id.f316:
-                imagesetter(R.id.f316,5,num);
-                if(num == 2){
+                imagesetter(R.id.f316, 5, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 6);
-                num ++;
+                } else hold(num, 6);
+                num++;
                 break;
             case R.id.f321:
-                imagesetter(R.id.f321,6,num);
-                if(num == 2){
+                imagesetter(R.id.f321, 6, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 7);
-                num ++;
+                } else hold(num, 7);
+                num++;
                 break;
             case R.id.f322:
-                imagesetter(R.id.f322,7,num);
-                if(num == 2){
+                imagesetter(R.id.f322, 7, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 8);
-                num ++;
+                } else hold(num, 8);
+                num++;
                 break;
             case R.id.f323:
-                imagesetter(R.id.f323,8,num);
-                if(num == 2){
+                imagesetter(R.id.f323, 8, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 9);
-                num ++;
+                } else hold(num, 9);
+                num++;
                 break;
             case R.id.f324:
-                imagesetter(R.id.f324,9,num);
-                if(num == 2){
+                imagesetter(R.id.f324, 9, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 10);
-                num ++;
+                } else hold(num, 10);
+                num++;
                 break;
             case R.id.f325:
-                imagesetter(R.id.f325,10,num);
-                if(num == 2){
+                imagesetter(R.id.f325, 10, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 11);
-                num ++;
+                } else hold(num, 11);
+                num++;
                 break;
             case R.id.f326:
-                imagesetter(R.id.f326,11,num);
-                if(num == 2){
+                imagesetter(R.id.f326, 11, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 12);
-                num ++;
+                } else hold(num, 12);
+                num++;
                 break;
             case R.id.f331:
-                imagesetter(R.id.f331,12,num);
-                if(num == 2){
+                imagesetter(R.id.f331, 12, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 13);
-                num ++;
+                } else hold(num, 13);
+                num++;
                 break;
             case R.id.f332:
-                imagesetter(R.id.f332,13,num);
-                if(num == 2){
+                imagesetter(R.id.f332, 13, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 14);
-                num ++;
+                } else hold(num, 14);
+                num++;
                 break;
             case R.id.f333:
-                imagesetter(R.id.f333,14,num);
-                if(num == 2){
+                imagesetter(R.id.f333, 14, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 15);
-                num ++;
+                } else hold(num, 15);
+                num++;
                 break;
             case R.id.f334:
-                imagesetter(R.id.f334,15,num);
-                if(num == 2){
+                imagesetter(R.id.f334, 15, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 16);
-                num ++;
+                } else hold(num, 16);
+                num++;
                 break;
             case R.id.f335:
-                imagesetter(R.id.f335,16,num);
-                if(num == 2){
+                imagesetter(R.id.f335, 16, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 17);
-                num ++;
+                } else hold(num, 17);
+                num++;
                 break;
             case R.id.f336:
-                imagesetter(R.id.f336,17,num);
-                if(num == 2){
+                imagesetter(R.id.f336, 17, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 18);
-                num ++;
+                } else hold(num, 18);
+                num++;
                 break;
             case R.id.f341:
-                imagesetter(R.id.f341,18,num);
-                if(num == 2){
+                imagesetter(R.id.f341, 18, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 19);
-                num ++;
+                } else hold(num, 19);
+                num++;
                 break;
             case R.id.f342:
-                imagesetter(R.id.f342,19,num);
-                if(num == 2){
+                imagesetter(R.id.f342, 19, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 20);
-                num ++;
+                } else hold(num, 20);
+                num++;
                 break;
             case R.id.f343:
-                imagesetter(R.id.f343,20,num);
-                if(num == 2){
+                imagesetter(R.id.f343, 20, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 21);
-                num ++;
+                } else hold(num, 21);
+                num++;
                 break;
             case R.id.f344:
-                imagesetter(R.id.f344,21,num);
-                if(num == 2){
+                imagesetter(R.id.f344, 21, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 22);
-                num ++;
+                } else hold(num, 22);
+                num++;
                 break;
             case R.id.f345:
-                imagesetter(R.id.f345,22,num);
-                if(num == 2){
+                imagesetter(R.id.f345, 22, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 23);
-                num ++;
+                } else hold(num, 23);
+                num++;
                 break;
             case R.id.f346:
-                imagesetter(R.id.f346,23,num);
-                if(num == 2){
+                imagesetter(R.id.f346, 23, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 24);
-                num ++;
+                } else hold(num, 24);
+                num++;
                 break;
             case R.id.f351:
-                imagesetter(R.id.f351,24,num);
-                if(num == 2){
+                imagesetter(R.id.f351, 24, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 25);
-                num ++;
+                } else hold(num, 25);
+                num++;
                 break;
             case R.id.f352:
-                imagesetter(R.id.f352,25,num);
-                if(num == 2){
+                imagesetter(R.id.f352, 25, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 26);
-                num ++;
+                } else hold(num, 26);
+                num++;
                 break;
             case R.id.f353:
-                imagesetter(R.id.f353,26,num);
-                if(num == 2){
+                imagesetter(R.id.f353, 26, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 27);
-                num ++;
+                } else hold(num, 27);
+                num++;
                 break;
             case R.id.f354:
-                imagesetter(R.id.f354,27,num);
-                if(num == 2){
+                imagesetter(R.id.f354, 27, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 28);
-                num ++;
+                } else hold(num, 28);
+                num++;
                 break;
             case R.id.f355:
-                imagesetter(R.id.f355,28,num);
-                if(num == 2){
+                imagesetter(R.id.f355, 28, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 29);
-                num ++;
+                } else hold(num, 29);
+                num++;
                 break;
             case R.id.f356:
-                imagesetter(R.id.f356,29,num);
-                if(num == 2){
+                imagesetter(R.id.f356, 29, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 30);
-                num ++;
+                } else hold(num, 30);
+                num++;
                 break;
             case R.id.f361:
-                imagesetter(R.id.f361,30,num);
-                if(num == 2){
+                imagesetter(R.id.f361, 30, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 31);
-                num ++;
+                } else hold(num, 31);
+                num++;
                 break;
             case R.id.f362:
-                imagesetter(R.id.f362,31,num);
-                if(num == 2){
+                imagesetter(R.id.f362, 31, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 32);
-                num ++;
+                } else hold(num, 32);
+                num++;
                 break;
             case R.id.f363:
-                imagesetter(R.id.f363,32,num);
-                if(num == 2){
+                imagesetter(R.id.f363, 32, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 33);
-                num ++;
+                } else hold(num, 33);
+                num++;
                 break;
             case R.id.f364:
-                imagesetter(R.id.f364,33,num);
-                if(num == 2){
+                imagesetter(R.id.f364, 33, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 34);
-                num ++;
+                } else hold(num, 34);
+                num++;
                 break;
             case R.id.f365:
-                imagesetter(R.id.f365,34,num);
-                if(num == 2){
+                imagesetter(R.id.f365, 34, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 35);
-                num ++;
+                } else hold(num, 35);
+                num++;
                 break;
             case R.id.f366:
-                imagesetter(R.id.f366,35,num);
-                if(num == 2){
+                imagesetter(R.id.f366, 35, num);
+                if (num == 2) {
                     closeAll();
                     num = -1;
-                }else hold(num, 36);
-                num ++;
+                } else hold(num, 36);
+                num++;
                 break;
         }
 
     }
 
 
-    public void hold(int number, int k){
+    public void hold(int number, int k) {
 
-        int ref2 = flaglistNum[k-1];
-        number ++;
-        if (number == 1){
+        int ref2 = flaglistNum[k - 1];
+        number++;
+        if (number == 1) {
             holderPic0 = k - 1;
             holder0 = ref2;
-        }else if (number == 2){
+        } else if (number == 2) {
             holderPic1 = k - 1;
             holder1 = ref2;
             System.out.println("Trial : " + holder0 + " at " + holderPic0 + "and " + holder1 + " at " + holderPic1);
@@ -532,7 +535,6 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                     Player.getInstance().setLife(4);
 
 
-
                     trueans3 = 0;
                     MemoryGameSelectionFragment move = new MemoryGameSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -546,21 +548,21 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                 holderPic1 = -3;
                 holder0 = -4;
                 holder1 = -5;
-            } else{
-                Player.getInstance().setLife(Player.getInstance().getLife()-1);
-                if(Player.getInstance().getLife() == 3){
+            } else {
+                Player.getInstance().setLife(Player.getInstance().getLife() - 1);
+                if (Player.getInstance().getLife() == 3) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h31);
                     myim.setImageResource(R.drawable.ekalp);
-                }else if(Player.getInstance().getLife() == 2){
+                } else if (Player.getInstance().getLife() == 2) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h32);
                     myim.setImageResource(R.drawable.ekalp);
-                }else if(Player.getInstance().getLife() == 1){
+                } else if (Player.getInstance().getLife() == 1) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h33);
                     myim.setImageResource(R.drawable.ekalp);
-                }else if(Player.getInstance().getLife() == 0){
+                } else if (Player.getInstance().getLife() == 0) {
                     ImageView myim = (ImageView) getActivity().findViewById(R.id.h34);
                     myim.setImageResource(R.drawable.ekalp);
-                }else{
+                } else {
                     firebasePointUpdate(0);
                     MemoryGameSelectionFragment game1 = new MemoryGameSelectionFragment();
                     android.app.FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -575,8 +577,6 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
     }
 
 
-
-
     public void imagesetter(final int id, int k, int num) {
         ImageView image1 = (ImageView) getActivity().findViewById(id);
         image1.setImageBitmap(allpictures[k]);
@@ -587,22 +587,21 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         image1.setImageBitmap(allpictures[k]);
     }
 
-    public void closeAll(){
+    public void closeAll() {
 
-        for (int i = 0; i < 36; i++){
+        for (int i = 0; i < 36; i++) {
             ImageView myview = (ImageView) getActivity().findViewById(imageViewID[i]);
-            if (ac[i] == 0){
+            if (ac[i] == 0) {
                 myview.setImageResource(R.drawable.card);
             }
         }
     }
 
 
-
-    public void runthis(){
-        dialog.dismiss();
+    public void runthis() {
         for (int i = 0; i < 36; i++) {
             imagesetter(imageViewID[i], i, 1);
+            Log.d("showthis", "runthis: " + i);
         }
         FragmentTransaction ft = getChildFragmentManager().beginTransaction();
         StopwatchFragment stopwatchFragment = new StopwatchFragment();
@@ -610,83 +609,132 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         ft.addToBackStack(null);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
+        dialog.dismiss();
         Handler handler1 = new Handler();
         handler1.postDelayed(new Runnable() {
             public void run() {
-            try {
-                closeAll();
-                imagesettertarget(R.id.target1, 0, 1);
-                imagesettertarget(R.id.target2, 1, 1);
-                imagesettertarget(R.id.target3, 2, 1);
-                imagesettertarget(R.id.target5, 3, 1);
-                imagesettertarget(R.id.target6, 4, 1);
-                imagesettertarget(R.id.target8, 5, 1);
-            }catch(Exception e){
+                try {
+                    imagesettertarget(R.id.target1, 0, 1);
+                    imagesettertarget(R.id.target2, 1, 1);
+                    imagesettertarget(R.id.target3, 2, 1);
+                    imagesettertarget(R.id.target5, 3, 1);
+                    imagesettertarget(R.id.target6, 4, 1);
+                    imagesettertarget(R.id.target8, 5, 1);
+                    closeAll();
+                } catch (Exception e) {
 
-            }
+                }
             }
         }, 5000);
     }
 
-    static  int incrementer = 0;
-    private int createImageArray(final int a[],final int[] flaglistNum,final Bitmap[] allpictures, final Bitmap[] targets) {
-        for (int i = 0; i < 30; i++){
-            try {
-                final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
-                storageRef = storage.getReference().child("flag" + a[i] + ".png");
-                final int finalI = i;
-                storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
-                        if (finalI < 6){
-                            targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            allpictures[30 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                            flaglistNum[30 + finalI] = a[finalI];
-                        }
-                        flaglistNum[finalI] = a[finalI];
-                        allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception exception) {}
-                }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
-                        incrementer++;
-                        if(incrementer == 30){
-                            runthis();
-                            incrementer = 0;
-                        }
+    static int incrementer = 0;
 
-                    }
-                });
+    private int createImageArray(final int a[], final int[] flaglistNum, final Bitmap[] allpictures, final Bitmap[] targets) {
 
-            } catch (IOException e) {}
+        try {
+            if (checkConnection(getActivity().getApplicationContext())) {
+                for (int i = 0; i < 30; i++) {
+                    final File localFile = File.createTempFile("flag" + a[i] + ".png", "png");
+                    storageRef = storage.getReference().child("flag" + a[i] + ".png");
+                    final int finalI = i;
+                    storageRef.getFile(localFile).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {
+                            if (finalI < 6) {
+                                targets[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                allpictures[30 + finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                                flaglistNum[30 + finalI] = a[finalI];
+                            }
+                            flaglistNum[finalI] = a[finalI];
+                            allpictures[finalI] = BitmapFactory.decodeFile(localFile.getAbsolutePath());
+                            MainActivity.mydb.insertImage(a[finalI] + "", allpictures[finalI]);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                        }
+                    }).addOnCompleteListener(new OnCompleteListener<FileDownloadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<FileDownloadTask.TaskSnapshot> task) {
+                            incrementer++;
+                            if (incrementer == 30) {
+                                runthis();
+                                incrementer = 0;
+                            }
+                        }
+                    });
+                }
+            } else {
+                Cursor cursor = MainActivity.mydb.getImage();
+                if (cursor.getCount() == 0) {
+                    Log.d("databaseInsert", "Cursor Null");
+                } else {
+                    int cnt = 0;
+                    while (cursor.moveToNext()) {
+                        if (cnt < 30) {
+                            byte[] image = cursor.getBlob(2);
+                            Log.d("databaseInsert", "::: " + image);
+                            Bitmap b = BitmapFactory.decodeByteArray(image, 0, image.length);
+                            flaglistNum[cnt] = Integer.parseInt(cursor.getString(1));
+                            allpictures[cnt] = b;
+                            if (cnt < 6) {
+                                flaglistNum[30 + cnt] = Integer.parseInt(cursor.getString(1));
+                                allpictures[30 + cnt] = b;
+                                targets[cnt] = b;
+                                if (cnt == 0) {
+                                    flaglist.getInstance().setTarget31(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 1) {
+                                    flaglist.getInstance().setTarget32(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 2) {
+                                    flaglist.getInstance().setTarget33(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 3) {
+                                    flaglist.getInstance().setTarget34(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 4) {
+                                    flaglist.getInstance().setTarget35(Integer.parseInt(cursor.getString(1)));
+                                } else if (cnt == 5) {
+                                    flaglist.getInstance().setTarget36(Integer.parseInt(cursor.getString(1)));
+                                }
+                            }
+                            cnt++;
+                            if (cnt == 30) {
+                                runthis();
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (IOException e) {
         }
+
         return 1;
     }
 
-    public void firebasePointUpdate(final int errorSolver){
+    public void firebasePointUpdate(final int errorSolver) {
         final int[] kk = {errorSolver};
         FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("info").child("mescore").addValueEventListener(new ValueEventListener() {
-            @Override public void onDataChange(DataSnapshot dataSnapshot) {
-                if (kk[0] == 0){
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (kk[0] == 0) {
                     int usersCurrentScore = Integer.parseInt(dataSnapshot.getValue(String.class));
                     usersCurrentScore += Player.getInstance().getPlayerScore();
                     FirebaseDatabase.getInstance().getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid().toString()).child("info").child("mescore").setValue(usersCurrentScore + "");
                     kk[0]++;
                 }
             }
-            @Override public void onCancelled(DatabaseError error) {}
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+            }
         });
 
-        if(challangeHandler.getInstance().isChallange()){
+        if (challangeHandler.getInstance().isChallange()) {
 
             challangeHandler.getInstance().setIsChallange(false);
-            if (challangeHandler.getInstance().isChallanger()){
+            if (challangeHandler.getInstance().isChallanger()) {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getOthersID()).child("challanges").child(challangeHandler.getInstance().getMyId()).child("scoreer1").setValue(Player.getInstance().getPlayerScore() + "");
-            } else{
+            } else {
                 FirebaseDatabase.getInstance().getReference("users").child(challangeHandler.getInstance().getMyId()).child("challanges").child(challangeHandler.getInstance().getOthersID()).child("scoreer1").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -694,16 +742,17 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
                             QuestionFragment notifier = new QuestionFragment();
                             if (Integer.parseInt(dataSnapshot.getValue().toString()) > Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU LOST", Toast.LENGTH_SHORT).show();
-                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You win against " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(), "You win against " + Player.getInstance().getPlayerName());
                             } else if (Integer.parseInt(dataSnapshot.getValue().toString()) < Player.getInstance().getPlayerScore()) {
                                 Toast.makeText(getActivity(), "YOU WIN", Toast.LENGTH_SHORT).show();
-                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You lost against " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(), "You lost against " + Player.getInstance().getPlayerName());
                             } else {
                                 Toast.makeText(getActivity(), "DRAW", Toast.LENGTH_SHORT).show();
-                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(),"You are draw with " + Player.getInstance().getPlayerName());
+                                notification.getInstance().sendNotification(challangeHandler.getChallangeremail(), "You are draw with " + Player.getInstance().getPlayerName());
                             }
                         }
                     }
+
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
 
@@ -719,15 +768,15 @@ public class levelThreeFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void updatePoint(boolean k){
+    private void updatePoint(boolean k) {
         System.out.println("list members are " + holder0 + "and" + holder1);
-        if (holder0 == holder1){
+        if (holder0 == holder1) {
             int alala = Player.getInstance().getPlayerScore();
-            if (k){
+            if (k) {
                 alala = alala + 100;
                 ac[holderPic0] = 1;
                 ac[holderPic1] = 1;
-            } else{
+            } else {
                 alala = alala - 100;
             }
 
