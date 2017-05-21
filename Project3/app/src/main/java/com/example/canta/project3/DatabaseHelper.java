@@ -52,8 +52,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
-    public Cursor getData(String cat, int num){
+    public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor result = db.rawQuery("SELECT FROM " + TABLE_NAME + " WHERE ")
+        Cursor result = db.rawQuery("select * from " + TABLE_NAME ,null);
+        return result;
     }
 }
