@@ -33,6 +33,7 @@ public class ViewUserProfileFragment extends Fragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_view_user_profile, container, false);
     }
     TextView username, name, surname , city;

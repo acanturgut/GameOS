@@ -1,6 +1,8 @@
 package com.example.canta.project3;
 
 
+import android.app.ActionBar;
+import android.app.Application;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +23,8 @@ public class MemoryGameSelectionFragment extends Fragment implements View.OnClic
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
+        MainActivity.toolbar.setTitle("Memory Game");
 
         return inflater.inflate(R.layout.fragment_memory_game_selection, container, false);
     }

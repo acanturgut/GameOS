@@ -16,9 +16,9 @@
             android:id="@+id/profile_name"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/textView10"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="86dp"
+            android:layout_marginBottom="20dp"
             android:background="@drawable/editextstyle"
             android:ems="10"
             android:inputType="textPersonName"
@@ -31,20 +31,25 @@
             android:id="@+id/profile_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="USERNAME"
-            android:textSize="30sp"
-
+            android:layout_alignEnd="@+id/profile_name"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="36dp" />
+
+            android:layout_alignStart="@+id/profile_name"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:text="USERNAME"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/profile_surname"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignStart="@+id/profile_name"
-            android:layout_below="@+id/profile_name"
-            android:layout_marginTop="29dp"
+            android:layout_below="@+id/textView11"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/editextstyle"
             android:ems="10"
             android:inputType="textPersonName"
@@ -58,11 +63,12 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignStart="@+id/profile_surname"
-            android:layout_below="@+id/profile_surname"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/textView12"
+
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/editextstyle"
             android:ems="10"
-
             android:inputType="textPersonName"
             android:text="City"
             android:textAlignment="center"
@@ -73,11 +79,54 @@
             android:id="@+id/button_profile_save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/profile_city"
+            android:layout_alignStart="@+id/profile_city"
             android:layout_below="@+id/profile_city"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="29dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/button_normal"
             android:text="Save Changes"
-            android:textColor="@color/common_google_signin_btn_text_dark_default" />
+            android:textColor="@color/common_google_signin_btn_text_dark_default"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/profile_username"
+            android:layout_below="@+id/profile_username"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:text="Your Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignEnd="@+id/profile_name" />
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/profile_surname"
+            android:layout_below="@+id/profile_name"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Your Surname"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignEnd="@+id/profile_name" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/profile_city"
+            android:layout_below="@+id/profile_surname"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:text="Your City"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_alignEnd="@+id/profile_surname" />
     </RelativeLayout>
 </FrameLayout>

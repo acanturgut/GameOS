@@ -35,6 +35,9 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        MainActivity.toolbar.setTitle("Quick Quiz");
+
         database.getReference("quickquiz").child("sport").child("q1").addValueEventListener(new ValueEventListener() {
             @Override public void onDataChange(DataSnapshot dataSnapshot) {QuestionDataSet.setQ1_sport(dataSnapshot.getValue(String.class));} @Override public void onCancelled(DatabaseError error) {}
         });
