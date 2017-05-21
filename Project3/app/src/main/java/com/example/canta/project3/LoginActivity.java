@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.wang.avi.AVLoadingIndicatorView;
 
 public class LoginActivity extends Activity implements View.OnClickListener {
 
@@ -29,8 +30,11 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     private EditText emailText;
     private EditText passwordText;
 
+    AVLoadingIndicatorView avi;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -55,8 +59,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         signIn.setOnClickListener(this);
         logIn.setOnClickListener(this);
 
-        ProgressBar a = (ProgressBar) findViewById(R.id.mainprogressBar);
-        a.setVisibility(View.INVISIBLE);
+            // NOT VISIBLE TODO
 
         } else {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -66,16 +69,22 @@ public class LoginActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        avi = (AVLoadingIndicatorView)findViewById(R.id.avi);
+        avi.hide();
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case  R.id.go_button: {
-
+                avi.show();
                 if (checkConnection(this)) {
                     // Its Available...
 
 
-                ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
-                myprogressbar.setVisibility(View.VISIBLE);
+                //VISIBLE TODO
                 if (!emailText.getText().toString().equals("") && !emailText.getText().toString().equals("Enter Your Name")) {
                     mAuth.signInWithEmailAndPassword(emailText.getText().toString(), passwordText.getText().toString())
                             .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -91,7 +100,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                         startActivity(intent);
 
                                     } else {
-
+                                        avi.hide();
                                         Toast.makeText(getApplicationContext(), "Fail To Login!",
                                                 Toast.LENGTH_LONG).show();
                                     }
@@ -100,7 +109,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 }
 
                 } else {
-
+                    avi.hide();
                     Toast.makeText(getApplicationContext(), "Check Internet Connection!",Toast.LENGTH_LONG).show();
 
 
@@ -108,14 +117,15 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.sign_in_button: {
-
+                avi.show();
                 Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(intent);
                 break;
             }
             case R.id.taylan_button: {
-                ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
-                myprogressbar.setVisibility(View.VISIBLE);
+                avi.show();
+                //TODO Visible
+
                 mAuth.signInWithEmailAndPassword("ccapraz@ku.edu.tr", "aaaaaa")
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -130,7 +140,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                     startActivity(intent);
 
                                 } else {
-
+                                    avi.hide();
                                     Toast.makeText(getApplicationContext(), "Fail To Login!",
                                             Toast.LENGTH_LONG).show();
                                 }
@@ -139,8 +149,10 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.can_button: {
-                ProgressBar myprogressbar = (ProgressBar) findViewById(R.id.mainprogressBar);
-                myprogressbar.setVisibility(View.VISIBLE);
+
+                avi.show();
+                //TODO VISIBLE
+
                 mAuth.signInWithEmailAndPassword("aturgut@ku.edu.tr", "aaaaaa")
                         .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                             @Override
@@ -155,7 +167,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
                                     startActivity(intent);
 
                                 } else {
-
+                                    avi.hide();
                                     Toast.makeText(getApplicationContext(), "Fail To Login!",
                                             Toast.LENGTH_LONG).show();
                                 }
@@ -172,7 +184,7 @@ public class LoginActivity extends Activity implements View.OnClickListener {
         NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
 
         if (activeNetworkInfo != null) {
-            Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
 
             if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
 
