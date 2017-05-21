@@ -2,15 +2,21 @@ package com.example.canta.project3;
 
 
 import android.app.Fragment;
+import android.content.Context;
+import android.database.Cursor;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,171 +44,231 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
 
         MainActivity.toolbar.setTitle("Quick Quiz");
 
-        database.getReference("quickquiz").child("sport").child("q1").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ1_sport(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
-            }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("sport").child("q2").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ2_sport(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
-            }
+        if (checkConnection(getActivity().getApplicationContext())) {
+                Log.d("databaseInsert", "internet var");
+            database.getReference("quickquiz").child("sport").child("q1").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ1_sport(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("sport", 1, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("sport").child("q3").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ3_sport(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("sport").child("q2").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ2_sport(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("sport", 2, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("sport").child("q4").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ4_sport(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("sport").child("q3").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ3_sport(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("sport", 3, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("sport").child("q5").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ5_sport(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("sport", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("sport").child("q4").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ4_sport(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("sport", 4, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("math").child("q1").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ1_math(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("sport").child("q5").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ5_sport(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("sport", 5, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("math").child("q2").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ2_math(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("math").child("q1").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ1_math(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("math", 1, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("math").child("q3").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ3_math(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("math").child("q2").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ2_math(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("math", 2, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("math").child("q4").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ4_math(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("math").child("q3").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ3_math(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("math", 3, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("math").child("q5").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ5_math(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("math").child("q4").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ4_math(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("math", 4, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("hist").child("q1").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ1_hist(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("math", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("math").child("q5").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ5_math(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("math", 5, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("hist").child("q2").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ2_hist(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("hist").child("q1").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ1_hist(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("hist", 1, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("hist").child("q3").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ3_hist(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("hist").child("q2").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ2_hist(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("hist", 2, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("hist").child("q4").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ4_hist(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("hist").child("q3").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ3_hist(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("hist", 3, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-            }
-        });
-        database.getReference("quickquiz").child("hist").child("q5").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                QuestionDataSet.setQ5_hist(dataSnapshot.getValue(String.class));
-                MainActivity.mydb.insertData ("hist", dataSnapshot.getValue(String.class));
-            }
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("hist").child("q4").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ4_hist(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("hist", 4, dataSnapshot.getValue(String.class));
+                }
 
-            @Override
-            public void onCancelled(DatabaseError error) {
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+            database.getReference("quickquiz").child("hist").child("q5").addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionDataSet.setQ5_hist(dataSnapshot.getValue(String.class));
+                    MainActivity.mydb.insertData("hist", 5, dataSnapshot.getValue(String.class));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                }
+            });
+        }else{
+            Log.d("databaseInsert", "ınternet yok");
+            Cursor a = MainActivity.mydb.getData();
+            if (a.getCount() == 0){
+                Log.d("databaseInsert", "Cursor Null" );
+            }else{
+                StringBuffer buffer = new StringBuffer();
+                while (a.moveToNext()){
+                    if(a.getString(1).equals("hist") && (a.getString(2)+"").equals("1")){
+                        QuestionDataSet.setQ1_hist(a.getString(3));
+                    }
+                    if(a.getString(1).equals("hist") && (a.getString(2)+"").equals("2")){
+                        QuestionDataSet.setQ2_hist(a.getString(3));
+                    }
+                    if(a.getString(1).equals("hist") && (a.getString(2)+"").equals("3")){
+                        QuestionDataSet.setQ3_hist(a.getString(3));
+                    }
+                    if(a.getString(1).equals("hist") && (a.getString(2)+"").equals("4")){
+                        QuestionDataSet.setQ4_hist(a.getString(3));
+                    }
+                    if(a.getString(1).equals("hist") && (a.getString(2)+"").equals("5")){
+                        QuestionDataSet.setQ5_hist(a.getString(3));
+                    }
+                    if(a.getString(1).equals("math") && (a.getString(2)+"").equals("1")){
+                        QuestionDataSet.setQ1_math(a.getString(3));
+                    }
+                    if(a.getString(1).equals("math") && (a.getString(2)+"").equals("2")){
+                        QuestionDataSet.setQ2_math(a.getString(3));
+                    }
+                    if(a.getString(1).equals("math") && (a.getString(2)+"").equals("3")){
+                        QuestionDataSet.setQ3_math(a.getString(3));
+                    }
+                    if(a.getString(1).equals("math") && (a.getString(2)+"").equals("4")){
+                        QuestionDataSet.setQ4_math(a.getString(3));
+                    }
+                    if(a.getString(1).equals("math") && (a.getString(2)+"").equals("5")){
+                        QuestionDataSet.setQ5_math(a.getString(3));
+                    }
+                    if(a.getString(1).equals("sport") && (a.getString(2)+"").equals("1")){
+                        QuestionDataSet.setQ1_sport(a.getString(3));
+                    }
+                    if(a.getString(1).equals("sport") && (a.getString(2)+"").equals("2")){
+                        QuestionDataSet.setQ2_sport(a.getString(3));
+                    }
+                    if(a.getString(1).equals("sport") && (a.getString(2)+"").equals("3")){
+                        QuestionDataSet.setQ3_sport(a.getString(3));
+                    }
+                    if(a.getString(1).equals("sport") && (a.getString(2)+"").equals("4")){
+                        QuestionDataSet.setQ4_sport(a.getString(3));
+                    }
+                    if(a.getString(1).equals("sport") && (a.getString(2)+"").equals("5")){
+                        QuestionDataSet.setQ5_sport(a.getString(3));
+                    }
+                }
             }
-        });
+            Log.d("databaseInsert", "onCreate: " + a.toString() + "  " );
+        }
     }
 
     @Override
@@ -412,4 +478,33 @@ public class qqTopicSelectFragment extends Fragment implements View.OnClickListe
         //finish();
 
     }
+
+    public static boolean checkConnection(Context context) {
+        final ConnectivityManager connMgr = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+        if (activeNetworkInfo != null) {
+            Toast.makeText(context, activeNetworkInfo.getTypeName(), Toast.LENGTH_SHORT).show();
+
+            if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+
+                return true;
+            } else if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
 }
