@@ -22,8 +22,9 @@
             android:background="@drawable/editextstyle"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="10dp"
             android:text="Name"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
@@ -36,9 +37,9 @@
 
             android:layout_alignStart="@+id/profile_name"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:text="USERNAME"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textSize="30sp"
             android:textStyle="bold" />
 
@@ -49,12 +50,12 @@
             android:layout_alignStart="@+id/profile_name"
             android:layout_below="@+id/textView11"
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/editextstyle"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="10dp"
             android:text="Surname"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
@@ -66,12 +67,12 @@
             android:layout_below="@+id/textView12"
 
             android:layout_marginBottom="20dp"
-            android:layout_marginTop="10dp"
             android:background="@drawable/editextstyle"
             android:ems="10"
             android:inputType="textPersonName"
+            android:paddingLeft="10dp"
             android:text="City"
-            android:textAlignment="center"
+            android:textAlignment="viewStart"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
 
@@ -107,26 +108,26 @@
             android:id="@+id/textView11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/profile_name"
             android:layout_alignStart="@+id/profile_surname"
             android:layout_below="@+id/profile_name"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:text="Your Surname"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_alignEnd="@+id/profile_name" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/profile_surname"
             android:layout_alignStart="@+id/profile_city"
             android:layout_below="@+id/profile_surname"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"
             android:text="Your City"
             android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_alignEnd="@+id/profile_surname" />
+            android:textStyle="bold" />
     </RelativeLayout>
 </FrameLayout>

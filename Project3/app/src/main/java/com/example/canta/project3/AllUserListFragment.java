@@ -44,7 +44,7 @@ public class AllUserListFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         MainActivity.menu_for_fragement.getItem(0).setVisible(true);
-
+        MainActivity.toolbar.setTitle("All Users");
         MenuItem searchBar = MainActivity.menu_for_fragement.getItem(0);
 
         final int[] counter = {0};

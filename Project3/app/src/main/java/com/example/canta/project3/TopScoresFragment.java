@@ -35,6 +35,7 @@ public class TopScoresFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        MainActivity.toolbar.setTitle("Top Scores");
         return inflater.inflate(R.layout.fragment_top_scores, container, false);
     }
 

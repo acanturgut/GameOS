@@ -55,6 +55,7 @@ public class ChallangesAndFriendRequestsFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        MainActivity.toolbar.setTitle("Your Requests");
         challangeHandler.getInstance().setIsChallange(false);
         QuestionHolder.getInstance().setCurrentQuestionNumberForChallange(0);
         return inflater.inflate(R.layout.fragment_friend_list, container, false);

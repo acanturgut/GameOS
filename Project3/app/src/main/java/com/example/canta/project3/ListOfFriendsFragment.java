@@ -39,6 +39,8 @@ public class ListOfFriendsFragment extends ListFragment {
                              Bundle savedInstanceState) {
 
         final int[] counter = {0};
+
+        MainActivity.toolbar.setTitle("Your Friends");
         database.getReference("users").child(FirebaseAuth.getInstance().getCurrentUser().getUid() + "").child("friends").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {

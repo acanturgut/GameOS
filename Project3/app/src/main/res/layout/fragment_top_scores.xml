@@ -18,6 +18,7 @@
             android:layout_margin="20dp"
             android:text="QuickQuiz"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold"
             tools:text="QuickQuiz" />
@@ -33,11 +34,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="MemoGame"
+            android:text=" Memo Game"
             android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
             android:textSize="30sp"
             android:textStyle="bold"
-            tools:text="MemoGame" />
+            tools:text="Memo Game" />
 
         <ListView
             android:id="@+id/list_view_mg"
